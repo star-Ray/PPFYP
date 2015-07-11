@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 2, 2015 12:30:25 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="model.Company" table="COMPANY">
+  <id name="companyId" type="long">
+   <column name="COMPANYID"/>
+   <generator class="increment"/>
+  </id>
+  <property generated="never" lazy="false" name="name" type="java.lang.String">
+   <column name="NAME"/>
+  </property>
+  <property generated="never" lazy="false" name="username" type="java.lang.String">
+   <column name="USERNAME"/>
+  </property>
+  <property generated="never" lazy="false" name="passwordSalt" type="java.lang.String">
+   <column name="PASSWORDSALT"/>
+  </property>
+  <property generated="never" lazy="false" name="passwordHash" type="java.lang.String">
+   <column name="PASSWORDHASH"/>
+  </property>
+  <property generated="never" lazy="false" name="objStatus" type="long">
+   <column name="OBJSTATUS"/>
+  </property>
+  <property generated="never" lazy="false" name="createDate" type="java.util.Date">
+   <column name="CREATEDATE"/>
+  </property>
+  <property generated="never" lazy="false" name="remark" type="java.lang.String">
+   <column name="REMARK"/>
+  </property>
+  <many-to-one class="model.SuperAdmin" fetch="join" name="superAdmin">
+   <column name="SUPERADMINID"/>
+  </many-to-one>
+  <set lazy="true" name="officers" sort="unsorted" table="OFFICER">
+   <key>
+    <column name="COMPANYID"/>
+   </key>
+   <one-to-many class="model.Officer"/>
+  </set>
+  <set lazy="true" name="senders" sort="unsorted" table="SENDER">
+   <key>
+    <column name="COMPANYID"/>
+   </key>
+   <one-to-many class="model.Sender"/>
+  </set>
+ </class>
+</hibernate-mapping>
