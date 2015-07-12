@@ -1,0 +1,127 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <!--Employee details-->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="50dp">
+
+        <TableRow
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="10sp">
+            <TextView
+                android:id="@+id/courier_id_admin"
+                android:layout_width="0dp"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:paddingRight="10sp"
+                android:text="EMPLOYEE ID."
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/courier_id"
+                android:layout_width="0dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:text="courier_id_here"
+                android:textSize="15sp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="10sp">
+            <TextView
+                android:id="@+id/courier_name_admin"
+                android:layout_width="0dp"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:paddingRight="10sp"
+                android:text="FULL NAME"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/courier_name"
+                android:layout_width="0dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:text="courier_name_here"
+                android:textSize="15sp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="10sp">
+            <TextView
+                android:id="@+id/courier_contactNo_admin"
+                android:layout_width="0dp"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:paddingRight="10sp"
+                android:text="CONTACT NUMBER"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/courier_contactNo"
+                android:layout_width="0dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:text="courier_num_here"
+                android:textSize="15sp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10sp">
+            <TextView
+                android:id="@+id/courier_dateJoined_admin"
+                android:layout_width="0dp"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:paddingRight="10sp"
+                android:text="DATE JOINED"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/courier_dateJoined"
+                android:layout_width="0dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:text="courier_dateJoined_here"
+                android:textSize="15sp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/text_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_name"
+        android:layout_alignStart="@+id/text_name"
+        android:layout_alignTop="@+id/text_name"
+        android:layout_marginTop="50dp"
+        android:text="Insert shared pref"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="openCamera"
+        android:text="Camera" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"></RelativeLayout>
+
+</LinearLayout>
