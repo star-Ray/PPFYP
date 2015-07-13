@@ -21,5 +21,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_test2">Test2Activity</string>
+    <string name="title_activity_test3">Test3Activity</string>
+    <string name="title_activity_test3_activitiy">Test3Activitiy</string>
 </resources>
 

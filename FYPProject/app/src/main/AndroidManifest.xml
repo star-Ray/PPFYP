@@ -57,6 +57,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.arnold.fypproject.Activity.HomepageActivity" />
         </activity>
+        <activity
+            android:name=".Activity.Test3Activity"
+            android:label="@string/title_activity_test3" >
+        </activity>
+        <activity
+            android:name=".Activity.Test3Activitiy"
+            android:label="@string/title_activity_test3_activitiy" >
+        </activity>
     </application>
 
 </manifest>

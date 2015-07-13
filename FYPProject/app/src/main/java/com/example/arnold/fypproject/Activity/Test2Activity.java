@@ -1,5 +1,6 @@
 package com.example.arnold.fypproject.Activity;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,7 +10,7 @@ import android.widget.ListView;
 
 import com.example.arnold.fypproject.R;
 
-public class Test2Activity extends ActionBarActivity {
+public class Test2Activity extends FragmentActivity {
 
     private String[] drawerArr;
 

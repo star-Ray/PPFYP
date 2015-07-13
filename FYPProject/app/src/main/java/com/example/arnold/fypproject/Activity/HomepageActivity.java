@@ -1,5 +1,6 @@
 package com.example.arnold.fypproject.Activity;
 
+import android.app.ActionBar;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -111,7 +112,7 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
     }
 
     public void goToTest(View view){
-        intent = new Intent(this, Test2Activity.class);
+        intent = new Intent(this, Test3Activity.class);
         startActivity(intent);
     }
 
