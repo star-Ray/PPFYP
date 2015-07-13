@@ -1,6 +1,5 @@
 package com.example.arnold.fypproject.Activity;
 
-import android.app.ActionBar;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +10,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
     Intent intent;
     Sender sender;
     Courier courier;
+    private String[] drawerArr;
 
     @Override
     public void onFragmentInteraction(Uri uri) {
@@ -35,19 +37,21 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_homepage);
+
+//        Initializing
         Gson gson = new Gson();
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.app_key), MODE_PRIVATE);
-
         sender = gson.fromJson(sharedPref.getString("sender", "sender_is_null"), Sender.class);
         courier = gson.fromJson(sharedPref.getString("courier", "courier_is_null"), Courier.class);
 
-//        Setting users name in welcome message
-        TextView textView = (TextView)findViewById(R.id.text_welcome_user);
-        textView.setText("Welcome, " + courier.getName());
+//        Drawer view
+        drawerArr = new String[]{"Drawer1", "Drawer2", "Logout"};
+        ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_textview, drawerArr);
+        ListView listView = (ListView)findViewById(R.id.homepage_drawer);
+        listView.setAdapter(drawerAdapter);
 
-//        Loading fragment
+//        Load fragment
         if (findViewById(R.id.fragment_container) != null){
             if(savedInstanceState != null){
                 return;
@@ -57,6 +61,7 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, sampleFragment).commit();
         }
 
+//        Load toast
         if (getIntent().getStringExtra("login") != null){
             //Welcome toast
             Toast.makeText(this, "Welcome, " + courier.getName(), Toast.LENGTH_LONG).show();
@@ -122,13 +127,12 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
         startActivity(intent);
     }
 
-    public void sendMessage(View view){
-        intent = new Intent(this, ProfileActivity.class);
-        TextView textView = (TextView)findViewById(R.id.text_username);
-        String message = textView.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
-    }
-
+//    public void sendMessage(View view){
+//        intent = new Intent(this, ProfileActivity.class);
+//        TextView textView = (TextView)findViewById(R.id.text_username);
+//        String message = textView.getText().toString();
+//        intent.putExtra(EXTRA_MESSAGE, message);
+//        startActivity(intent);
+//    }
 
 }

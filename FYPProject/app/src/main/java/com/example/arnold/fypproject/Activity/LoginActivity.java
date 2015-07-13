@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 
@@ -27,10 +29,10 @@ public class LoginActivity extends ActionBarActivity {
     // Login button press
     public void sendMessage(View view){
         Intent intent = new Intent(this, HomepageActivity.class);
-        EditText editText1 = (EditText)findViewById(R.id.text_username);
-        EditText editText2 = (EditText)findViewById(R.id.text_password);
-        String username = editText1.getText().toString();
-        String password = editText2.getText().toString();
+        EditText input_username = (EditText)findViewById(R.id.text_username);
+        EditText input_password = (EditText)findViewById(R.id.text_password);
+        String username = input_username.getText().toString();
+        String password = input_password.getText().toString();
 
 //        Create test user
         Sender sender = createTestSender();

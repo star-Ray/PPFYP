@@ -9,9 +9,6 @@
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
 
-
-    <!--test-->
-
     <ListView
         android:id="@+id/left_drawer"
         android:layout_width="240dp"

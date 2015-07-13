@@ -1,35 +1,56 @@
 package com.example.arnold.fypproject.Activity;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+//import android.support.v7.app.ActionBar;
+import android.app.ActionBar;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.example.arnold.fypproject.Adapter.HomepageTabsPagerAdapter;
 import com.example.arnold.fypproject.R;
 
-public class Test3Activity extends FragmentActivity {
+public class Test3Activity extends FragmentActivity implements ActionBar.TabListener{
 
-    TestCollectionPagerAdapter  testCollectionPagerAdapter;;
+    HomepageTabsPagerAdapter homepageTabsPagerAdapter;
     ViewPager viewPager;
+//    android.support.v7.app.ActionBar actionBar;
+    ActionBar actionBar;
+    private String[] tabs = {"Tab1", "Tab2", "Tab3"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test3);
 
-        testCollectionPagerAdapter = new TestCollectionPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager)findViewById(R.id.pager_test);
-        viewPager.setAdapter(testCollectionPagerAdapter);
+        homepageTabsPagerAdapter = new HomepageTabsPagerAdapter(getSupportFragmentManager());
+
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//        actionBar.setDisplayHomeAsUpEnabled(false);
+        viewPager.setAdapter(homepageTabsPagerAdapter);
+
+//        Adding Tabs
+        for (String tab_name : tabs){
+            actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
+        }
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    }
+
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+        // on tab selected
+        // show respected fragment view
+        viewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
     }
 
     @Override
@@ -50,43 +71,6 @@ public class Test3Activity extends FragmentActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
-    }
-
-    public class TestCollectionPagerAdapter extends FragmentPagerAdapter {
-        public TestCollectionPagerAdapter (FragmentManager fm){
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int i){
-            Fragment fragment = new TestFragment();
-            Bundle args = new Bundle();
-            args.putInt(TestFragment.ARG_OBJECT, i + 1);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public int getCount(){
-            return 100;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position){
-            return "OBJECT" + (position + 1);
-        }
-    }
-
-    public static class TestFragment extends Fragment {
-        public static final String ARG_OBJECT = "object";
-
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-            View rootView = inflater.inflate(R.layout.fragment_text, container, false);
-            Bundle args = getArguments();
-            ((TextView)rootView.findViewById(R.id.fragment_text1)).setText(Integer.toString(args.getInt(ARG_OBJECT)));
-            return rootView;
-        }
     }
 }
