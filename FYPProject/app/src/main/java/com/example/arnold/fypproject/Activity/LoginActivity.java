@@ -5,10 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
-import android.text.InputType;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 
@@ -19,7 +16,6 @@ import com.example.arnold.fypproject.Entity.Task;
 import com.example.arnold.fypproject.R;
 import com.google.gson.Gson;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 

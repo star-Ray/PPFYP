@@ -1,6 +1,5 @@
 package com.example.arnold.fypproject.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.arnold.fypproject.Entity.Courier;
-import com.example.arnold.fypproject.Entity.Sender;
 import com.example.arnold.fypproject.R;
 import com.google.gson.Gson;
 

@@ -6,6 +6,16 @@
     tools:context="com.example.arnold.fypproject.Activity.ReadNFCActivity">
 
     <TextView
+        android:id="@+id/sample_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp"
+        android:text="sampletext"
+        android:textSize="30dp" />
+
+    <TextView
         android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

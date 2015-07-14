@@ -1,7 +1,6 @@
 package com.example.arnold.fypproject.Activity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,13 +8,13 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arnold.fypproject.Connection.DatabaseContract;
@@ -27,10 +26,10 @@ import com.google.gson.Gson;
 
 
 public class HomepageActivity extends ActionBarActivity implements SampleFragment.OnFragmentInteractionListener {
-    public final static String EXTRA_MESSAGE = "com.example.arnold.fypproject.MESSAGE";
-    Intent intent;
-    Sender sender;
-    Courier courier;
+//    public final static String EXTRA_MESSAGE = "com.example.arnold.fypproject.MESSAGE";
+    private Intent intent;
+    private Sender sender;
+    private Courier courier;
     private String[] drawerArr;
 
     @Override
@@ -49,10 +48,18 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
         courier = gson.fromJson(sharedPref.getString("courier", "courier_is_null"), Courier.class);
 
 //        Drawer view
-        drawerArr = new String[]{"Drawer1", "Drawer2", "Logout"};
+        drawerArr = new String[]{"TaskActivity", "Task2Activity", "Task3Activity", "Logout"};
         ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_textview, drawerArr);
+        DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         ListView listView = (ListView)findViewById(R.id.homepage_drawer);
+
         listView.setAdapter(drawerAdapter);
+//        listView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                selectItem(item);
+//            }
+//        }));
 
 //        Load fragment
         if (findViewById(R.id.fragment_container) != null){
@@ -66,8 +73,8 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
 
 //        Load toast
         if (getIntent().getStringExtra("login") != null){
-            //Welcome toast
-            Toast.makeText(this, "Welcome, " + courier.getName(), Toast.LENGTH_LONG).show();
+//            Welcome toast
+            Toast.makeText(this, "Welcome, " + courier.getName(), Toast.LENGTH_SHORT).show();
         }
 
 //        writeDatabaseTesting();
@@ -106,7 +113,8 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
                 builder.setPositiveButton("Yes, I'm leaving!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+//                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        finish();
                     }
                 });
                 builder.setNegativeButton("No, I'm staying!", null);
@@ -149,6 +157,39 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
 //        String message = textView.getText().toString();
 //        intent.putExtra(EXTRA_MESSAGE, message);
 //        startActivity(intent);
+//    }
+
+//    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+//        @Override
+//        public void onItemClick(AdapterView parent, View view, int position, long id) {
+//            selectItem(position);
+//        }
+//    }
+//
+//    /** Swaps fragments in the main content view */
+//    private void selectItem(int position) {
+//        // Create a new fragment and specify the planet to show based on position
+//        Fragment fragment = new PlanetFragment();
+//        Bundle args = new Bundle();
+//        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
+//        fragment.setArguments(args);
+//
+//        // Insert the fragment by replacing any existing fragment
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.content_frame, fragment)
+//                .commit();
+//
+//        // Highlight the selected item, update the title, and close the drawer
+//        mDrawerList.setItemChecked(position, true);
+//        setTitle(mPlanetTitles[position]);
+//        mDrawerLayout.closeDrawer(mDrawerList);
+//    }
+//
+//    @Override
+//    public void setTitle(CharSequence title) {
+//        mTitle = title;
+//        getActionBar().setTitle(mTitle);
 //    }
 
 }

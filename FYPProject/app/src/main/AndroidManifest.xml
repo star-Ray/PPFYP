@@ -11,17 +11,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.NFC" />
 
-    <uses-feature
-        android:name="android.hardware.nfc"
-        android:required="true" />
-
-    <android:uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" /> <!-- So that application only shows up in google play only for devices with NFC hardware -->
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_teamlogo1"
@@ -36,7 +25,6 @@
         <activity
             android:name=".Activity.HomepageActivity"
             android:label="@string/title_activity_homepage" >
-            android:parentActivityName=".Activity.LoginActivity" >
         </activity>
         <activity
             android:name=".Activity.ProfileActivity"
@@ -79,14 +67,13 @@
             android:label="@string/title_activity_read_nfc"
             android:parentActivityName=".Activity.HomepageActivity" >
             <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="text/plain" />
+                <data android:mimeType="text/plain"/>
             </intent-filter>
             <meta-data
-                android:name="android.nfc.action.TECH_DISCOVERED"
-                android:value="com.example.arnold.fypproject.Activity.HomepageActivity"
-                android:resource="@xml/nfc_tech_list"/>
+                android:name="android.nfc.action.TAG_DISCOVERED"
+                android:value="com.example.arnold.fypproject.Activity.HomepageActivity"/>
         </activity>
     </application>
 

@@ -23,8 +23,6 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.arnold.fypproject.R;
 
-import java.lang.reflect.Array;
-
 public class TestActivity extends ActionBarActivity {
 
     @Override
