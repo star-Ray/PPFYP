@@ -1,6 +1,9 @@
 package com.example.arnold.fypproject.Activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -96,13 +99,21 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(item.getItemId()){
+            case R.id.action_logout:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Logout confirmation").setMessage("Leaving so soon? We will miss you");
+                builder.setPositiveButton("Yes, I'm leaving!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    }
+                });
+                builder.setNegativeButton("No, I'm staying!", null);
+                builder.create().show();
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     public void openMap(View view){
@@ -119,6 +130,11 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
     public void goToTest(View view){
         intent = new Intent(this, Test3Activity.class);
         startActivity(intent);
+    }
+
+    public void goToReadNFC(View view){
+        intent = new Intent(this, ReadNFCActivity.class);
+        startActivityForResult(intent, 1);
     }
 
     public void goToProfilePage(View view){

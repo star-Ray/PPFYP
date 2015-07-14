@@ -1,5 +1,6 @@
 package com.example.arnold.fypproject.Activity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,15 +23,15 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class LoginActivity extends Activity{
     public final static String EXTRA_MESSAGE = "com.example.arnold.fypproject.MESSAGE";
     public final static String KEY = "com.example.arnold.fypproject";
 
     // Login button press
     public void sendMessage(View view){
         Intent intent = new Intent(this, HomepageActivity.class);
-        EditText input_username = (EditText)findViewById(R.id.text_username);
-        EditText input_password = (EditText)findViewById(R.id.text_password);
+        EditText input_username = (EditText)findViewById(R.id.login_text_username);
+        EditText input_password = (EditText)findViewById(R.id.login_text_password);
         String username = input_username.getText().toString();
         String password = input_password.getText().toString();
 
@@ -52,10 +53,11 @@ public class LoginActivity extends ActionBarActivity {
             startActivity(intent);
         }else{
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.title_dialog_login_fail)
-                    .setMessage(R.string.message_dialog_login_fail);
+            builder.setTitle(R.string.dialog_title_login_fail).setMessage(R.string.dialog_message_login_fail);
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
+                    finish();
                 }
             });
             AlertDialog dialog = builder.create();

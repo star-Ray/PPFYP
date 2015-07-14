@@ -2,17 +2,19 @@
     <string name="app_name">Eye-tem</string>
     <string name="app_key">com.example.arnold.fypproject</string>
 
-    <string name="text_welcome_user">Welcome, User</string>
     <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
     <string name="action_search">Search</string>
     <string name="button_login">Login!</string>
-    <string name="login_username">Username</string>
-    <string name="login_password">Password</string>
+    <string name="hint_login_username">Username</string>
+    <string name="hint_login_password">Password</string>
+    <string name="dialog_message_login_fail">Oops! \nIt seems like your username or password is incorrect. \nPlease try again.</string>
+    <string name="dialog_message_nfc_fail">It seems like your NFC is disabled. Please enable NFC to continue.</string>
+    <string name="dialog_title_login_fail">Incorrect credentials</string>
+    <string name="dialog_title_nfc_settings_fail">NFC settings</string>
+    <string name="text_welcome_user">Welcome, User</string>
     <string name="title_activity_homepage">Homepage</string>
     <string name="title_activity_profile">Profile</string>
-    <string name="title_dialog_login_fail">Incorrect credentials</string>
-    <string name="message_dialog_login_fail">Oops! \nIt seems like your username or password is incorrect. \nPlease try again.</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -23,5 +25,6 @@
     <string name="title_activity_test2">Test2Activity</string>
     <string name="title_activity_test3">Test3Activity</string>
     <string name="title_activity_test3_activitiy">Test3Activitiy</string>
+    <string name="title_activity_read_nfc">ReadNFCActivity</string>
 </resources>
 
