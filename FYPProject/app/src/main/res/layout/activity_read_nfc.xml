@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="85dp"
         android:text="sampletext"
-        android:textSize="30dp" />
+        android:textSize="12dp" />
 
     <TextView
         android:id="@+id/text1"

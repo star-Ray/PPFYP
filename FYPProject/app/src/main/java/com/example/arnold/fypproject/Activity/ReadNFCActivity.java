@@ -13,6 +13,7 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -69,7 +70,7 @@ public class ReadNFCActivity extends ActionBarActivity {
 
     public void handleIntent(Intent intent){
         String action = intent.getAction();
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)){
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)){
             String type = intent.getType();
             if (MIME_TEXT_PLAIN.equals(type)){
                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -77,7 +78,7 @@ public class ReadNFCActivity extends ActionBarActivity {
             } else{
                 System.out.println("WRONG MIME TYPE!!!");
             }
-        }else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
+        }else if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)) {
 
             // In case we would still use the Tech Discovered Intent
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -124,6 +125,31 @@ public class ReadNFCActivity extends ActionBarActivity {
          * an IllegalStateException is thrown.
          */
         setupForegroundDispatch(this, nfcAdapter);
+
+        Toast.makeText(this, "ON RESUME RUNNING!", Toast.LENGTH_SHORT).show();
+
+        Intent intent = getIntent();
+        NdefMessage[] msgs;
+
+//            Toast.makeText(this, "TAG DISCOVERED! \nTag: " + NfcAdapter.ACTION_TAG_DISCOVERED, Toast.LENGTH_SHORT).show();
+        sampleText = (TextView)findViewById(R.id.sample_text);
+        sampleText.setText("Tag: " + NfcAdapter.ACTION_TECH_DISCOVERED +
+                "\nIntent: " + intent.getAction() +
+                "\nandroidpush: " + nfcAdapter.isNdefPushEnabled());
+        System.out.println(intent);
+
+
+        if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(getIntent().getAction())) {
+            Toast.makeText(this, "here1", Toast.LENGTH_SHORT).show();
+            Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            if (rawMsgs != null) {
+                msgs = new NdefMessage[rawMsgs.length];
+                for (int i = 0; i < rawMsgs.length; i++) {
+                    msgs[i] = (NdefMessage) rawMsgs[i];
+                }
+            }
+        }
+        //process the msgs array
     }
 
     @Override
@@ -144,6 +170,7 @@ public class ReadNFCActivity extends ActionBarActivity {
          *
          * In our case this method gets called, when the user attaches a Tag to the device.
          */
+        Toast.makeText(this, "New Intent", Toast.LENGTH_SHORT).show();
         handleIntent(intent);
     }
 
@@ -169,7 +196,8 @@ public class ReadNFCActivity extends ActionBarActivity {
         } catch (IntentFilter.MalformedMimeTypeException e) {
             throw new RuntimeException("Check your mime type.");
         }
-        adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
+//        adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
+        adapter.enableForegroundDispatch(activity, pendingIntent, null, null);
     }
 
     /**

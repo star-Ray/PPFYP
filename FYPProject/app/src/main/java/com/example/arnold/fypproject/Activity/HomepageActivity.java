@@ -48,7 +48,7 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
         courier = gson.fromJson(sharedPref.getString("courier", "courier_is_null"), Courier.class);
 
 //        Drawer view
-        drawerArr = new String[]{"TaskActivity", "Task2Activity", "Task3Activity", "Logout"};
+        drawerArr = new String[]{"TaskActivity", "Task2Activity", "Task3Activity"};
         ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_textview, drawerArr);
         DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         ListView listView = (ListView)findViewById(R.id.homepage_drawer);

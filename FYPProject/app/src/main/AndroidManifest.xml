@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.NFC" />
 
+    <uses-feature android:name="android.hardware.nfc" android:required="true"/> <!-- ensure only device with nfc can install and view the app -->
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_teamlogo1"
@@ -67,13 +69,12 @@
             android:label="@string/title_activity_read_nfc"
             android:parentActivityName=".Activity.HomepageActivity" >
             <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="text/plain"/>
+                <action android:name="android.nfc.action.TECH_DISCOVERED"/>
             </intent-filter>
             <meta-data
-                android:name="android.nfc.action.TAG_DISCOVERED"
-                android:value="com.example.arnold.fypproject.Activity.HomepageActivity"/>
+                android:value="com.example.arnold.fypproject.Activity.HomepageActivity"
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter"/>
         </activity>
     </application>
 
