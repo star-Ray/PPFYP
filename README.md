@@ -11,5 +11,13 @@ Below are the external libraries that are used in this project.
 * Mifare SDK
   * API for interaction with NFC Tag
 
+
+# Target Android Versions
+* Minimum Android version: Android API Level 16 (Android 4.1 Jellybean)
+* Target Android version: Android API Level 22 (Android 5.1 Lollipop)
+
+# Testing Device
+* Sony Xperia Z3 (Android 5.0.2)
+
 # Developer
 This project is managed and maintained by Arnold. 
