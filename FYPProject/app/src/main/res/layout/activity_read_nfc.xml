@@ -6,31 +6,30 @@
     tools:context="com.example.arnold.fypproject.Activity.ReadNFCActivity">
 
     <TextView
-        android:id="@+id/sample_text"
+        android:id="@+id/nfc_sample_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/image_nfc_logo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
-        android:text="sampletext"
+        android:padding="30dp"
+        android:text="sample_title"
         android:textSize="12dp" />
 
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/image_nfc_logo"
+        android:layout_width="200sp"
+        android:layout_height="200sp"
         android:layout_centerInParent="true"
-        android:text="Congratulations!"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+        android:src="@drawable/ic_nfc_black_24dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text1"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="30dp"
-        android:text="Your NFC is enabled!"
-        android:textSize="20dp"/>
+        android:layout_below="@+id/image_nfc_logo"
+        android:layout_centerHorizontal="true"
+        android:padding="30dp"
+        android:text="Place device near NFC Tag"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
 
 </RelativeLayout>

@@ -13,7 +13,6 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -61,14 +60,9 @@ public class ReadNFCActivity extends ActionBarActivity {
             });
             builder.create().show();
         }
-
-//        Sampletext
-        TextView sampleText = (TextView)findViewById(R.id.sample_text);
-
-        handleIntent(getIntent());
     }
 
-    public void handleIntent(Intent intent){
+    protected void handleIntent(Intent intent){
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)){
             String type = intent.getType();
@@ -125,31 +119,7 @@ public class ReadNFCActivity extends ActionBarActivity {
          * an IllegalStateException is thrown.
          */
         setupForegroundDispatch(this, nfcAdapter);
-
-        Toast.makeText(this, "ON RESUME RUNNING!", Toast.LENGTH_SHORT).show();
-
-        Intent intent = getIntent();
-        NdefMessage[] msgs;
-
-//            Toast.makeText(this, "TAG DISCOVERED! \nTag: " + NfcAdapter.ACTION_TAG_DISCOVERED, Toast.LENGTH_SHORT).show();
-        sampleText = (TextView)findViewById(R.id.sample_text);
-        sampleText.setText("Tag: " + NfcAdapter.ACTION_TECH_DISCOVERED +
-                "\nIntent: " + intent.getAction() +
-                "\nandroidpush: " + nfcAdapter.isNdefPushEnabled());
-        System.out.println(intent);
-
-
-        if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(getIntent().getAction())) {
-            Toast.makeText(this, "here1", Toast.LENGTH_SHORT).show();
-            Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-            if (rawMsgs != null) {
-                msgs = new NdefMessage[rawMsgs.length];
-                for (int i = 0; i < rawMsgs.length; i++) {
-                    msgs[i] = (NdefMessage) rawMsgs[i];
-                }
-            }
-        }
-        //process the msgs array
+        System.out.println("On Resume Running...");
     }
 
     @Override
@@ -170,17 +140,30 @@ public class ReadNFCActivity extends ActionBarActivity {
          *
          * In our case this method gets called, when the user attaches a Tag to the device.
          */
-        Toast.makeText(this, "New Intent", Toast.LENGTH_SHORT).show();
-        handleIntent(intent);
+
+        String showString = "NFC Tag detected!\nIntent: " + intent.toString();
+
+        System.out.println("new intent is here");
+        sampleText = (TextView)findViewById(R.id.nfc_sample_text);
+        sampleText.setText(showString);
+        Toast.makeText(this, showString, Toast.LENGTH_LONG).show();
+//        handleIntent(intent);
+
+        sampleText.setText(intent.getAction());
+        if (intent.getAction().equals(NfcAdapter.ACTION_TAG_DISCOVERED)){
+            Toast.makeText(this,"tag detected!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
      * @param activity The corresponding {@link Activity} requesting the foreground dispatch.
      * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
      */
-    public static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
+    protected static void setupForegroundDispatch(final Activity activity, NfcAdapter adapter) {
         final Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        System.out.println(intent.toString());
 
         final PendingIntent pendingIntent = PendingIntent.getActivity(activity.getApplicationContext(), 0, intent, 0);
 
@@ -189,7 +172,7 @@ public class ReadNFCActivity extends ActionBarActivity {
 
         // Notice that this is the same filter as in our manifest.
         filters[0] = new IntentFilter();
-        filters[0].addAction(NfcAdapter.ACTION_NDEF_DISCOVERED);
+        filters[0].addAction(NfcAdapter.ACTION_TAG_DISCOVERED);
         filters[0].addCategory(Intent.CATEGORY_DEFAULT);
         try {
             filters[0].addDataType(MIME_TEXT_PLAIN);
@@ -197,6 +180,10 @@ public class ReadNFCActivity extends ActionBarActivity {
             throw new RuntimeException("Check your mime type.");
         }
 //        adapter.enableForegroundDispatch(activity, pendingIntent, filters, techList);
+        System.out.println("activity: " + activity.toString());
+        System.out.println("pending intent: " + pendingIntent.toString());
+        System.out.println("filters: " + filters.toString());
+        System.out.println("techlist: " + techList.toString());
         adapter.enableForegroundDispatch(activity, pendingIntent, null, null);
     }
 
@@ -204,10 +191,9 @@ public class ReadNFCActivity extends ActionBarActivity {
      * @param activity The corresponding {@link BaseActivity} requesting to stop the foreground dispatch.
      * @param adapter The {@link NfcAdapter} used for the foreground dispatch.
      */
-    public static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
+    protected static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
         adapter.disableForegroundDispatch(activity);
     }
-
 
     /**
      * Background task for reading the data. Do not block the UI thread while reading.

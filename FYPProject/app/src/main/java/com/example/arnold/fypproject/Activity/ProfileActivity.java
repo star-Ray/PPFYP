@@ -19,7 +19,7 @@ public class ProfileActivity extends ActionBarActivity {
     Intent intent;
     Courier courier;
 
-    public void openCamera(View view){
+    protected void openCamera(View view){
         intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivity(intent);
     }

@@ -81,7 +81,7 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
     }
 
 //    Probably not using this method
-    public void writeDatabaseTesting(){
+    protected void writeDatabaseTesting(){
         DatabaseContract.DatabaseHelper dbHelper = new DatabaseContract.DatabaseHelper(getApplicationContext());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -113,7 +113,6 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
                 builder.setPositiveButton("Yes, I'm leaving!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-//                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                         finish();
                     }
                 });

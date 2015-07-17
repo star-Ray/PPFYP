@@ -1,8 +1,10 @@
 package com.example.arnold.fypproject.Activity;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -38,6 +40,18 @@ public class TestActivity extends ActionBarActivity {
         Network network = new BasicNetwork(new HurlStack());
 
         final ImageView imageView = (ImageView)findViewById(R.id.imageView);
+
+        // Testing codes to retrieve phone number
+        TextView myNum = (TextView)findViewById(R.id.number123);
+        TelephonyManager tMgr = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+//        String mPhoneNumber = tMgr.getSimSerialNumber();
+        String mPhoneNumber = tMgr.getDeviceId();
+        System.out.println("telephonemanager: " + tMgr.toString());
+        System.out.println("Phonenumber: " + mPhoneNumber.toString());
+        if (mPhoneNumber.equals("")){
+            mPhoneNumber = "nothing";
+        }
+        myNum.setText(mPhoneNumber);
 
         //RequestQueue
         RequestQueue queue = new RequestQueue(cache, network);

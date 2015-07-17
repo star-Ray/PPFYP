@@ -3,16 +3,18 @@ package com.example.arnold.fypproject.Activity;
 //import android.support.v7.app.ActionBar;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.app.Notification;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.arnold.fypproject.Adapter.HomepageTabsPagerAdapter;
 import com.example.arnold.fypproject.R;
 
-public class Test3Activity extends FragmentActivity implements ActionBar.TabListener{
+public class Test3Activity extends ActionBarActivity implements ActionBar.TabListener{
 
     HomepageTabsPagerAdapter homepageTabsPagerAdapter;
     ViewPager viewPager;
@@ -32,10 +34,10 @@ public class Test3Activity extends FragmentActivity implements ActionBar.TabList
 //        actionBar.setDisplayHomeAsUpEnabled(false);
         viewPager.setAdapter(homepageTabsPagerAdapter);
 
-//        Adding Tabs
-        for (String tab_name : tabs){
-            actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
-        }
+////        Adding Tabs
+//        for (String tab_name : tabs){
+//            actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
+//        }
     }
 
     @Override
@@ -44,10 +46,10 @@ public class Test3Activity extends FragmentActivity implements ActionBar.TabList
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        // on tab selected
-        // show respected fragment view
-        viewPager.setCurrentItem(tab.getPosition());
-    }
+    // on tab selected
+    // show respected fragment view
+    viewPager.setCurrentItem(tab.getPosition());
+}
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {

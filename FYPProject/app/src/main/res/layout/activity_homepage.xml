@@ -92,6 +92,55 @@
             android:layout_marginTop="57dp"
             android:onClick="goToReadNFC"
             android:text="Go To Read NFC" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/button_maps"
+            android:layout_alignLeft="@+id/button_maps"
+            android:layout_alignRight="@+id/button_maps"
+            android:layout_alignStart="@+id/button_maps"
+            android:layout_below="@+id/button_maps"
+            android:gravity="center"
+            android:text="Maps" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/button_test"
+            android:layout_alignLeft="@+id/button_test"
+            android:layout_alignRight="@+id/button_test"
+            android:layout_alignStart="@+id/button_test"
+            android:layout_below="@+id/button_test"
+            android:gravity="center"
+            android:text="Don't press" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/button_task"
+            android:layout_alignLeft="@+id/button_task"
+            android:layout_alignRight="@+id/button_task"
+            android:layout_alignStart="@+id/button_task"
+            android:layout_below="@+id/button_task"
+            android:gravity="center"
+            android:text="My Tasks" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button_profile"
+            android:layout_alignStart="@+id/button_profile"
+            android:layout_below="@+id/button_profile"
+            android:gravity="center"
+            android:text="My Profile"
+            android:layout_alignRight="@+id/button_profile"
+            android:layout_alignEnd="@+id/button_profile" />
+
     </RelativeLayout>
 
     <!--Listview for drawer-->

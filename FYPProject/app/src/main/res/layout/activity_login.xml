@@ -60,11 +60,12 @@
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:background="#489aff"
+        android:background="#ff4d86b3"
         android:onClick="sendMessage"
         android:text="@string/button_login"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
-        android:textStyle="bold"/>
+        android:typeface="sans"
+        android:visibility="visible" />
 
 </LinearLayout>
