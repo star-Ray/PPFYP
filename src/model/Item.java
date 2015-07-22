@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Item {
@@ -14,14 +16,15 @@ public class Item {
 	private String image;
 	private String nfcTag;
 	private String barCode;
-	
+
 	private long objStatus;
 	private Date createDate;
 	private String remark;
-	
+
 	private Task task;
-	
-	public Item(){}
+
+	public Item() {
+	}
 
 	public Item(Task task, String description, double weight, String dimension) {
 		super();
@@ -35,7 +38,7 @@ public class Item {
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
-	
+
 	public long getItemId() {
 		return itemId;
 	}
@@ -124,9 +127,23 @@ public class Item {
 		this.task = task;
 	}
 
-	public JSONObject toJson(){
+	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
+
+		returnJson.put(Key.ITEMID, this.itemId);
+		returnJson.put(Key.DESCRIPTION, this.description);
+		returnJson.put(Key.WEIGHT, this.weight);
+		returnJson.put(Key.DIMENSION, this.dimension);
+		returnJson.put(Key.IMAGE, this.image);
+		returnJson.put(Key.NFCTAG, this.nfcTag);
+		returnJson.put(Key.BARCODE, this.barCode);
 		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		returnJson.put(Key.TASK, this.task.toJson());
+
 		return returnJson;
 	}
 

@@ -5,6 +5,7 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Company;
 import model.Officer;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -59,5 +60,16 @@ public class OfficerDAO {
 			}
 		}
 		return officer;
+	}
+	
+	public static ArrayList<Officer> getOfficersByCompany(Company company){
+		ArrayList<Officer> tasks = new ArrayList<Officer>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Officer.class);
+		detachedCriteria.add(Restrictions.eq(Key.COMPANY, company));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tasks.add((Officer) o);
+		}
+		return tasks;
 	}
 }

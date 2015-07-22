@@ -56,7 +56,7 @@ public class Key {
 	public static final String STARTLOCATION = "startLocation";
 	public static final String ENDLOCATION = "endLocation";
 	public static final String SIGNATURE = "signature";
-	public static final String ONETIMEPASS = "oneTimePass";
+	public static final String VERIFYPASS = "verifyPass";
 	public static final String TASKSTATUS = "taskStatus";
 	
 	

@@ -2,7 +2,12 @@ package model;
 
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import persistence.CompanyDAO;
+import persistence.TaskDAO;
+import system.Key;
 
 public class SuperAdmin {
 	private long superAdminId;
@@ -63,6 +68,24 @@ public class SuperAdmin {
 	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.SUPERADMINID, this.superAdminId);
+		returnJson.put(Key.NAME, this.name);
+		
+		return returnJson;
+	}
+	
+	public JSONObject toJsonStrong(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.SUPERADMINID, this.superAdminId);
+		returnJson.put(Key.NAME, this.name);
+		
+		JSONArray companyJArr = new JSONArray();
+		for(Company c : CompanyDAO.getCompanysBySuperAdmin(this)){
+			companyJArr.add(c.toJson());
+		}
+		returnJson.put(Key.COMPANYS, companyJArr);
 		
 		return returnJson;
 	}

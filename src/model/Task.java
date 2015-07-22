@@ -7,6 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import persistence.ItemDAO;
+import system.Config;
 import system.Key;
 import system.Value;
 
@@ -212,10 +213,78 @@ public class Task {
 		this.objStatus = objStatus;
 	}
 	
+	//all have
+	public JSONObject toJson(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.TASKID, this.taskId);
+		returnJson.put(Key.RECEIVERNAME, this.receiverName);
+		returnJson.put(Key.RECEIVERCONTACT, this.receiverContact);
+		returnJson.put(Key.PLANSTARTTIME, this.planStartTime);
+		returnJson.put(Key.PLANENDTIME, this.planEndTime);
+		returnJson.put(Key.ACTUALSTARTTIME, this.actualStartTime);
+		returnJson.put(Key.ACTUALENDTIME, this.actualEndTime);
+		returnJson.put(Key.STARTLOCATION, this.startLocation);
+		returnJson.put(Key.ENDLOCATION, this.endLocation);
+		
+		returnJson.put(Key.SIGNATURE, this.signature);
+		returnJson.put(Key.VERIFYPASS, this.planStartTime);
+		returnJson.put(Key.TASKSTATUS, this.taskStatus);
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		returnJson.put(Key.SENDER, this.sender.toJson());
+		returnJson.put(Key.COURIER, this.courier.toJson());
+		returnJson.put(Key.OFFICER, this.officer.toJson());
+		
+		return returnJson;
+	}
+	
+	/*
+	//only have sender
+	public JSONObject toJsonSender(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.SENDER, this.sender.toJson());
+		
+		return returnJson;
+	}
+	
+	//sender and officer
+	public JSONObject toJsonOfficer(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.SENDER, this.sender.toJson());
+		returnJson.put(Key.OFFICER, this.officer.toJson());
+		
+		return returnJson;
+	}
+	*/
+	
 	public JSONObject toJsonStrong(){
 		JSONObject returnJson = new JSONObject();
 		
+		returnJson.put(Key.TASKID, this.taskId);
+		returnJson.put(Key.RECEIVERNAME, this.receiverName);
+		returnJson.put(Key.RECEIVERCONTACT, this.receiverContact);
+		returnJson.put(Key.PLANSTARTTIME, this.planStartTime);
+		returnJson.put(Key.PLANENDTIME, this.planEndTime);
+		returnJson.put(Key.ACTUALSTARTTIME, this.actualStartTime);
+		returnJson.put(Key.ACTUALENDTIME, this.actualEndTime);
+		returnJson.put(Key.STARTLOCATION, this.startLocation);
+		returnJson.put(Key.ENDLOCATION, this.endLocation);
 		
+		returnJson.put(Key.SIGNATURE, this.signature);
+		returnJson.put(Key.VERIFYPASS, this.planStartTime);
+		returnJson.put(Key.TASKSTATUS, this.taskStatus);
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		returnJson.put(Key.SENDER, this.sender.toJson());
+		returnJson.put(Key.COURIER, this.courier.toJson());
+		returnJson.put(Key.OFFICER, this.officer.toJson());
 		
 		JSONArray itemArr = new JSONArray();
 		for(Item k : ItemDAO.getItemsByTask(this)){
@@ -225,34 +294,6 @@ public class Task {
 		
 		return returnJson;
 	}
-	
-	public JSONObject toJson(){
-		JSONObject returnJson = new JSONObject();
-		//all have
-		returnJson.put(Key.SENDER, this.sender.toJson());
-		returnJson.put(Key.COURIER, this.courier.toJson());
-		returnJson.put(Key.OFFICER, this.officer.toJson());
-		
-		return returnJson;
-	}
-	
-	public JSONObject toJsonSender(){
-		JSONObject returnJson = new JSONObject();
-		//only have sender
-		returnJson.put(Key.SENDER, this.sender.toJson());
-		
-		return returnJson;
-	}
-	
-	public JSONObject toJsonOfficer(){
-		JSONObject returnJson = new JSONObject();
-		//sender and officer
-		returnJson.put(Key.SENDER, this.sender.toJson());
-		returnJson.put(Key.OFFICER, this.officer.toJson());
-		
-		return returnJson;
-	}
-	
 	//TODO possibly add in the function that courier can also create task.??? then the business flow would change.
 	
 }

@@ -3,8 +3,12 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import persistence.TaskDAO;
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Officer {
@@ -117,6 +121,40 @@ public class Officer {
 	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.OFFICERID, this.officerId);
+		returnJson.put(Key.NAME,this.name);
+		returnJson.put(Key.USERNAME,this.username);
+		returnJson.put(Key.NAME,this.name);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		returnJson.put(Key.COMPANY, this.company.toJson());
+		
+		return returnJson;
+	}
+	
+	public JSONObject toJsonStrong(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.OFFICERID, this.officerId);
+		returnJson.put(Key.NAME,this.name);
+		returnJson.put(Key.USERNAME,this.username);
+		returnJson.put(Key.NAME,this.name);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		returnJson.put(Key.COMPANY, this.company.toJson());
+		
+		JSONArray taskJArr = new JSONArray();
+		for(Task t : TaskDAO.getTasksByOfficer(this)){
+			taskJArr.add(t.toJson());
+		}
+		returnJson.put(Key.TASKS, taskJArr);
 		
 		return returnJson;
 	}

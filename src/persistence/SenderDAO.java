@@ -5,6 +5,7 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Company;
 import model.Sender;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -41,6 +42,17 @@ public class SenderDAO {
 	}
 	
 	//features
+	public static ArrayList<Sender> getSendersByCompany(Company company){
+		ArrayList<Sender> tasks = new ArrayList<Sender>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Sender.class);
+		detachedCriteria.add(Restrictions.eq(Key.COMPANY, company));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tasks.add((Sender) o);
+		}
+		return tasks;
+	}
+	
 	public static Sender getSenderByName(String name){
 		Sender sender = null;
 		Sender tempSender = null;

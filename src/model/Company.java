@@ -3,8 +3,14 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import persistence.OfficerDAO;
+import persistence.SenderDAO;
+import persistence.TaskDAO;
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Company {
@@ -126,8 +132,40 @@ public class Company {
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
+		returnJson.put(Key.COMPANYID, this.companyId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.USERNAME, this.username);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
 		return returnJson;
 	}
 
-
+	public JSONObject toJsonStrong(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.COMPANYID, this.companyId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.USERNAME, this.username);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		JSONArray officerJArr = new JSONArray();
+		for(Officer o : OfficerDAO.getOfficersByCompany(this)){
+			officerJArr.add(o.toJson());
+		}
+		returnJson.put(Key.OFFICERS, officerJArr);
+		
+		JSONArray senderJArr = new JSONArray();
+		for(Sender s : SenderDAO.getSendersByCompany(this)){
+			senderJArr.add(s.toJson());
+		}
+		returnJson.put(Key.SENDERS, senderJArr);
+		
+		return returnJson;
+	}
 }

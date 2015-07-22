@@ -3,8 +3,13 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import persistence.OfficerDAO;
+import persistence.TaskDAO;
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Courier {
@@ -96,6 +101,36 @@ public class Courier {
 
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.COURIERID, this.courierId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.CONTACTNO, this.contactNo);
+		returnJson.put(Key.REALTIMELOCATION, this.realTimeLocation);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
+	public JSONObject toJsonStrong(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.COURIERID, this.courierId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.CONTACTNO, this.contactNo);
+		returnJson.put(Key.REALTIMELOCATION, this.realTimeLocation);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		JSONArray taskJArr = new JSONArray();
+		for(Task t : TaskDAO.getTasksByCourier(this)){
+			taskJArr.add(t.toJson());
+		}
+		returnJson.put(Key.TASKS, taskJArr);
 		
 		return returnJson;
 	}

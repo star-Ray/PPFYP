@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Item;
-import model.Item;
 import model.Task;
 
 import org.hibernate.criterion.DetachedCriteria;

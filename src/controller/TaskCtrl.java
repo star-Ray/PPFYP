@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Date;
 
+import model.Company;
 import model.Courier;
 import model.Sender;
 import model.Task;
@@ -10,12 +11,12 @@ import model.Officer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import persistence.CompanyDAO;
 import persistence.CourierDAO;
 import persistence.SenderDAO;
 import persistence.TaskDAO;
 import persistence.OfficerDAO;
 import system.Config;
-import system.Encrypt;
 import system.Key;
 import system.Message;
 import system.Value;
@@ -191,11 +192,27 @@ public class TaskCtrl {
 	}
 	
 	//features
-	public static JSONObject getTaskByOfficerId(){
+	public static JSONObject getTasksByCompany(JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		
-		
-		
+		try{
+			Company company = CompanyDAO.getCompanyById((long) inputJson.get(Key.COMPANYID));
+			if(company != null){
+				JSONArray taskJArr = new JSONArray();
+				for(Task t: TaskDAO.getTasksByCompany(company)){
+					taskJArr.add(t.toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, taskJArr);
+			}else{
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.COMPANYNOTEXIST);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
 		return returnJson;
 	}
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Company;
-
+import model.SuperAdmin;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -59,5 +59,16 @@ public class CompanyDAO {
 			}
 		}
 		return company;
+	}
+	
+	public static ArrayList<Company> getCompanysBySuperAdmin(SuperAdmin superAdmin) {
+		ArrayList<Company> companys = new ArrayList<Company>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Company.class);
+		detachedCriteria.add(Restrictions.eq(Key.SUPERADMIN, superAdmin));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			companys.add((Company) o);
+		}
+		return companys;
 	}
 }
