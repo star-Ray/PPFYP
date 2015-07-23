@@ -41,19 +41,15 @@ public class CompanyDAO {
 	}
 	
 	//features
-	public static Company getCompanyByName(String name){
+	public static Company getCompanyByUsername(String username){
 		Company company = null;
 		Company tempCompany = null;
-		
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Company.class);
-		
-		detachedCriteria.add(Restrictions.eq(Key.NAME, name));
-		
+		detachedCriteria.add(Restrictions.eq(Key.USERNAME, username));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		
 		for(Object o : list){
 			tempCompany = (Company)o;
-			if(tempCompany.getName().equals(name)){
+			if(tempCompany.getName().equals(username)){
 				company = tempCompany;
 				break;
 			}

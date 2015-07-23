@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import system.Config;
 import system.Key;
 import system.Value;
 import controller.CompanyCtrl;
@@ -18,22 +17,21 @@ import controller.CompanyCtrl;
 /**
  * @author RaySong
  */
-
-public class CreateCompanyServlet extends HttpServlet {
+public class InstallServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateCompanyServlet() {
+    public InstallServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    /**
+	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
@@ -50,13 +48,17 @@ public class CreateCompanyServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+		response.setContentType("text/html; charset=UTF-8"); 
 		PrintWriter out = response.getWriter();
 		JSONObject returnJson = new JSONObject();
 		
 		try{
-			String inputStr = request.getParameter(Key.INPUT);
-			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
+			//String inputStr = request.getParameter(Key.INPUT);
+			JSONObject inputJson = new JSONObject();
+			inputJson.put(Key.NAME, "test");
+			inputJson.put(Key.USERNAME, "test");
+			inputJson.put(Key.PASSWORD, "test");
+			
 			System.out.println(inputJson.toJSONString());
 			
 			returnJson = CompanyCtrl.createCompany(inputJson);
@@ -65,7 +67,7 @@ public class CreateCompanyServlet extends HttpServlet {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-		
 		out.println(returnJson.toJSONString());
 	}
+
 }

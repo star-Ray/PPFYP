@@ -19,13 +19,13 @@ import controller.CompanyCtrl;
  * @author RaySong
  */
 
-public class CreateCompanyServlet extends HttpServlet {
+public class GetUserByUsernameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateCompanyServlet() {
+    public GetUserByUsernameServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,7 +59,7 @@ public class CreateCompanyServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = CompanyCtrl.createCompany(inputJson);
+			returnJson = CompanyCtrl.loginUser(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

@@ -42,19 +42,15 @@ public class OfficerDAO {
 	}
 	
 	//features
-	public static Officer getOfficerByName(String name){
+	public static Officer getOfficerByUsername(String username){
 		Officer officer = null;
 		Officer tempOfficer = null;
-		
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Officer.class);
-		
-		detachedCriteria.add(Restrictions.eq(Key.NAME, name));
-		
+		detachedCriteria.add(Restrictions.eq(Key.USERNAME, username));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		
 		for(Object o : list){
 			tempOfficer = (Officer)o;
-			if(tempOfficer.getName().equals(name)){
+			if(tempOfficer.getName().equals(username)){
 				officer = tempOfficer;
 				break;
 			}

@@ -8,7 +8,7 @@ function login(){
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
 	$.ajax({
-		url:'/SimTech/admin/RetrieveCompanyByUsernameServlet?input='+inputStr,
+		url:'/SimTech/admin/GetUserByUsernameServlet?input='+inputStr,
 		method:'POST',
 		dataType: 'json',
 		error: function(err){
@@ -20,10 +20,19 @@ function login(){
 			var status = data.status;
 			var message = data.message;
 			if(status== 1){
-				var companyId = message.companyId;
-				localStorage.setItem('companyId', companyId);
-				//TODO Remove the comment after success testing
-				//window.location = "pages/index.html";
+				var user = message;
+				var companyId = user.companyId;
+				var officerId = user.officerId;
+				if(companyId != null){
+					localStorage.setItem('companyId', companyId);
+					//TODO Remove the comment after success testing
+					//window.location = "pages/index.html";
+				}
+				if(officerId != null){
+					localStorage.setItem('officerId', officerId);
+					//TODO Remove the comment after success testing
+					//window.location = "pages/index.html";
+				}
 			}else{
 				$("#message").html("Invalid Eamil/Password");
 				console.log(message);

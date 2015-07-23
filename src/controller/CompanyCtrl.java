@@ -1,11 +1,13 @@
 package controller;
 
 import model.Company;
+import model.Officer;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import persistence.CompanyDAO;
+import persistence.OfficerDAO;
 import system.Encrypt;
 import system.Key;
 import system.Message;
@@ -137,5 +139,47 @@ public class CompanyCtrl {
 	}
 	
 	//features
-	
+	public static JSONObject loginUser (JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		try{
+			String username = (String) inputJson.get(Key.USERNAME);
+			Company company = CompanyDAO.getCompanyByUsername(username);
+			if(company != null){
+				String password = (String)inputJson.get(Key.PASSWORD);
+				String passwordSalt = company.getPasswordSalt();
+				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
+				String checkHash = company.getPasswordHash();
+				if(checkHash.equals(passwordHash)){
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, company.toJson());
+				}else{
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.WRONGCOMPANYPASSWORD);
+				}
+			}else{
+				Officer officer = OfficerDAO.getOfficerByUsername(username);
+				if(officer != null){
+					String password = (String)inputJson.get(Key.PASSWORD);
+					String passwordSalt = officer.getPasswordSalt();
+					String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
+					String checkHash = officer.getPasswordHash();
+					if(checkHash.equals(passwordHash)){
+						returnJson.put(Key.STATUS, Value.SUCCESS);
+						returnJson.put(Key.MESSAGE, officer.toJson());
+					}else{
+						returnJson.put(Key.STATUS, Value.FAIL);
+						returnJson.put(Key.MESSAGE, Message.WRONGOFFICERPASSWORD);
+					}
+				}else{
+					returnJson.put(Key.STATUS, Value.FAIL)  ;
+					returnJson.put(Key.MESSAGE, Message.USERNOTEXIST);
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
 }

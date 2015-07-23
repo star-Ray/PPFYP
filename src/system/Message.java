@@ -11,5 +11,8 @@ public class Message {
 	public static final String ITEMNOTEXIST = "The item does not exist.";
 	public static final String OFFICERNOTEXIST = "The officer does not exist.";
 	public static final String TASKNOTEXIST = "The task does not exist.";
-
+	
+	public static final String USERNOTEXIST = "The user does not exist";
+	public static final String WRONGCOMPANYPASSWORD = "Invalid admin email or password.";
+	public static final String WRONGOFFICERPASSWORD = "Invalid email or password.";
 }
