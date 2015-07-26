@@ -22,22 +22,38 @@ import java.util.ArrayList;
 public class LoginActivity extends Activity{
     public final static String EXTRA_MESSAGE = "com.example.arnold.fypproject.MESSAGE";
     public final static String KEY = "com.example.arnold.fypproject";
+    private SharedPreferences sharedPref;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        sharedPref = this.getSharedPreferences(getString(R.string.app_key), MODE_PRIVATE);
+
+        String courier = sharedPref.getString("courier", null);
+        if(courier != null){
+            Intent intent = new Intent(this, HomepageActivity.class);
+            startActivity(intent);
+        }
+    }
 
     // Login button press
     public void sendMessage(View view){
+
         Intent intent = new Intent(this, HomepageActivity.class);
+
         EditText input_username = (EditText)findViewById(R.id.login_username);
         EditText input_password = (EditText)findViewById(R.id.login_password);
         String username = input_username.getText().toString();
         String password = input_password.getText().toString();
 
-//        Create test user
+//        ****** Create test user ******
         Sender sender = createTestSender();
         Courier courier = createTestCourier();
 
         // validation of login credentials
         if(sender.getUsername().equals(username) && sender.getPasswordSALT().equals(password)){
-            SharedPreferences sharedPref = this.getSharedPreferences(KEY, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             Gson gson = new Gson();
 
@@ -81,10 +97,6 @@ public class LoginActivity extends Activity{
         return courier;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-    }
+
 
 }

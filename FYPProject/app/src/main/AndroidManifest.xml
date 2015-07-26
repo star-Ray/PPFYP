@@ -19,7 +19,8 @@
         android:icon="@drawable/ic_teamlogo1"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name=".Activity.LoginActivity" >
+        <activity
+            android:name=".Activity.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -32,14 +33,6 @@
         <activity
             android:name=".Activity.ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:parentActivityName=".Activity.HomepageActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.HomepageActivity" />
-        </activity>
-        <activity
-            android:name=".Activity.TaskActivity"
-            android:label="@string/title_activity_task"
             android:parentActivityName=".Activity.HomepageActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

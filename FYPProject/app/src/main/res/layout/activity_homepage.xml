@@ -16,44 +16,6 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.example.arnold.fypproject.Activity.HomepageActivity">
 
-        <!--My profile button-->
-        <ImageButton
-            android:id="@+id/button_profile"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="50dp"
-            android:adjustViewBounds="false"
-            android:cropToPadding="false"
-            android:onClick="goToProfilePage"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_usericon" />
-
-        <!--task button-->
-        <ImageButton
-            android:id="@+id/button_task"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_alignEnd="@+id/fragment_container"
-            android:layout_alignRight="@+id/fragment_container"
-            android:layout_alignTop="@+id/button_profile"
-            android:layout_marginRight="50dp"
-            android:onClick="goToTaskPage"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_taskicon"
-            android:visibility="visible" />
-
-        <ImageButton
-            android:id="@+id/button_maps"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_alignLeft="@id/button_profile"
-            android:layout_below="@id/button_profile"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="50dp"
-            android:onClick="openMap"
-            android:src="@drawable/ic_place_black_24dp" />
-
         <RelativeLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
@@ -72,74 +34,6 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </RelativeLayout>
 
-        <ImageButton
-            android:id="@+id/button_test"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_alignLeft="@+id/button_task"
-            android:layout_alignStart="@+id/button_task"
-            android:layout_alignTop="@+id/button_maps"
-            android:onClick="goToTest"
-            android:src="@drawable/ic_adb_black_24dp" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button_maps"
-            android:layout_alignStart="@+id/button_maps"
-            android:layout_below="@+id/button_maps"
-            android:layout_marginTop="57dp"
-            android:onClick="goToReadNFC"
-            android:text="Go To Read NFC" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/button_maps"
-            android:layout_alignLeft="@+id/button_maps"
-            android:layout_alignRight="@+id/button_maps"
-            android:layout_alignStart="@+id/button_maps"
-            android:layout_below="@+id/button_maps"
-            android:gravity="center"
-            android:text="Maps" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/button_test"
-            android:layout_alignLeft="@+id/button_test"
-            android:layout_alignRight="@+id/button_test"
-            android:layout_alignStart="@+id/button_test"
-            android:layout_below="@+id/button_test"
-            android:gravity="center"
-            android:text="Don't press" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/button_task"
-            android:layout_alignLeft="@+id/button_task"
-            android:layout_alignRight="@+id/button_task"
-            android:layout_alignStart="@+id/button_task"
-            android:layout_below="@+id/button_task"
-            android:gravity="center"
-            android:text="My Tasks" />
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button_profile"
-            android:layout_alignStart="@+id/button_profile"
-            android:layout_below="@+id/button_profile"
-            android:gravity="center"
-            android:text="My Profile"
-            android:layout_alignRight="@+id/button_profile"
-            android:layout_alignEnd="@+id/button_profile" />
 
     </RelativeLayout>
 
@@ -149,7 +43,7 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#111"
+        android:background="#213D3E"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="5sp"
