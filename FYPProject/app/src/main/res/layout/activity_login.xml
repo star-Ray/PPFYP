@@ -4,9 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- Logo -->
+    <!-- TeamLogo -->
     <ImageView
-        android:id="@+id/image_teamLogo"
+        android:id="@+id/login_teamLogo"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
@@ -16,7 +16,7 @@
 
     <!--Title-->
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/login_appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -29,7 +29,7 @@
 
     <!-- Username -->
     <EditText
-        android:id="@+id/login_text_username"
+        android:id="@+id/login_username"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -42,7 +42,7 @@
 
     <!-- Password -->
     <EditText
-        android:id="@+id/login_text_password"
+        android:id="@+id/login_password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -55,7 +55,7 @@
 
     <!--Login button-->
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/login_button"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"

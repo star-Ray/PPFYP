@@ -26,8 +26,8 @@ public class LoginActivity extends Activity{
     // Login button press
     public void sendMessage(View view){
         Intent intent = new Intent(this, HomepageActivity.class);
-        EditText input_username = (EditText)findViewById(R.id.login_text_username);
-        EditText input_password = (EditText)findViewById(R.id.login_text_password);
+        EditText input_username = (EditText)findViewById(R.id.login_username);
+        EditText input_password = (EditText)findViewById(R.id.login_password);
         String username = input_username.getText().toString();
         String password = input_password.getText().toString();
 

@@ -1,17 +1,17 @@
 <resources>
-    <string name="app_name">Eye-tem</string>
+    <string name="app_name">CDMS</string>
     <string name="app_key">com.example.arnold.fypproject</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
     <string name="action_search">Search</string>
     <string name="button_login">Log in</string>
-    <string name="hint_login_username">Username</string>
-    <string name="hint_login_password">Password</string>
     <string name="dialog_message_login_fail">Oops! \nIt seems like your username or password is incorrect. \nPlease try again.</string>
     <string name="dialog_message_nfc_fail">It seems like your NFC is disabled. Please enable NFC to continue.</string>
     <string name="dialog_title_login_fail">Incorrect credentials</string>
     <string name="dialog_title_nfc_settings_fail">NFC settings</string>
+    <string name="hint_login_username">Username</string>
+    <string name="hint_login_password">Password</string>
     <string name="text_welcome_user">Welcome, User</string>
     <string name="title_activity_homepage">Homepage</string>
     <string name="title_activity_profile">Profile</string>
