@@ -28,6 +28,7 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
     private String[] drawerArr;
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
         setContentView(R.layout.activity_homepage);
 
 //        Initializing
-        Gson gson = new Gson();
+        gson = new Gson();
         sharedPref = this.getSharedPreferences(getString(R.string.app_key), MODE_PRIVATE);
         editor = sharedPref.edit();
         sender = gson.fromJson(sharedPref.getString("sender", null), Sender.class);
@@ -96,9 +97,8 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, sampleFragment).commit();
         }
 
-//        Load toast
+//        Load welcome toast
         if (getIntent().getStringExtra("login") != null){
-//            Welcome toast
             Toast.makeText(this, "Welcome, " + courier.getName(), Toast.LENGTH_SHORT).show();
         }
     }
