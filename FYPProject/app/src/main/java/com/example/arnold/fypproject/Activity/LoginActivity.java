@@ -20,22 +20,39 @@ import java.util.ArrayList;
 
 
 public class LoginActivity extends Activity{
-    public final static String EXTRA_MESSAGE = "com.example.arnold.fypproject.MESSAGE";
-    public final static String KEY = "com.example.arnold.fypproject";
+
     private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+//        initializing
         sharedPref = this.getSharedPreferences(getString(R.string.app_key), MODE_PRIVATE);
+        editor = sharedPref.edit();
 
         String courier = sharedPref.getString("courier", null);
         if(courier != null){
             Intent intent = new Intent(this, HomepageActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(sharedPref.getString("action", "null").equals("exit")){
+            editor.remove("action").apply();
+            finish();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        System.out.println("Back is pressed");
+        finish();
     }
 
     // Login button press
@@ -54,7 +71,6 @@ public class LoginActivity extends Activity{
 
         // validation of login credentials
         if(sender.getUsername().equals(username) && sender.getPasswordSALT().equals(password)){
-            SharedPreferences.Editor editor = sharedPref.edit();
             Gson gson = new Gson();
 
             editor.putString("sender", gson.toJson(sender));
@@ -91,12 +107,9 @@ public class LoginActivity extends Activity{
 
         return sender;
     }
-
     public Courier createTestCourier(){
         Courier courier = new Courier(1,1,"Arnold_Courier", "Arnold_username", "123", "123", "98765446", "Hougang", "no_remarks", null, 1);
         return courier;
     }
-
-
 
 }

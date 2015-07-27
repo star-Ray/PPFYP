@@ -27,6 +27,7 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
     private Courier courier;
     private String[] drawerArr;
     private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
 //        Initializing
         Gson gson = new Gson();
         sharedPref = this.getSharedPreferences(getString(R.string.app_key), MODE_PRIVATE);
+        editor = sharedPref.edit();
         sender = gson.fromJson(sharedPref.getString("sender", null), Sender.class);
         courier = gson.fromJson(sharedPref.getString("courier", null), Courier.class);
 
@@ -107,10 +109,8 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
         builder.setPositiveButton("Yes, I'm leaving!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.clear().commit();
-                intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                editor.clear().apply();
+                finish();
             }
         });
         builder.setNegativeButton("No, I'm staying!", null);
@@ -151,4 +151,9 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
     public void onFragmentInteraction(Uri uri) {
     }
 
+    @Override
+    public void onBackPressed() {
+        editor.putString("action", "exit").apply();
+        finish();
+    }
 }
