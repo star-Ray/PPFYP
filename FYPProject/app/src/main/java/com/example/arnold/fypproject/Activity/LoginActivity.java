@@ -93,7 +93,7 @@ public class LoginActivity extends Activity{
     }
 
     public Courier createTestCourier(){
-        Courier courier = new Courier(1,1,"Arnold_Courier", "98765446", "Hougang", "no_remarks", null);
+        Courier courier = new Courier(1,1,"Arnold_Courier", "Arnold_username", "123", "123", "98765446", "Hougang", "no_remarks", null, 1);
         return courier;
     }
 

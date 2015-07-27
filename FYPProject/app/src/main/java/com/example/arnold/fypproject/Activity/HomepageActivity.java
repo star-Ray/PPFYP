@@ -40,7 +40,7 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
         courier = gson.fromJson(sharedPref.getString("courier", null), Courier.class);
 
 //        Drawer view
-        drawerArr = new String[]{"My Profile", "NFC Page", "test1", "test2", "Test3NavScroll", "maps", "Settings", "Logout"};
+        drawerArr = new String[]{"My Profile", "NFC Page", "WriteNFC", "test1", "test2", "Test3NavScroll", "maps", "Settings", "Logout"};
         final ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_textview, drawerArr);
         final DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         ListView listView = (ListView)findViewById(R.id.homepage_drawer);
@@ -75,6 +75,9 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
                         break;
                     case "maps":
                         goToMaps();
+                        break;
+                    case "WriteNFC":
+                        goToWriteNFC();
                         break;
                 }
                 drawerLayout.closeDrawers();
@@ -137,6 +140,10 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
     public void goToMyProfilePage(){
         intent = new Intent(this, ProfileActivity.class);
         intent.putExtra("Arnold", "Arnold really rocks");
+        startActivity(intent);
+    }
+    public void goToWriteNFC(){
+        intent = new Intent(this, WriteNFCActivity.class);
         startActivity(intent);
     }
 

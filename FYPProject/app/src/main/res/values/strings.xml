@@ -26,5 +26,6 @@
     <string name="title_activity_test3">Test3Activity</string>
     <string name="title_activity_test3_activitiy">Test3Activitiy</string>
     <string name="title_activity_read_nfc">ReadNFCActivity</string>
+    <string name="title_activity_write_nfc">WriteNFCActivity</string>
 </resources>
 
