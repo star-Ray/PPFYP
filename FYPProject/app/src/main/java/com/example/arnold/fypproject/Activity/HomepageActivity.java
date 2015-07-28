@@ -1,6 +1,8 @@
 package com.example.arnold.fypproject.Activity;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,15 +14,17 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arnold.fypproject.Entity.Courier;
 import com.example.arnold.fypproject.Entity.Sender;
-import com.example.arnold.fypproject.Fragment.HomepageFragment;
 import com.example.arnold.fypproject.R;
 import com.google.gson.Gson;
 
@@ -46,6 +50,30 @@ public class HomepageActivity extends ActionBarActivity {
         editor = sharedPref.edit();
         sender = gson.fromJson(sharedPref.getString("sender", null), Sender.class);
         courier = gson.fromJson(sharedPref.getString("courier", null), Courier.class);
+
+//        ActionBarTabs
+        final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        Toast.makeText(this, actionBar.toString(), Toast.LENGTH_LONG).show();
+        actionBar.setNavigationMode(android.support.v7.app.ActionBar.NAVIGATION_MODE_TABS);
+        android.support.v7.app.ActionBar.TabListener tabListener = new android.support.v7.app.ActionBar.TabListener() {
+            @Override
+            public void onTabSelected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
+
+            }
+            @Override
+            public void onTabUnselected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
+            }
+            @Override
+            public void onTabReselected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
+
+            }
+        };
+//         Add 3 tabs, specifying the tab's text and TabListener
+        String[] tabList = new String[]{"Previous", "Current", "Future"};
+        for (int i = 0; i < tabList.length; i++) {
+            actionBar.addTab(actionBar.newTab().setText(tabList[i]).setTabListener(tabListener));
+        }
+
 
 //        Load swipe view
         viewPager = (ViewPager)findViewById(R.id.pager_test);
@@ -176,7 +204,18 @@ public class HomepageActivity extends ActionBarActivity {
 
         @Override
         public CharSequence getPageTitle(int position){
-            return "OBJECT" + (position + 1);
+            return "OBJECT " + (position + 1);
+        }
+    }
+
+    public static class HomepageFragment extends android.support.v4.app.Fragment {
+        public static final String ARG_OBJECT = "object";
+
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+            View rootView = inflater.inflate(R.layout.fragment_text, container, false);
+            Bundle args = getArguments();
+            ((TextView)rootView.findViewById(R.id.text1)).setText(Integer.toString(args.getInt(ARG_OBJECT)));
+            return rootView;
         }
     }
 }

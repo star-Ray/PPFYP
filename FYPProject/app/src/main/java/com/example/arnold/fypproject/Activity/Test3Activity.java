@@ -8,10 +8,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.example.arnold.fypproject.Fragment.HomepageFragment;
 import com.example.arnold.fypproject.R;
 
 public class Test3Activity extends ActionBarActivity implements ActionBar.TabListener{
@@ -95,6 +98,17 @@ public class Test3Activity extends ActionBarActivity implements ActionBar.TabLis
         @Override
         public CharSequence getPageTitle(int position){
             return "OBJECT" + (position + 1);
+        }
+    }
+
+    public static class HomepageFragment extends android.support.v4.app.Fragment {
+        public static final String ARG_OBJECT = "object";
+
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+            View rootView = inflater.inflate(R.layout.fragment_text, container, false);
+            Bundle args = getArguments();
+            ((TextView)rootView.findViewById(R.id.text1)).setText(Integer.toString(args.getInt(ARG_OBJECT)));
+            return rootView;
         }
     }
 }
