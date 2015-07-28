@@ -19,4 +19,3 @@ public class HomepageFragment extends android.support.v4.app.Fragment {
         return rootView;
     }
 }
-

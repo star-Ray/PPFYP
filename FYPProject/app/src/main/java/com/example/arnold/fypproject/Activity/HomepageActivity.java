@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -16,19 +20,20 @@ import android.widget.Toast;
 
 import com.example.arnold.fypproject.Entity.Courier;
 import com.example.arnold.fypproject.Entity.Sender;
-import com.example.arnold.fypproject.Fragment.SampleFragment;
+import com.example.arnold.fypproject.Fragment.HomepageFragment;
 import com.example.arnold.fypproject.R;
 import com.google.gson.Gson;
 
 
-public class HomepageActivity extends ActionBarActivity implements SampleFragment.OnFragmentInteractionListener {
+public class HomepageActivity extends ActionBarActivity {
     private Intent intent;
     private Sender sender;
     private Courier courier;
-    private String[] drawerArr;
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
     private Gson gson;
+    private HomepageTabsPagerAdapter homepageTabsPagerAdapter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,62 +47,14 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
         sender = gson.fromJson(sharedPref.getString("sender", null), Sender.class);
         courier = gson.fromJson(sharedPref.getString("courier", null), Courier.class);
 
-//        Drawer view
-        drawerArr = new String[]{"My Profile", "NFC Page", "WriteNFC", "test1", "test2", "Test3NavScroll", "maps", "Settings", "Logout"};
-        final ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_textview, drawerArr);
-        final DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        ListView listView = (ListView)findViewById(R.id.homepage_drawer);
+//        Load swipe view
+        viewPager = (ViewPager)findViewById(R.id.pager_test);
+        homepageTabsPagerAdapter = new HomepageTabsPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(homepageTabsPagerAdapter);
 
+        loadDrawer(); //load Drawer
 
-        listView.setAdapter(drawerAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String itemTitle = drawerAdapter.getItem(position);
-
-                switch(itemTitle){
-                    case "My Profile":
-                        goToMyProfilePage();
-                        break;
-                    case "NFC Page":
-                        goToNFCPage();
-                        break;
-                    case "Settings":
-                        break;
-                    case "Logout":
-                        goToLogout();
-                        break;
-                    case "Test3NavScroll":
-                        goToTest3();
-                        break;
-                    case "test1":
-                        goToTest1();
-                        break;
-                    case "test2":
-                        goToTest2();
-                        break;
-                    case "maps":
-                        goToMaps();
-                        break;
-                    case "WriteNFC":
-                        goToWriteNFC();
-                        break;
-                }
-                drawerLayout.closeDrawers();
-            }
-        });
-
-//        Load fragment
-        if (findViewById(R.id.fragment_container) != null){
-            if(savedInstanceState != null){
-                return;
-            }
-            SampleFragment sampleFragment = new SampleFragment();
-            sampleFragment.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, sampleFragment).commit();
-        }
-
-//        Load welcome toast
+//        Load welcome toast if entered from login page
         if (getIntent().getStringExtra("login") != null){
             Toast.makeText(this, "Welcome, " + courier.getName(), Toast.LENGTH_SHORT).show();
         }
@@ -148,12 +105,78 @@ public class HomepageActivity extends ActionBarActivity implements SampleFragmen
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-    }
-
-    @Override
     public void onBackPressed() {
         editor.putString("action", "exit").apply();
         finish();
+    }
+
+    public void loadDrawer(){
+//        Drawer view
+        String[] drawerArr = new String[]{"My Profile", "NFC Page", "WriteNFC", "test1", "test2", "Test3NavScroll", "maps", "Settings", "Logout"};
+        final ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_textview, drawerArr);
+        final DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+
+        ListView listView = (ListView)findViewById(R.id.homepage_drawer);
+        listView.setAdapter(drawerAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String itemTitle = drawerAdapter.getItem(position);
+                switch(itemTitle){
+                    case "My Profile":
+                        goToMyProfilePage();
+                        break;
+                    case "NFC Page":
+                        goToNFCPage();
+                        break;
+                    case "Settings":
+                        break;
+                    case "Logout":
+                        goToLogout();
+                        break;
+                    case "Test3NavScroll":
+                        goToTest3();
+                        break;
+                    case "test1":
+                        goToTest1();
+                        break;
+                    case "test2":
+                        goToTest2();
+                        break;
+                    case "maps":
+                        goToMaps();
+                        break;
+                    case "WriteNFC":
+                        goToWriteNFC();
+                        break;
+                }
+                drawerLayout.closeDrawers();
+            }
+        });
+    }
+
+    public static class HomepageTabsPagerAdapter extends FragmentPagerAdapter {
+        public HomepageTabsPagerAdapter (FragmentManager fm){
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i){
+            Fragment fragment = new HomepageFragment();
+            Bundle args = new Bundle();
+            args.putInt(HomepageFragment.ARG_OBJECT, i + 1);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public int getCount(){
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position){
+            return "OBJECT" + (position + 1);
+        }
     }
 }

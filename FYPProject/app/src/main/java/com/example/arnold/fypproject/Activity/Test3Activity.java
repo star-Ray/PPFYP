@@ -1,26 +1,23 @@
 package com.example.arnold.fypproject.Activity;
 
-//import android.support.v7.app.ActionBar;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
-import android.app.Notification;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.arnold.fypproject.Adapter.HomepageTabsPagerAdapter;
+import com.example.arnold.fypproject.Fragment.HomepageFragment;
 import com.example.arnold.fypproject.R;
 
 public class Test3Activity extends ActionBarActivity implements ActionBar.TabListener{
 
     HomepageTabsPagerAdapter homepageTabsPagerAdapter;
     ViewPager viewPager;
-//    android.support.v7.app.ActionBar actionBar;
-    ActionBar actionBar;
-    private String[] tabs = {"Tab1", "Tab2", "Tab3"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +43,10 @@ public class Test3Activity extends ActionBarActivity implements ActionBar.TabLis
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-    // on tab selected
-    // show respected fragment view
-    viewPager.setCurrentItem(tab.getPosition());
-}
+        // on tab selected
+        // show respected fragment view
+        viewPager.setCurrentItem(tab.getPosition());
+    }
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -74,5 +71,30 @@ public class Test3Activity extends ActionBarActivity implements ActionBar.TabLis
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static class HomepageTabsPagerAdapter extends FragmentPagerAdapter {
+        public HomepageTabsPagerAdapter (FragmentManager fm){
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i){
+            Fragment fragment = new HomepageFragment();
+            Bundle args = new Bundle();
+            args.putInt(HomepageFragment.ARG_OBJECT, i + 1);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public int getCount(){
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position){
+            return "OBJECT" + (position + 1);
+        }
     }
 }
