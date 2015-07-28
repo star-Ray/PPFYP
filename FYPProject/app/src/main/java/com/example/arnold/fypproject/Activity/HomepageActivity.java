@@ -38,6 +38,7 @@ public class HomepageActivity extends ActionBarActivity {
     private Gson gson;
     private HomepageTabsPagerAdapter homepageTabsPagerAdapter;
     private ViewPager viewPager;
+    private android.support.v7.app.ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +52,25 @@ public class HomepageActivity extends ActionBarActivity {
         sender = gson.fromJson(sharedPref.getString("sender", null), Sender.class);
         courier = gson.fromJson(sharedPref.getString("courier", null), Courier.class);
 
+//        Load swipe view
+        viewPager = (ViewPager) findViewById(R.id.pager_test);
+        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                actionBar.setSelectedNavigationItem(position);
+            }
+        });
+        homepageTabsPagerAdapter = new HomepageTabsPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(homepageTabsPagerAdapter);
+
+
 //        ActionBarTabs
-        final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        Toast.makeText(this, actionBar.toString(), Toast.LENGTH_LONG).show();
+        actionBar = getSupportActionBar();
         actionBar.setNavigationMode(android.support.v7.app.ActionBar.NAVIGATION_MODE_TABS);
         android.support.v7.app.ActionBar.TabListener tabListener = new android.support.v7.app.ActionBar.TabListener() {
             @Override
             public void onTabSelected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
-
+                viewPager.setCurrentItem(tab.getPosition());
             }
             @Override
             public void onTabUnselected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
@@ -75,17 +87,18 @@ public class HomepageActivity extends ActionBarActivity {
         }
 
 
-//        Load swipe view
-        viewPager = (ViewPager)findViewById(R.id.pager_test);
-        homepageTabsPagerAdapter = new HomepageTabsPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(homepageTabsPagerAdapter);
-
         loadDrawer(); //load Drawer
 
 //        Load welcome toast if entered from login page
         if (getIntent().getStringExtra("login") != null){
             Toast.makeText(this, "Welcome, " + courier.getName(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewPager.setCurrentItem(1);
     }
 
     public void goToLogout(){
@@ -202,10 +215,10 @@ public class HomepageActivity extends ActionBarActivity {
             return 3;
         }
 
-        @Override
-        public CharSequence getPageTitle(int position){
-            return "OBJECT " + (position + 1);
-        }
+//        @Override
+//        public CharSequence getPageTitle(int position){
+//            return "OBJECT " + (position + 1);
+//        }
     }
 
     public static class HomepageFragment extends android.support.v4.app.Fragment {
