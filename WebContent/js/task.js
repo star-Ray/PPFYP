@@ -7,11 +7,11 @@ if(companyId==null){
 	});
 }
 
-var EMPLOYEES = [];
+var TASKS = [];
 
 function getTasksByCompany(){
 	var input = {};
-	input.companyId = companyId;
+	input.companyId = Number(companyId);
 	
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
@@ -22,7 +22,7 @@ function getTasksByCompany(){
 		dataType: 'json',
 		error: function(err){
 			console.log(err);
-			console.log("some error");
+			//console.log("some error");
 		},
 		success: function(data){
 			console.log(data);
@@ -30,55 +30,46 @@ function getTasksByCompany(){
 			var message = data.message;
 			if(status == 1){
 				var tasks = message;
-				EMPLOYEES = tasks;
+				TASKS = tasks;
 				var html = '';
 				for(var o in tasks){
 					var tmpTask = tasks[o];
 					
 					var taskId = tmpTask.taskId;
-					var avata = tmpTask.avata;
-					var email = tmpTask.email;
-					var name = tmpTask.name;
-					var workingType = tmpTask.workingType;
-					var passType = tmpTask.passType;
-					var passNo = tmpTask.passNo;
-					var frequencyId = tmpTask.frequency.frequencyId;
+					var recervierName = tmpTask.recervierName;
+					var receriverContact = tmpTask.receriverContact;
+					var planStartTime = tmpTask.planStartTime;
+					var planEndTime = tmpTask.planEndTime;
+					var actualStartTime = tmpTask.actualStartTime;
+					var actualEndTime = tmpTask.actualEndTime;
+					var startLocation = tmpTask.startLocation;
+					var endLocation = tmpTask.endLocation;
+					var signature = tmpTask.signature;
+					var verifyPass = tmpTask.verifyPass;
+					var taskStatus = tmpTask.taskStatus;
 					var date = tmpTask.createDate;
+					
+					var officer = tmpTask.officer;
+					var courier = tmpTask.courier;
+					var sender = tmpTask.sender;
+					
 					var wType = '';
-					var pType = '';
-					switch (passType) {
-						case 0: pType = "Local";
-	                    	break;
-						case 1: pType = "PR";
-	                    	break;
-						case 2: pType = "EP";
-	                    	break;
-						case 3: pType = "SP";
-	                    	break;
-						case 4: pType = "WP";
-	                    	break;
-			            default: passType = "Invalid pass";
-                     		break;
-					}
-					if(workingType == 0){
-						wType = "Full-Time";
-					}else{
-						wType = "Part-Time";
-					}
+					
 					html += '\
 						<tr id="task-'+taskId+'">\
 							<td id="taskId-'+taskId+'">'+taskId+'</td>\
-							<td><a id="avataA-'+taskId+'" href="'+avata+'" target="_blank">\
-								<img id="avata-'+taskId+'" src="'+avata+'" class="img-responsive img-rounded my-img-xs" alt="avata">\
-							</a></td>\
-							<td id="email-'+taskId+'">'+email+'</td>\
-							<td id="name-'+taskId+'">'+name+'</td>\
-							<td id="workingType-'+taskId+'">'+pType+'</td>\
-							<td id="passType-'+taskId+'">'+wType+'</td>\
-							<td id="passNo-'+taskId+'">'+passNo+'</td>\
-							<td id="frequencyId-'+taskId+'">'+frequencyId+'</td>\
+							<td id="recervierName-'+taskId+'">'+recervierName+'</td>\
+							<td id="receriverContact-'+taskId+'">'+receriverContact+'</td>\
+							<td id="planStartTime-'+taskId+'">'+planStartTime+'</td>\
+							<td id="planEndTime-'+taskId+'">'+planEndTime+'</td>\
+							<td id="actualStartTime-'+taskId+'">'+actualStartTime+'</td>\
+							<td id="actualEndTime-'+taskId+'">'+actualEndTime+'</td>\
+							<td id="startLocation-'+taskId+'">'+startLocation+'</td>\
+							<td id="endLocation-'+taskId+'">'+endLocation+'</td>\
+							<td id="signature-'+taskId+'">'+signature+'</td>\
+							<td id="verifyPass-'+taskId+'">'+verifyPass+'</td>\
+							<td id="taskStatus-'+taskId+'">'+taskStatus+'</td>\
 							<td>'+date.replace("T","  ")+'</td>\
-							<td id="objStatus-'+taskId+'">'+task.objStatus+'</td>\
 							<td>\
 								<button class="btn btn-sm btn-warning fa fa-pencil" onclick="launchEditTask('+taskId+')" title="Edit"></button>\
 								<button class="btn btn-sm btn-info fa fa-eraser fa-1" onclick="launchChangeTaskPassword('+taskId+')" title="Change Password"></button>\

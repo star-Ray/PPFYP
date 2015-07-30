@@ -220,10 +220,10 @@ public class Task {
 		returnJson.put(Key.TASKID, this.taskId);
 		returnJson.put(Key.RECEIVERNAME, this.receiverName);
 		returnJson.put(Key.RECEIVERCONTACT, this.receiverContact);
-		returnJson.put(Key.PLANSTARTTIME, this.planStartTime);
-		returnJson.put(Key.PLANENDTIME, this.planEndTime);
-		returnJson.put(Key.ACTUALSTARTTIME, this.actualStartTime);
-		returnJson.put(Key.ACTUALENDTIME, this.actualEndTime);
+		returnJson.put(Key.PLANSTARTTIME, Config.SDF.format(this.planStartTime));
+		returnJson.put(Key.PLANENDTIME, Config.SDF.format(this.planEndTime));
+		returnJson.put(Key.ACTUALSTARTTIME, Config.SDF.format(this.actualStartTime));
+		returnJson.put(Key.ACTUALENDTIME, Config.SDF.format(this.actualEndTime));
 		returnJson.put(Key.STARTLOCATION, this.startLocation);
 		returnJson.put(Key.ENDLOCATION, this.endLocation);
 		
@@ -268,15 +268,15 @@ public class Task {
 		returnJson.put(Key.TASKID, this.taskId);
 		returnJson.put(Key.RECEIVERNAME, this.receiverName);
 		returnJson.put(Key.RECEIVERCONTACT, this.receiverContact);
-		returnJson.put(Key.PLANSTARTTIME, this.planStartTime);
-		returnJson.put(Key.PLANENDTIME, this.planEndTime);
-		returnJson.put(Key.ACTUALSTARTTIME, this.actualStartTime);
-		returnJson.put(Key.ACTUALENDTIME, this.actualEndTime);
+		returnJson.put(Key.PLANSTARTTIME, Config.SDF.format(this.planStartTime));
+		returnJson.put(Key.PLANENDTIME, Config.SDF.format(this.planEndTime));
+		returnJson.put(Key.ACTUALSTARTTIME, Config.SDF.format(this.actualStartTime));
+		returnJson.put(Key.ACTUALENDTIME, Config.SDF.format(this.actualEndTime));
 		returnJson.put(Key.STARTLOCATION, this.startLocation);
 		returnJson.put(Key.ENDLOCATION, this.endLocation);
 		
 		returnJson.put(Key.SIGNATURE, this.signature);
-		returnJson.put(Key.VERIFYPASS, this.planStartTime);
+		returnJson.put(Key.VERIFYPASS, this.verifyPass);
 		returnJson.put(Key.TASKSTATUS, this.taskStatus);
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

@@ -1,10 +1,12 @@
 package controller;
 
+import model.Company;
 import model.Courier;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import persistence.CompanyDAO;
 import persistence.CourierDAO;
 import system.Encrypt;
 import system.Key;
@@ -20,15 +22,25 @@ public class CourierCtrl {
 		JSONObject returnJson = new JSONObject();
 		
 		try{
-			String name = (String) inputJson.get(Key.NAME);
-			String contactNo = (String) inputJson.get(Key.CONTACTNO);
-			String realTimeLocation = (String) inputJson.get(Key.REALTIMELOCATION);
-			
-			Courier courier = new Courier(name, contactNo, realTimeLocation);
-			CourierDAO.addCourier(courier);
-			
-			returnJson.put(Key.STATUS, Value.SUCCESS)  ;
-			returnJson.put(Key.MESSAGE, courier.toJson());
+			Company company = CompanyDAO.getCompanyById((long) inputJson.get(Key.COMPANYID));
+			if(company != null){
+				String name = (String) inputJson.get(Key.NAME);
+				String username = (String) inputJson.get(Key.USERNAME);
+				String password = (String) inputJson.get(Key.PASSWORD);
+				String passwordSalt = Encrypt.nextSalt();
+				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
+				String contactNo = (String) inputJson.get(Key.CONTACTNO);
+				String realTimeLocation = (String) inputJson.get(Key.REALTIMELOCATION);
+				
+				Courier courier = new Courier(company, name, username, passwordSalt, passwordHash, contactNo, realTimeLocation);
+				CourierDAO.addCourier(courier);
+				
+				returnJson.put(Key.STATUS, Value.SUCCESS)  ;
+				returnJson.put(Key.MESSAGE, courier.toJson());
+			}else{
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.OFFICERNOTEXIST);
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL)  ;
@@ -83,13 +95,14 @@ public class CourierCtrl {
 		
 		try{
 			Courier courier = CourierDAO.getCourierById((long) inputJson.get(Key.COURIERID));
-			
 			if(courier != null){
 				String name = (String) inputJson.get(Key.NAME);
+				String username = (String) inputJson.get(Key.USERNAME);
 				String contactNo = (String) inputJson.get(Key.CONTACTNO);
 				String realTimeLocation = (String) inputJson.get(Key.REALTIMELOCATION);
 				
 				courier.setName(name);
+				courier.setUsername(username);
 				courier.setContactNo(contactNo);
 				courier.setRealTimeLocation(realTimeLocation);
 				

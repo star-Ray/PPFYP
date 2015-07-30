@@ -26,12 +26,12 @@ function login(){
 				if(companyId != null){
 					localStorage.setItem('companyId', companyId);
 					//TODO Remove the comment after success testing
-					//window.location = "pages/index.html";
+					window.location = "../index.html";
 				}
 				if(officerId != null){
 					localStorage.setItem('officerId', officerId);
 					//TODO Remove the comment after success testing
-					//window.location = "pages/index.html";
+					//window.location = "../index.html";
 				}
 			}else{
 				$("#message").html("Invalid Eamil/Password");

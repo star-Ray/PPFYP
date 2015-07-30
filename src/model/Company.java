@@ -6,6 +6,7 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import persistence.CourierDAO;
 import persistence.OfficerDAO;
 import persistence.SenderDAO;
 import persistence.TaskDAO;
@@ -27,6 +28,7 @@ public class Company {
 	private SuperAdmin superAdmin;
 	private Set<Officer> officers;
 	private Set<Sender>	senders;
+	private Set<Courier> couriers;
 	
 	public Company(){}
 
@@ -127,7 +129,20 @@ public class Company {
 	public void setSenders(Set<Sender> senders) {
 		this.senders = senders;
 	}
-	
+
+	/**
+	 * @return the couriers
+	 */
+	public Set<Courier> getCouriers() {
+		return couriers;
+	}
+
+	/**
+	 * @param couriers the couriers to set
+	 */
+	public void setCouriers(Set<Courier> couriers) {
+		this.couriers = couriers;
+	}
 	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
@@ -166,6 +181,13 @@ public class Company {
 		}
 		returnJson.put(Key.SENDERS, senderJArr);
 		
+		JSONArray courierJArr = new JSONArray();
+		for(Courier c : CourierDAO.getCouriersByCompany(this)){
+			courierJArr.add(c.toJson());
+		}
+		returnJson.put(Key.SENDERS, courierJArr);
+		
 		return returnJson;
 	}
+
 }

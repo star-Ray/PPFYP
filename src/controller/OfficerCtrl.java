@@ -26,13 +26,13 @@ public class OfficerCtrl {
 			if(company != null){
 				
 				String name = (String) inputJson.get(Key.NAME);
-				String userName = (String) inputJson.get(Key.USERNAME);
+				String username = (String) inputJson.get(Key.USERNAME);
 				String password = (String) inputJson.get(Key.PASSWORD);
 				
 				String passwordSalt = Encrypt.nextSalt();
 				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 				
-				Officer officer = new Officer(company, name, userName, passwordSalt, passwordHash);
+				Officer officer = new Officer(company, name, username, passwordSalt, passwordHash);
 				OfficerDAO.addOfficer(officer);
 				
 				returnJson.put(Key.STATUS, Value.SUCCESS)  ;
