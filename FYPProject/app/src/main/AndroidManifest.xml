@@ -11,11 +11,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.nfc"
-        android:required="true" /><!-- ensure only device with nfc can install and view the app -->
+        android:required="true" /> <!-- ensure only device with nfc can install and view the app -->
 
     <android:uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -57,24 +57,13 @@
                 android:value="com.example.arnold.fypproject.Activity.HomepageActivity" />
         </activity>
         <activity
-            android:name=".Activity.Test2Activity"
-            android:label="@string/title_activity_test2"
-            android:parentActivityName=".Activity.HomepageActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.arnold.fypproject.Activity.HomepageActivity" />
-        </activity>
-        <activity
-            android:name=".Activity.Test3Activity"
-            android:label="@string/title_activity_test3" >
-        </activity>
-        <activity
             android:name=".Activity.ReadNFCActivity"
             android:label="@string/title_activity_read_nfc"
             android:parentActivityName=".Activity.HomepageActivity" >
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
             </intent-filter>
+
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter"
@@ -87,10 +76,15 @@
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
             </intent-filter>
+
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter"
                 android:value="com.example.arnold.fypproject.Activity.HomepageActivity" />
+        </activity>
+        <activity
+            android:name=".Activity.Test2Activity"
+            android:label="@string/title_activity_test2" >
         </activity>
     </application>
 
