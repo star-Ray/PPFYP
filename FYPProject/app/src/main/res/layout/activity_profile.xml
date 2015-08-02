@@ -16,20 +16,20 @@
             android:layout_height="wrap_content"
             android:paddingTop="10sp">
             <TextView
-                android:id="@+id/courier_id_admin"
+                android:id="@+id/title_courierID"
                 android:layout_width="0dp"
                 android:layout_column="1"
                 android:layout_weight="1"
                 android:paddingRight="10sp"
-                android:text="EMPLOYEE ID."
+                android:text="Employee ID: "
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/courier_id"
+                android:id="@+id/content_courierID"
                 android:layout_width="0dp"
                 android:layout_column="2"
                 android:layout_weight="1"
-                android:text="courier_id_here"
+                android:text="1"
                 android:textSize="15sp" />
         </TableRow>
         <TableRow
@@ -37,20 +37,20 @@
             android:layout_height="wrap_content"
             android:paddingTop="10sp">
             <TextView
-                android:id="@+id/courier_name_admin"
+                android:id="@+id/title_courierName"
                 android:layout_width="0dp"
                 android:layout_column="1"
                 android:layout_weight="1"
                 android:paddingRight="10sp"
-                android:text="FULL NAME"
+                android:text="Employee Name:"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/courier_name"
+                android:id="@+id/content_courierName"
                 android:layout_width="0dp"
                 android:layout_column="2"
                 android:layout_weight="1"
-                android:text="courier_name_here"
+                android:text="Arnold Lee"
                 android:textSize="15sp" />
         </TableRow>
         <TableRow
@@ -58,20 +58,20 @@
             android:layout_height="wrap_content"
             android:paddingTop="10sp">
             <TextView
-                android:id="@+id/courier_contactNo_admin"
+                android:id="@+id/title_courierContactNo"
                 android:layout_width="0dp"
                 android:layout_column="1"
                 android:layout_weight="1"
                 android:paddingRight="10sp"
-                android:text="CONTACT NUMBER"
+                android:text="Contact No:"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/courier_contactNo"
+                android:id="@+id/content_courierContactNo"
                 android:layout_width="0dp"
                 android:layout_column="2"
                 android:layout_weight="1"
-                android:text="courier_num_here"
+                android:text="98658569"
                 android:textSize="15sp" />
         </TableRow>
         <TableRow
@@ -79,20 +79,20 @@
             android:layout_height="wrap_content"
             android:paddingTop="10sp">
             <TextView
-                android:id="@+id/courier_dateJoined_admin"
+                android:id="@+id/title_courierDateJoined"
                 android:layout_width="0dp"
                 android:layout_column="1"
                 android:layout_weight="1"
                 android:paddingRight="10sp"
-                android:text="DATE JOINED"
+                android:text="Date Joined:"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/courier_dateJoined"
+                android:id="@+id/content_courierDateJoined"
                 android:layout_width="0dp"
                 android:layout_column="2"
                 android:layout_weight="1"
-                android:text="courier_dateJoined_here"
+                android:text="2 August 2015"
                 android:textSize="15sp" />
         </TableRow>
 

@@ -50,41 +50,8 @@ public class HomepageActivity extends ActionBarActivity {
         sender = gson.fromJson(sharedPref.getString("sender", null), Sender.class);
         courier = gson.fromJson(sharedPref.getString("courier", null), Courier.class);
 
-//        Load swipe view
-        viewPager = (ViewPager) findViewById(R.id.pager_test);
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                actionBar.setSelectedNavigationItem(position);
-            }
-        });
-        homepageTabsPagerAdapter = new HomepageTabsPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(homepageTabsPagerAdapter);
-
-
-//        ActionBarTabs
-        actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(android.support.v7.app.ActionBar.NAVIGATION_MODE_TABS);
-        android.support.v7.app.ActionBar.TabListener tabListener = new android.support.v7.app.ActionBar.TabListener() {
-            @Override
-            public void onTabSelected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-            @Override
-            public void onTabUnselected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
-            }
-            @Override
-            public void onTabReselected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
-
-            }
-        };
-//         Add 3 tabs, specifying the tab's text and TabListener
-        String[] tabList = new String[]{"Previous", "Current", "Future"};
-        for (int i = 0; i < tabList.length; i++) {
-            actionBar.addTab(actionBar.newTab().setText(tabList[i]).setTabListener(tabListener));
-        }
-
-
+        loadSwipeView(); //load swipe view
+        loadActionBarTabs(); //load Action bar tabs
         loadDrawer(); //load Drawer
 
 //        Load welcome toast if entered from login page
@@ -140,6 +107,10 @@ public class HomepageActivity extends ActionBarActivity {
         intent = new Intent(this, WriteNFCActivity.class);
         startActivity(intent);
     }
+    public void goToTask(View view){
+        intent = new Intent(this, TaskActivity.class);
+        startActivity(intent);
+    }
 
     public void loadDrawer(){
 //        Drawer view
@@ -153,7 +124,7 @@ public class HomepageActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String itemTitle = drawerAdapter.getItem(position);
-                switch(itemTitle){
+                switch (itemTitle) {
                     case "My Profile":
                         goToMyProfilePage();
                         break;
@@ -179,6 +150,40 @@ public class HomepageActivity extends ActionBarActivity {
             }
         });
     }
+    public void loadActionBarTabs(){
+        actionBar = getSupportActionBar();
+        actionBar.setNavigationMode(android.support.v7.app.ActionBar.NAVIGATION_MODE_TABS);
+        android.support.v7.app.ActionBar.TabListener tabListener = new android.support.v7.app.ActionBar.TabListener() {
+            @Override
+            public void onTabSelected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+            @Override
+            public void onTabUnselected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
+            }
+            @Override
+            public void onTabReselected(android.support.v7.app.ActionBar.Tab tab, android.support.v4.app.FragmentTransaction ft) {
+
+            }
+        };
+//         Add 3 tabs, specifying the tab's text and TabListener
+        String[] tabList = new String[]{"Previous", "Current", "Future"};
+        for (int i = 0; i < tabList.length; i++) {
+            actionBar.addTab(actionBar.newTab().setText(tabList[i]).setTabListener(tabListener));
+        }
+    }
+    public void loadSwipeView(){
+        viewPager = (ViewPager) findViewById(R.id.pager_test);
+        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                actionBar.setSelectedNavigationItem(position);
+            }
+        });
+        homepageTabsPagerAdapter = new HomepageTabsPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(homepageTabsPagerAdapter);
+    }
+
 
     public static class HomepageTabsPagerAdapter extends FragmentPagerAdapter {
         public HomepageTabsPagerAdapter (FragmentManager fm){
@@ -199,14 +204,13 @@ public class HomepageActivity extends ActionBarActivity {
             return 3;
         }
     }
-
     public static class HomepageFragment extends android.support.v4.app.Fragment {
         public static final String ARG_OBJECT = "object";
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-            View rootView = inflater.inflate(R.layout.fragment_text, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_layout, container, false);
             Bundle args = getArguments();
-            ((TextView)rootView.findViewById(R.id.text1)).setText(Integer.toString(args.getInt(ARG_OBJECT)));
+//            ((TextView)rootView.findViewById(R.id.text1)).setText(Integer.toString(args.getInt(ARG_OBJECT)));
             return rootView;
         }
     }

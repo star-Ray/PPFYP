@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 public class ProfileActivity extends ActionBarActivity {
     Intent intent;
     Courier courier;
+    Gson gson;
 
     protected void openCamera(View view){
         intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -30,19 +31,21 @@ public class ProfileActivity extends ActionBarActivity {
         setContentView(R.layout.activity_profile);
         SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.app_key), MODE_PRIVATE);
         intent = getIntent();
-        Gson gson = new Gson();
+        gson = new Gson();
 
-        courier = gson.fromJson(sharedPref.getString("courier", "courier_is_null"), Courier.class);
+        courier = gson.fromJson(sharedPref.getString("courier", null), Courier.class);
+
 
         //Setting textviews
-        TextView courier_id = (TextView)findViewById(R.id.courier_id);
-        TextView courier_name = (TextView)findViewById(R.id.courier_name);
-        TextView courier_contactNo = (TextView)findViewById(R.id.courier_contactNo);
-        TextView courier_dateJoined = (TextView)findViewById(R.id.courier_dateJoined);
+        TextView courier_id = (TextView)findViewById(R.id.content_courierID);
+        TextView courier_name = (TextView)findViewById(R.id.content_courierName);
+        TextView courier_contactNo = (TextView)findViewById(R.id.content_courierContactNo);
+        TextView courier_dateJoined = (TextView)findViewById(R.id.content_courierDateJoined);
         courier_id.setText(String.valueOf(courier.getID()));
         courier_name.setText(courier.getName());
         courier_contactNo.setText(courier.getContactNo());
-        courier_dateJoined.setText("no_date_available");
+//        courier_dateJoined.setText(courier.getCreateDate()); **not ready yet
+        courier_dateJoined.setText("2 August 2015"); //temp text
     }
 
     @Override

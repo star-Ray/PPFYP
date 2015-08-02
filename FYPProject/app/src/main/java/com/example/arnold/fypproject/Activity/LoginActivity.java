@@ -51,7 +51,6 @@ public class LoginActivity extends Activity{
 
     @Override
     public void onBackPressed() {
-        System.out.println("Back is pressed");
         finish();
     }
 
@@ -108,7 +107,7 @@ public class LoginActivity extends Activity{
         return sender;
     }
     public Courier createTestCourier(){
-        Courier courier = new Courier(1,1,"Arnold_Courier", "Arnold_username", "123", "123", "98765446", "Hougang", "no_remarks", null, 1);
+        Courier courier = new Courier(1,1,"Arnold Lee", "arnold.lee.2013", "123", "123", "98765446", "Hougang", "no_remarks", null, 1);
         return courier;
     }
 
