@@ -12,13 +12,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arnold.fypproject.Entity.Courier;
@@ -38,6 +39,7 @@ public class HomepageActivity extends ActionBarActivity {
     private ViewPager viewPager;
     private android.support.v7.app.ActionBar actionBar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,8 @@ public class HomepageActivity extends ActionBarActivity {
         loadSwipeView(); //load swipe view
         loadActionBarTabs(); //load Action bar tabs
         loadDrawer(); //load Drawer
+//        loadRecyclerView(); //load recycler view
+
 
 //        Load welcome toast if entered from login page
         if (getIntent().getStringExtra("login") != null){
@@ -191,7 +195,6 @@ public class HomepageActivity extends ActionBarActivity {
         viewPager.setAdapter(homepageTabsPagerAdapter);
     }
 
-
     public static class HomepageTabsPagerAdapter extends FragmentPagerAdapter {
         public HomepageTabsPagerAdapter (FragmentManager fm){
             super(fm);
@@ -213,12 +216,83 @@ public class HomepageActivity extends ActionBarActivity {
     }
     public static class HomepageFragment extends android.support.v4.app.Fragment {
         public static final String ARG_OBJECT = "object";
+        private RecyclerView recyclerView;
+        private RecyclerView.Adapter taskListAdapter;
+        private RecyclerView.LayoutManager layoutManager;
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-            View rootView = inflater.inflate(R.layout.fragment_layout, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_homepage, container, false);
             Bundle args = getArguments();
 //            ((TextView)rootView.findViewById(R.id.text1)).setText(Integer.toString(args.getInt(ARG_OBJECT)));
+
+            loadRecyclerView(rootView);
+
             return rootView;
         }
+
+        public void loadRecyclerView(View view){
+            recyclerView = (RecyclerView) view.findViewById(R.id.tasklist_recycler);
+
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            recyclerView.setHasFixedSize(true);
+
+            // use a linear layout manager
+            layoutManager = new LinearLayoutManager(getActivity());
+            recyclerView.setLayoutManager(layoutManager);
+
+            // specify an adapter (see also next example)
+            String[] myDataset = new String[]{"bye1", "bye2", "bye3"};
+            taskListAdapter = new TaskListAdapter(myDataset);
+            recyclerView.setAdapter(taskListAdapter);
+        }
+    }
+
+    public static class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
+        private String[] dataSet;
+
+        // Provide a reference to the views for each data item
+        // Complex data items may need more than one view per item, and
+        // you provide access to all the views for a data item in a view holder
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public View view;
+
+            public ViewHolder(View v) {
+                super(v);
+                view = v;
+//                textView2 = (TextView) v.findViewById(R.id.textView2);
+            }
+//            public TextView getTitle(){
+//                return textView2;
+//            }
+        }
+
+        // Provide a suitable constructor (depends on the kind of dataset)
+        public TaskListAdapter(String[] myDataset) {
+            dataSet = myDataset;
+        }
+
+        // Create new views (invoked by the layout manager)
+        @Override
+        public TaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_currenttask, parent, false); // create a new view
+            ViewHolder vh = new ViewHolder(v); // set the view's size, margins, paddings and layout parameters
+            return vh;
+        }
+
+        // Replace the contents of a view (invoked by the layout manager)
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            // - get element from your dataset at this position
+            // - replace the contents of the view with that element
+//            holder.getTitle().setText(mDataset[position]);
+        }
+
+        // Return the size of your dataset (invoked by the layout manager)
+        @Override
+        public int getItemCount() {
+            return dataSet.length;
+        }
+
     }
 }
