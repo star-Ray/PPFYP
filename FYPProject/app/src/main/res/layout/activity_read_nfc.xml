@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.arnold.fypproject.Activity.ReadNFCActivity">
+    tools:context="fypproject.Activity.ReadNFCActivity">
 
     <TextView
         android:id="@+id/nfc_sample_text"

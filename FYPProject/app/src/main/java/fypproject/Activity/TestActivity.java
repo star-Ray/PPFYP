@@ -1,4 +1,4 @@
-package com.example.arnold.fypproject.Activity;
+package fypproject.Activity;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -28,7 +28,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.example.arnold.fypproject.R;
+import fypproject.R;
 
 public class TestActivity extends ActionBarActivity {
 

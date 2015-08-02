@@ -1,4 +1,4 @@
-package com.example.arnold.fypproject.Connection;
+package fypproject.Connection;
 
 import android.content.Context;
 import android.graphics.Bitmap;

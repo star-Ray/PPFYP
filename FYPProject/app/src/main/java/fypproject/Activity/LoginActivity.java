@@ -1,4 +1,4 @@
-package com.example.arnold.fypproject.Activity;
+package fypproject.Activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -9,11 +9,11 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.arnold.fypproject.Entity.Courier;
-import com.example.arnold.fypproject.Entity.Item;
-import com.example.arnold.fypproject.Entity.Sender;
-import com.example.arnold.fypproject.Entity.Task;
-import com.example.arnold.fypproject.R;
+import fypproject.Entity.Courier;
+import fypproject.Entity.Item;
+import fypproject.Entity.Sender;
+import fypproject.Entity.Task;
+import fypproject.R;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

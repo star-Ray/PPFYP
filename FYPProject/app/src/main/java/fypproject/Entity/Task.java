@@ -1,4 +1,4 @@
-package com.example.arnold.fypproject.Entity;
+package fypproject.Entity;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

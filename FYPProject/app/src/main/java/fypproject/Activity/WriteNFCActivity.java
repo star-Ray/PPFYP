@@ -1,9 +1,8 @@
-package com.example.arnold.fypproject.Activity;
+package fypproject.Activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -14,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.arnold.fypproject.R;
+import fypproject.R;
 import com.nxp.nfclib.classic.MFClassic;
 import com.nxp.nfclib.exceptions.SmartCardException;
 import com.nxp.nfclib.icode.ICodeSLI;
@@ -40,8 +39,6 @@ import com.nxp.nfcliblite.cards.DESFire;
 import com.nxp.nfcliblite.cards.Plus;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.text.Normalizer;
 
 public class WriteNFCActivity extends ActionBarActivity {
 

@@ -1,4 +1,4 @@
-package com.example.arnold.fypproject.Activity;
+package fypproject.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.arnold.fypproject.Entity.Courier;
-import com.example.arnold.fypproject.R;
+import fypproject.Entity.Courier;
+import fypproject.R;
 import com.google.gson.Gson;
 
 

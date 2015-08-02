@@ -1,4 +1,4 @@
-package com.example.arnold.fypproject.Activity;
+package fypproject.Activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.arnold.fypproject.R;
+import fypproject.R;
 import com.nxp.nfclib.classic.MFClassic;
 import com.nxp.nfclib.exceptions.SmartCardException;
 import com.nxp.nfclib.icode.ICodeSLI;

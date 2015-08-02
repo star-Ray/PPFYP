@@ -1,4 +1,4 @@
-package com.example.arnold.fypproject.Activity;
+package fypproject.Activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -22,9 +22,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.arnold.fypproject.Entity.Courier;
-import com.example.arnold.fypproject.Entity.Sender;
-import com.example.arnold.fypproject.R;
+import fypproject.Entity.Courier;
+import fypproject.Entity.Sender;
+import fypproject.R;
 import com.google.gson.Gson;
 
 
