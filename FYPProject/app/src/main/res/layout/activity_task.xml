@@ -57,7 +57,7 @@
                     android:id="@+id/title_address"
                     android:layout_weight="1"
                     android:padding="5sp"
-                    android:text="Address:"
+                    android:text="@string/address"
                     android:textSize="15sp"
                     android:textStyle="bold"/>
                 <TextView

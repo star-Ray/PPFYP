@@ -32,7 +32,6 @@
         <activity android:name=".Activity.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -54,7 +53,7 @@
             android:parentActivityName=".Activity.HomepageActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.arnold.fypproject.Activity.HomepageActivity" />
+                android:value=".Activity.HomepageActivity" />
         </activity>
         <activity
             android:name=".Activity.ReadNFCActivity"
@@ -63,10 +62,11 @@
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
             </intent-filter>
+
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter"
-                android:value="com.example.arnold.fypproject.Activity.HomepageActivity" />
+                android:value=".Activity.HomepageActivity" />
         </activity>
         <activity
             android:name=".Activity.WriteNFCActivity"
@@ -75,10 +75,11 @@
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
             </intent-filter>
+
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/nfc_tech_filter"
-                android:value="com.example.arnold.fypproject.Activity.HomepageActivity" />
+                android:value=".Activity.HomepageActivity" />
         </activity>
         <activity
             android:name=".Activity.Test2Activity"
@@ -87,6 +88,13 @@
         <activity
             android:name=".Activity.TaskActivity"
             android:label="@string/title_activity_task" >
+        </activity>
+        <activity
+            android:name=".Activity.BiddingActivity"
+            android:label="@string/title_activity_bidding" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activity.HomepageActivity" />
         </activity>
     </application>
 

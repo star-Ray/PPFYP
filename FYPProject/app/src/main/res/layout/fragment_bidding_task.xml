@@ -1,0 +1,78 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recyclerList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/customborder"
+    android:orientation="vertical"
+    android:layout_marginBottom="5sp"
+    android:padding="5sp">
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+            <TextView
+                android:id="@+id/title_recipient"
+                android:layout_weight="1"
+                android:width="0dp"
+                android:gravity="right"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp"
+                android:text="To:"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/content_recipient"
+                android:layout_weight="1"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp"
+                android:text="Ms. Ong Hui Qi"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/title_address"
+                android:layout_weight="1"
+                android:width="0dp"
+                android:gravity="right"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp"
+                android:text="@string/address"/>
+
+            <TextView
+                android:id="@+id/content_address"
+                android:layout_weight="1"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp"
+                android:text="123 Doraemon Street \nS234567"/>
+        </TableRow>
+
+    </TableLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:text="Accept"/>
+        <Button
+            android:id="@+id/button_reject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Reject"/>
+
+    </LinearLayout>
+
+</LinearLayout>

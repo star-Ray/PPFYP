@@ -22,14 +22,13 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_test2">Test2Activity</string>
-    <string name="title_activity_test3">Test3Activity</string>
-    <string name="title_activity_test3_activitiy">Test3Activitiy</string>
     <string name="title_activity_read_nfc">ReadNFCActivity</string>
     <string name="title_activity_write_nfc">WriteNFCActivity</string>
     <string name="title_activity_tab">TabActivity</string>
-
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
+    <string name="title_activity_bidding">My Bidding Activities</string>
+    <string name="address">Address:</string>
 </resources>
 

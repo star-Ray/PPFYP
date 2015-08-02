@@ -111,10 +111,14 @@ public class HomepageActivity extends ActionBarActivity {
         intent = new Intent(this, TaskActivity.class);
         startActivity(intent);
     }
+    public void goToBidding(){
+        intent = new Intent(this, BiddingActivity.class);
+        startActivity(intent);
+    }
 
     public void loadDrawer(){
 //        Drawer view
-        String[] drawerArr = new String[]{"My Profile", "NFC Page", "WriteNFC", "test1", "maps", "Settings", "Logout"};
+        String[] drawerArr = new String[]{"My Profile", "Bidding", "NFC Page", "WriteNFC", "test1", "maps", "Settings", "Logout"};
         final ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_textview, drawerArr);
         final DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
@@ -127,6 +131,9 @@ public class HomepageActivity extends ActionBarActivity {
                 switch (itemTitle) {
                     case "My Profile":
                         goToMyProfilePage();
+                        break;
+                    case "Bidding":
+                        goToBidding();
                         break;
                     case "NFC Page":
                         goToNFCPage();
@@ -173,7 +180,7 @@ public class HomepageActivity extends ActionBarActivity {
         }
     }
     public void loadSwipeView(){
-        viewPager = (ViewPager) findViewById(R.id.pager_test);
+        viewPager = (ViewPager) findViewById(R.id.homepage_pager);
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
