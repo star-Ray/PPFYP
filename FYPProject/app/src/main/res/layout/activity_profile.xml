@@ -5,98 +5,107 @@
 
     <!--Employee details-->
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="10dp"
+        android:padding="5sp">
 
         <TableRow
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10sp">
+            android:gravity="center"
+            android:padding="5sp">
             <TextView
                 android:id="@+id/title_courierID"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_column="1"
-                android:layout_weight="1"
-                android:paddingRight="10sp"
-                android:text="Employee ID: "
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:text="Employee ID:"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/content_courierID"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_column="2"
-                android:layout_weight="1"
                 android:text="1"
                 android:textSize="15sp" />
         </TableRow>
         <TableRow
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10sp">
+            android:gravity="center"
+            android:padding="5sp">
             <TextView
                 android:id="@+id/title_courierName"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_column="1"
-                android:layout_weight="1"
-                android:paddingRight="10sp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
                 android:text="Employee Name:"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/content_courierName"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_column="2"
-                android:layout_weight="1"
                 android:text="Arnold Lee"
                 android:textSize="15sp" />
         </TableRow>
         <TableRow
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10sp">
+            android:gravity="center"
+            android:padding="5sp">
             <TextView
                 android:id="@+id/title_courierContactNo"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_column="1"
-                android:layout_weight="1"
-                android:paddingRight="10sp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
                 android:text="Contact No:"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/content_courierContactNo"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_column="2"
-                android:layout_weight="1"
                 android:text="98658569"
                 android:textSize="15sp" />
         </TableRow>
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10sp">
+            android:gravity="center"
+            android:padding="5sp">
             <TextView
                 android:id="@+id/title_courierDateJoined"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_column="1"
-                android:layout_weight="1"
-                android:paddingRight="10sp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
                 android:text="Date Joined:"
+                android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/content_courierDateJoined"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_column="2"
-                android:layout_weight="1"
                 android:text="2 August 2015"
                 android:textSize="15sp" />
         </TableRow>
 
     </TableLayout>
+
+    <!--line break-->
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 
     <TextView
         android:id="@+id/text_name2"
