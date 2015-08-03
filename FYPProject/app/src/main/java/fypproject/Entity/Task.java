@@ -2,6 +2,7 @@ package fypproject.Entity;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Arnold on 7/9/2015.
@@ -9,14 +10,14 @@ import java.util.ArrayList;
 public class Task {
     private int ID, officerID, courierID, senderID;
     private String receiverName, receiverContact, startLocation, endLocation, signature, oneTimePass, taskStatus, remarks;
-    private Timestamp planStartTime, planEndTime, actualStartTime, actualEndTime, createDate;
+    private Date planStartTime, planEndTime, actualStartTime, actualEndTime, createDate;
     private ArrayList<Item> itemList;
 
-    public Task(int ID, int officerID, int courierID, int senderID, String receiverName,
-                String receiverContact, String startLocation, String endLocation, String signature,
-                String oneTimePass, String taskStatus, String remarks, Timestamp planStartTime,
-                Timestamp planEndTime, Timestamp actualStartTime, Timestamp actualEndTime,
-                Timestamp createDate, ArrayList<Item> itemList) {
+    public Task(int ID, int officerID, int courierID, int senderID,
+                String receiverName, String receiverContact, String startLocation,
+                String endLocation, String signature, String oneTimePass, String taskStatus,
+                String remarks, Timestamp planStartTime, Timestamp planEndTime, Timestamp actualStartTime,
+                Timestamp actualEndTime, Date createDate, ArrayList<Item> itemList) {
         this.ID = ID;
         this.officerID = officerID;
         this.courierID = courierID;
@@ -35,30 +36,6 @@ public class Task {
         this.actualEndTime = actualEndTime;
         this.createDate = createDate;
         this.itemList = itemList;
-    }
-
-    public Task(int ID, int officerID, int courierID, int senderID,
-                String receiverName, String receiverContact, String startLocation,
-                String endLocation, String signature, String oneTimePass, String taskStatus,
-                String remarks, Timestamp planStartTime, Timestamp planEndTime, Timestamp actualStartTime,
-                Timestamp actualEndTime, Timestamp createDate) {
-        this.ID = ID;
-        this.officerID = officerID;
-        this.courierID = courierID;
-        this.senderID = senderID;
-        this.receiverName = receiverName;
-        this.receiverContact = receiverContact;
-        this.startLocation = startLocation;
-        this.endLocation = endLocation;
-        this.signature = signature;
-        this.oneTimePass = oneTimePass;
-        this.taskStatus = taskStatus;
-        this.remarks = remarks;
-        this.planStartTime = planStartTime;
-        this.planEndTime = planEndTime;
-        this.actualStartTime = actualStartTime;
-        this.actualEndTime = actualEndTime;
-        this.createDate = createDate;
     }
 
     public ArrayList<Item> getItemList() {
@@ -165,44 +142,43 @@ public class Task {
         this.remarks = remarks;
     }
 
-    public Timestamp getPlanStartTime() {
+    public Date getPlanStartTime() {
         return planStartTime;
     }
 
-    public void setPlanStartTime(Timestamp planStartTime) {
+    public void setPlanStartTime(Date planStartTime) {
         this.planStartTime = planStartTime;
     }
 
-    public Timestamp getPlanEndTime() {
+    public Date getPlanEndTime() {
         return planEndTime;
     }
 
-    public void setPlanEndTime(Timestamp planEndTime) {
+    public void setPlanEndTime(Date planEndTime) {
         this.planEndTime = planEndTime;
     }
 
-    public Timestamp getActualStartTime() {
+    public Date getActualStartTime() {
         return actualStartTime;
     }
 
-    public void setActualStartTime(Timestamp actualStartTime) {
+    public void setActualStartTime(Date actualStartTime) {
         this.actualStartTime = actualStartTime;
     }
 
-    public Timestamp getActualEndTime() {
+    public Date getActualEndTime() {
         return actualEndTime;
     }
 
-    public void setActualEndTime(Timestamp actualEndTime) {
+    public void setActualEndTime(Date actualEndTime) {
         this.actualEndTime = actualEndTime;
     }
 
-    public Timestamp getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Timestamp createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-
 }

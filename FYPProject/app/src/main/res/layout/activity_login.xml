@@ -37,8 +37,7 @@
         android:gravity="center"
         android:hint="@string/hint_login_username"
         android:inputType="text"
-        android:maxWidth="300dp"
-        android:text="arnold.lee.2013" />
+        android:maxWidth="300dp" />
 
     <!-- Password -->
     <EditText
@@ -50,8 +49,7 @@
         android:gravity="center"
         android:hint="@string/hint_login_password"
         android:inputType="textPassword"
-        android:maxWidth="300dp"
-        android:text="123" />
+        android:maxWidth="300dp" />
 
     <!--Login button-->
     <Button
@@ -61,12 +59,12 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:background="@color/blue_login"
+        android:capitalize="none"
         android:onClick="sendMessage"
         android:text="@string/button_login"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:typeface="sans"
-        android:visibility="visible"
-        android:capitalize="none" />
+        android:visibility="visible" />
 
 </LinearLayout>

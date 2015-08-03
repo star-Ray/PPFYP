@@ -84,7 +84,6 @@ public class LoginActivity extends Activity{
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
-                    finish();
                 }
             });
             AlertDialog dialog = builder.create();
@@ -93,10 +92,10 @@ public class LoginActivity extends Activity{
     }
 
     public Sender createTestSender(){
-        Sender sender = new Sender(1, 1, 1, "Ray_Sender", "98366640", "arnold.lee.2013", "123", "123", "boy", null);
+        Sender sender = new Sender(1, 1, 1, "Ray_Sender", "98366640", "arnold.lee.2013", "123", "123", "boy", null, null);
         ArrayList<Item> itemList = new ArrayList<Item>();
-        itemList.add(new Item(1,1,1,2.0,"Banana","dimen","image","nfcTagID", "barcode", "no remarks", null));
-        itemList.add(new Item(2,1,1,2.0,"Potato","dimen","image","nfcTagID", "barcode", "no remarks", null));
+        itemList.add(new Item(1,1,1,2.0,"Banana","dimen","image","nfcTagID", "barcode", "no remarks", null, null));
+        itemList.add(new Item(2,1,1,2.0,"Potato","dimen","image","nfcTagID", "barcode", "no remarks", null, null));
 
         Task task = new Task(1,1,1,1,"Task1", "4444444", "startL", "endL", "sign", "OTP", "Ontime", "no remarks",
                 null, null, null, null, null, itemList);
@@ -107,7 +106,7 @@ public class LoginActivity extends Activity{
         return sender;
     }
     public Courier createTestCourier(){
-        Courier courier = new Courier(1,1,"Arnold Lee", "arnold.lee.2013", "123", "123", "98765446", "Hougang", "no_remarks", null, 1);
+        Courier courier = new Courier(1,1,"Arnold Lee", "arnold.lee.2013", "123", "123", "98765446", "Hougang", "no_remarks", null, 1, null);
         return courier;
     }
 

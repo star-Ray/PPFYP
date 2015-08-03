@@ -1,6 +1,5 @@
 package fypproject.Activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,10 +23,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import fypproject.Entity.Courier;
 import fypproject.Entity.Sender;
 import fypproject.R;
-import com.google.gson.Gson;
 
 
 public class HomepageActivity extends ActionBarActivity {
@@ -96,6 +96,10 @@ public class HomepageActivity extends ActionBarActivity {
         startActivity(intent);
     }
     public void goToTest1(){
+        intent = new Intent(this, TestActivity.class);
+        startActivity(intent);
+    }
+    public void goToTest2(){
         intent = new Intent(this, Test2Activity.class);
         startActivity(intent);
     }
@@ -123,7 +127,7 @@ public class HomepageActivity extends ActionBarActivity {
 
     public void loadDrawer(){
 //        Drawer view
-        String[] drawerArr = new String[]{"My Profile", "Bidding", "NFC Page", "WriteNFC", "test1", "maps", "Settings", "Logout"};
+        String[] drawerArr = new String[]{"My Profile", "Bidding", "NFC Page", "WriteNFC", "test1", "test2", "maps", "Settings", "Logout"};
         final ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_textview, drawerArr);
         final DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
@@ -150,6 +154,9 @@ public class HomepageActivity extends ActionBarActivity {
                         break;
                     case "test1":
                         goToTest1();
+                        break;
+                    case "test2":
+                        goToTest2();
                         break;
                     case "maps":
                         goToMaps();
@@ -206,7 +213,6 @@ public class HomepageActivity extends ActionBarActivity {
             Fragment fragment = new HomepageFragment();
             Bundle args = new Bundle();
             args.putInt(HomepageFragment.ARG_OBJECT, i + 1);
-//            args.putInt("object", i + 1);
             fragment.setArguments(args);
             return fragment;
         }

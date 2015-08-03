@@ -1,6 +1,6 @@
 package fypproject.Entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by Arnold on 7/9/2015.
@@ -8,7 +8,21 @@ import java.sql.Timestamp;
 public class Officer {
     private int ID, objStatus, companyID;
     private String name, username, passwordSALT, passwordHASH, remarks;
-    private Timestamp createDate;
+    private Date createDate;
+
+    public Officer(int ID, int objStatus, int companyID, String name, String username,
+                   String passwordSALT, String passwordHASH, String remarks, Date createDate) {
+
+        this.ID = ID;
+        this.objStatus = objStatus;
+        this.companyID = companyID;
+        this.name = name;
+        this.username = username;
+        this.passwordSALT = passwordSALT;
+        this.passwordHASH = passwordHASH;
+        this.remarks = remarks;
+        this.createDate = createDate;
+    }
 
     public int getID() {
         return ID;
@@ -74,25 +88,11 @@ public class Officer {
         this.remarks = remarks;
     }
 
-    public Timestamp getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Timestamp createDate) {
-        this.createDate = createDate;
-    }
-
-    public Officer(int ID, int objStatus, int companyID, String name, String username,
-                   String passwordSALT, String passwordHASH, String remarks, Timestamp createDate) {
-
-        this.ID = ID;
-        this.objStatus = objStatus;
-        this.companyID = companyID;
-        this.name = name;
-        this.username = username;
-        this.passwordSALT = passwordSALT;
-        this.passwordHASH = passwordHASH;
-        this.remarks = remarks;
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 }

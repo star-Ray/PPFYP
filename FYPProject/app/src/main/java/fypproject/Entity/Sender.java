@@ -1,7 +1,7 @@
 package fypproject.Entity;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Arnold on 7/9/2015.
@@ -9,28 +9,12 @@ import java.util.ArrayList;
 public class Sender {
     private int ID, objStatus, companyID;
     private String name, contactNo, username, passwordSALT, passwordHASH, remarks;
-    private Timestamp createDate;
+    private Date createDate;
     private ArrayList<Task> taskList;
 
     public Sender(int ID, int objStatus, int companyID, String name, String contactNo,
                   String username, String passwordSALT, String passwordHASH, String remarks,
-                  Timestamp createDate) {
-
-        this.ID = ID;
-        this.objStatus = objStatus;
-        this.companyID = companyID;
-        this.name = name;
-        this.contactNo = contactNo;
-        this.username = username;
-        this.passwordSALT = passwordSALT;
-        this.passwordHASH = passwordHASH;
-        this.remarks = remarks;
-        this.createDate = createDate;
-    }
-
-    public Sender(int ID, int objStatus, int companyID, String name, String contactNo,
-                  String username, String passwordSALT, String passwordHASH, String remarks,
-                  Timestamp createDate, ArrayList<Task> taskList) {
+                  Date createDate, ArrayList<Task> taskList) {
 
         this.ID = ID;
         this.objStatus = objStatus;
@@ -125,11 +109,11 @@ public class Sender {
         this.remarks = remarks;
     }
 
-    public Timestamp getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Timestamp createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 }

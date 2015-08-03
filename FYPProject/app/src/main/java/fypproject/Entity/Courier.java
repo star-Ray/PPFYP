@@ -1,21 +1,20 @@
 package fypproject.Entity;
 
-import java.sql.Timestamp;
+import java.lang.reflect.Array;
+import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * Created by Arnold on 7/9/2015.
  */
 public class Courier {
     private int ID, objStatus, companyID;
-    private String name, username, passwordSALT, passwordHASH, contactNo, realtimeLocation, remarks;
-    private Timestamp createDate;
-
-
-
-
+    private String name, username, passwordSALT, passwordHASH, contactNo, realTimeLocation, remarks;
+    private Date createDate;
+    private ArrayList<Task> taskList;
 
     public Courier(int ID, int objStatus, String name, String username, String passwordHASH, String passwordSALT,
-                   String contactNo, String realtimeLocation, String remarks, Timestamp createDate, int companyID) {
+                   String contactNo, String realTimeLocation, String remarks, Date createDate, int companyID, ArrayList<Task> taskList) {
 
         this.ID = ID;
         this.companyID = companyID;
@@ -25,33 +24,18 @@ public class Courier {
         this.passwordSALT = passwordSALT;
         this.name = name;
         this.contactNo = contactNo;
-        this.realtimeLocation = realtimeLocation;
+        this.realTimeLocation = realTimeLocation;
         this.remarks = remarks;
         this.createDate = createDate;
+        this.taskList = taskList;
     }
 
-    public String getPasswordSALT() {
-        return passwordSALT;
+    public ArrayList<Task> getTaskList() {
+        return taskList;
     }
 
-    public void setPasswordSALT(String passwordSALT) {
-        this.passwordSALT = passwordSALT;
-    }
-
-    public String getPasswordHASH() {
-        return passwordHASH;
-    }
-
-    public void setPasswordHASH(String passwordHASH) {
-        this.passwordHASH = passwordHASH;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setTaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
     }
 
     public int getID() {
@@ -70,12 +54,44 @@ public class Courier {
         this.objStatus = objStatus;
     }
 
+    public int getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(int companyID) {
+        this.companyID = companyID;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPasswordSALT() {
+        return passwordSALT;
+    }
+
+    public void setPasswordSALT(String passwordSALT) {
+        this.passwordSALT = passwordSALT;
+    }
+
+    public String getPasswordHASH() {
+        return passwordHASH;
+    }
+
+    public void setPasswordHASH(String passwordHASH) {
+        this.passwordHASH = passwordHASH;
     }
 
     public String getContactNo() {
@@ -86,12 +102,12 @@ public class Courier {
         this.contactNo = contactNo;
     }
 
-    public String getRealtimeLocation() {
-        return realtimeLocation;
+    public String getRealTimeLocation() {
+        return realTimeLocation;
     }
 
-    public void setRealtimeLocation(String realtimeLocation) {
-        this.realtimeLocation = realtimeLocation;
+    public void setRealTimeLocation(String realTimeLocation) {
+        this.realTimeLocation = realTimeLocation;
     }
 
     public String getRemarks() {
@@ -102,19 +118,11 @@ public class Courier {
         this.remarks = remarks;
     }
 
-    public Timestamp getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Timestamp createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    public int getCompanyID() {
-        return companyID;
-    }
-
-    public void setCompanyID(int companyID) {
-        this.companyID = companyID;
     }
 }

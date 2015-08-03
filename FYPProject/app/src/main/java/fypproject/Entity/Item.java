@@ -1,6 +1,7 @@
 package fypproject.Entity;
 
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Arnold on 7/9/2015.
@@ -9,11 +10,10 @@ public class Item{
     private int ID, taskID, objStatus;
     private double weight;
     private String desc, dimen, image, nfcTag, barcode, remarks;
-    private Timestamp createDate;
-
+    private Date createDate;
 
     public Item(int ID, int taskID, int objStatus, double weight, String desc, String dimen, String image,
-                String nfcTag, String barcode, String remarks, Timestamp createDate) {
+                String nfcTag, String barcode, String remarks, Date createDate, ArrayList<Item> itemList) {
         this.ID = ID;
         this.taskID = taskID;
         this.objStatus = objStatus;
@@ -27,13 +27,6 @@ public class Item{
         this.createDate = createDate;
     }
 
-    public Timestamp getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Timestamp createDate) {
-        this.createDate = createDate;
-    }
 
     public int getID() {
         return ID;
@@ -113,5 +106,13 @@ public class Item{
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }
