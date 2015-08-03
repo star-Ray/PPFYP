@@ -69,7 +69,7 @@ public class BiddingActivity extends ActionBarActivity {
                 accept_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int position = v.getVerticalScrollbarPosition();
+                        int position = getPosition();
                         mDataset.remove(position);
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, mDataset.size());
@@ -78,7 +78,7 @@ public class BiddingActivity extends ActionBarActivity {
                 reject_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int position = v.getVerticalScrollbarPosition();
+                        int position = getPosition();
                         mDataset.remove(position);
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, mDataset.size());

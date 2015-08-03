@@ -1,5 +1,6 @@
 package fypproject.Activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -203,8 +204,8 @@ public class HomepageActivity extends ActionBarActivity {
         public Fragment getItem(int i){
             Fragment fragment = new HomepageFragment();
             Bundle args = new Bundle();
-//            args.putInt(HomepageFragment.ARG_OBJECT, i + 1);
-            args.putInt("object", i + 1);
+            args.putInt(HomepageFragment.ARG_OBJECT, i + 1);
+//            args.putInt("object", i + 1);
             fragment.setArguments(args);
             return fragment;
         }
@@ -215,7 +216,7 @@ public class HomepageActivity extends ActionBarActivity {
         }
     }
     public class HomepageFragment extends android.support.v4.app.Fragment {
-        public final String ARG_OBJECT = "object";
+        public static final String ARG_OBJECT = "object";
         private RecyclerView recyclerView;
         private RecyclerView.Adapter taskListAdapter;
         private RecyclerView.LayoutManager layoutManager;
@@ -266,6 +267,11 @@ public class HomepageActivity extends ActionBarActivity {
                     @Override
                     public void onClick(View v) {
                         goToTask();
+                    }
+
+                    public void goToTask(){
+                        Intent intent = new Intent(HomepageActivity.this, TaskActivity.class);
+                        startActivity(intent);
                     }
                 });
             }
