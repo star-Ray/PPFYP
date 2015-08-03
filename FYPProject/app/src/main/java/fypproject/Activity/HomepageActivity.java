@@ -110,7 +110,7 @@ public class HomepageActivity extends ActionBarActivity {
         intent = new Intent(this, WriteNFCActivity.class);
         startActivity(intent);
     }
-    public void goToTask(View view){
+    public void goToTask(){
         intent = new Intent(this, TaskActivity.class);
         startActivity(intent);
     }
@@ -203,7 +203,8 @@ public class HomepageActivity extends ActionBarActivity {
         public Fragment getItem(int i){
             Fragment fragment = new HomepageFragment();
             Bundle args = new Bundle();
-            args.putInt(HomepageFragment.ARG_OBJECT, i + 1);
+//            args.putInt(HomepageFragment.ARG_OBJECT, i + 1);
+            args.putInt("object", i + 1);
             fragment.setArguments(args);
             return fragment;
         }
@@ -214,7 +215,7 @@ public class HomepageActivity extends ActionBarActivity {
         }
     }
     public class HomepageFragment extends android.support.v4.app.Fragment {
-        public static final String ARG_OBJECT = "object";
+        public final String ARG_OBJECT = "object";
         private RecyclerView recyclerView;
         private RecyclerView.Adapter taskListAdapter;
         private RecyclerView.LayoutManager layoutManager;
@@ -247,6 +248,7 @@ public class HomepageActivity extends ActionBarActivity {
         }
     }
 
+    // recycler view
     public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
         private String[] dataSet;
 
@@ -260,13 +262,14 @@ public class HomepageActivity extends ActionBarActivity {
                 super(v);
                 view = v;
 
-                v.setOnClickListener(new View.OnClickListener(){
+                v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        goToTask(v);
+                        goToTask();
                     }
                 });
             }
+
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)
