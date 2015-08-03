@@ -85,7 +85,8 @@
         </activity>
         <activity
             android:name=".Activity.BiddingActivity"
-            android:label="@string/title_activity_bidding" >
+            android:label="@string/title_activity_bidding"
+            android:parentActivityName=".Activity.HomepageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.HomepageActivity" />

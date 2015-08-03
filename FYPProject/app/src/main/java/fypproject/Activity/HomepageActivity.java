@@ -55,7 +55,6 @@ public class HomepageActivity extends ActionBarActivity {
         loadSwipeView(); //load swipe view
         loadActionBarTabs(); //load Action bar tabs
         loadDrawer(); //load Drawer
-//        loadRecyclerView(); //load recycler view
 
 
 //        Load welcome toast if entered from login page
@@ -195,7 +194,7 @@ public class HomepageActivity extends ActionBarActivity {
         viewPager.setAdapter(homepageTabsPagerAdapter);
     }
 
-    public static class HomepageTabsPagerAdapter extends FragmentPagerAdapter {
+    public class HomepageTabsPagerAdapter extends FragmentPagerAdapter {
         public HomepageTabsPagerAdapter (FragmentManager fm){
             super(fm);
         }
@@ -214,7 +213,7 @@ public class HomepageActivity extends ActionBarActivity {
             return 3;
         }
     }
-    public static class HomepageFragment extends android.support.v4.app.Fragment {
+    public class HomepageFragment extends android.support.v4.app.Fragment {
         public static final String ARG_OBJECT = "object";
         private RecyclerView recyclerView;
         private RecyclerView.Adapter taskListAdapter;
@@ -248,7 +247,7 @@ public class HomepageActivity extends ActionBarActivity {
         }
     }
 
-    public static class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
+    public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
         private String[] dataSet;
 
         // Provide a reference to the views for each data item
@@ -260,11 +259,14 @@ public class HomepageActivity extends ActionBarActivity {
             public ViewHolder(View v) {
                 super(v);
                 view = v;
-//                textView2 = (TextView) v.findViewById(R.id.textView2);
+
+                v.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        goToTask(v);
+                    }
+                });
             }
-//            public TextView getTitle(){
-//                return textView2;
-//            }
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)

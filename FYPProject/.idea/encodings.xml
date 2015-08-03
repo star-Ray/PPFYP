@@ -2,7 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/build.gradle" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/arnold/fypproject/Activity/ReadNFCActivity.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/fypproject/Activity/ReadNFCActivity.java" charset="windows-1252" />
     <file url="PROJECT" charset="windows-1252" />
   </component>
 </project>

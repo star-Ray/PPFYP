@@ -1,5 +1,8 @@
 package fypproject.Activity;
 
+import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import fypproject.R;
 
@@ -34,35 +41,15 @@ public class BiddingActivity extends ActionBarActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        String[] myDataset = new String[]{"bye1", "bye2", "bye3"};
+        ArrayList<String> myDataset = new ArrayList<String>(Arrays.asList("bye1", "bye2", "bye3"));
         biddingListAdapter = new BiddingListAdapter(myDataset);
         recyclerView.setAdapter(biddingListAdapter);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_bidding, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public class BiddingListAdapter extends RecyclerView.Adapter<BiddingListAdapter.ViewHolder> {
-        private String[] mDataset;
+        private ArrayList<String> mDataset;
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
@@ -70,12 +57,33 @@ public class BiddingActivity extends ActionBarActivity {
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
             public View view;
-//            private TextView textView2;
+            public Button accept_button;
+            public Button reject_button;
 
             public ViewHolder(View v) {
                 super(v);
                 view = v;
-//                textView2 = (TextView) v.findViewById(R.id.textView2);
+                accept_button = (Button)v.findViewById(R.id.button_accept);
+                reject_button = (Button)v.findViewById(R.id.button_reject);
+
+                accept_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = v.getVerticalScrollbarPosition();
+                        mDataset.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, mDataset.size());
+                    }
+                });
+                reject_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = v.getVerticalScrollbarPosition();
+                        mDataset.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, mDataset.size());
+                    }
+                });
             }
 //            public TextView getTitle(){
 //                return textView2;
@@ -83,7 +91,7 @@ public class BiddingActivity extends ActionBarActivity {
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)
-        public BiddingListAdapter(String[] myDataset) {
+        public BiddingListAdapter(ArrayList<String> myDataset) {
             mDataset = myDataset;
         }
 
@@ -91,8 +99,8 @@ public class BiddingActivity extends ActionBarActivity {
         @Override
         public BiddingListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             // create a new view
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_bidding_task, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_bidding_task, parent, false);
+
             // set the view's size, margins, paddings and layout parameters
             ViewHolder vh = new ViewHolder(v);
             return vh;
@@ -109,8 +117,10 @@ public class BiddingActivity extends ActionBarActivity {
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return mDataset.length;
+            return mDataset.size();
         }
+
+
 
     }
 }
