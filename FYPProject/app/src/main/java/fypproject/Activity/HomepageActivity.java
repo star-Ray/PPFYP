@@ -2,6 +2,7 @@ package fypproject.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -195,7 +196,7 @@ public class HomepageActivity extends ActionBarActivity {
         viewPager.setAdapter(homepageTabsPagerAdapter);
     }
 
-    public class HomepageTabsPagerAdapter extends FragmentPagerAdapter {
+    public static class HomepageTabsPagerAdapter extends FragmentPagerAdapter {
         public HomepageTabsPagerAdapter (FragmentManager fm){
             super(fm);
         }
@@ -215,7 +216,7 @@ public class HomepageActivity extends ActionBarActivity {
             return 3;
         }
     }
-    public class HomepageFragment extends android.support.v4.app.Fragment {
+    public static class HomepageFragment extends android.support.v4.app.Fragment {
         public static final String ARG_OBJECT = "object";
         private RecyclerView recyclerView;
         private RecyclerView.Adapter taskListAdapter;
@@ -250,7 +251,7 @@ public class HomepageActivity extends ActionBarActivity {
     }
 
     // recycler view
-    public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
+    public static class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
         private String[] dataSet;
 
         // Provide a reference to the views for each data item
@@ -266,12 +267,10 @@ public class HomepageActivity extends ActionBarActivity {
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        goToTask();
-                    }
+                        Context context = v.getContext();
+                        Intent intent = new Intent(context, TaskActivity.class);
+                        context.startActivity(intent);
 
-                    public void goToTask(){
-                        Intent intent = new Intent(HomepageActivity.this, TaskActivity.class);
-                        startActivity(intent);
                     }
                 });
             }
