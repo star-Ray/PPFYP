@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,7 @@ public class HomepageActivity extends ActionBarActivity {
     private HomepageTabsPagerAdapter homepageTabsPagerAdapter;
     private ViewPager viewPager;
     private android.support.v7.app.ActionBar actionBar;
+//    private android.support.v7.app.ActionBarDrawerToggle drawerToggle;
 
 
     @Override
@@ -126,10 +128,26 @@ public class HomepageActivity extends ActionBarActivity {
     }
 
     public void loadDrawer(){
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+
+
 //        Drawer view
         String[] drawerArr = new String[]{"My Profile", "Bidding", "NFC Page", "WriteNFC", "test1", "test2", "maps", "Settings", "Logout"};
         final ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_textview, drawerArr);
         final DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        final ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_menu_white_24dp, R.string.drawer_open, R.string.drawer_close){
+
+        };
+        drawerToggle.setDrawerIndicatorEnabled(true);
+        drawerToggle.setHomeAsUpIndicator(R.drawable.ic_teamlogo1);
+        drawerLayout.setDrawerListener(drawerToggle);
+
+
+
+
+
 
         ListView listView = (ListView)findViewById(R.id.homepage_drawer);
         listView.setAdapter(drawerAdapter);
@@ -202,6 +220,7 @@ public class HomepageActivity extends ActionBarActivity {
         homepageTabsPagerAdapter = new HomepageTabsPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(homepageTabsPagerAdapter);
     }
+
 
     public static class HomepageTabsPagerAdapter extends FragmentPagerAdapter {
         public HomepageTabsPagerAdapter (FragmentManager fm){
