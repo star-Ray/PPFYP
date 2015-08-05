@@ -1,49 +1,22 @@
 package fypproject.Entity;
 
-import java.lang.reflect.Array;
 import java.sql.Date;
-import java.util.ArrayList;
 
 /**
  * Created by Arnold on 7/9/2015.
  */
 public class Courier {
-    private int ID, objStatus, companyID;
-    private String name, username, passwordSALT, passwordHASH, contactNo, realTimeLocation, remarks;
+    private int courierId, objStatus;
+    private String name, username, passwordSALT, passwordHASH, contactNo, realTimeLocation, remark, company;
     private Date createDate;
-    private ArrayList<Task> taskList;
+//    private ArrayList<Task> taskList;
 
-    public Courier(int ID, int objStatus, String name, String username, String passwordHASH, String passwordSALT,
-                   String contactNo, String realTimeLocation, String remarks, Date createDate, int companyID, ArrayList<Task> taskList) {
-
-        this.ID = ID;
-        this.companyID = companyID;
-        this.objStatus = objStatus;
-        this.username = username;
-        this.passwordHASH = passwordHASH;
-        this.passwordSALT = passwordSALT;
-        this.name = name;
-        this.contactNo = contactNo;
-        this.realTimeLocation = realTimeLocation;
-        this.remarks = remarks;
-        this.createDate = createDate;
-        this.taskList = taskList;
+    public int getCourierId() {
+        return courierId;
     }
 
-    public ArrayList<Task> getTaskList() {
-        return taskList;
-    }
-
-    public void setTaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setCourierId(int courierId) {
+        this.courierId = courierId;
     }
 
     public int getObjStatus() {
@@ -52,14 +25,6 @@ public class Courier {
 
     public void setObjStatus(int objStatus) {
         this.objStatus = objStatus;
-    }
-
-    public int getCompanyID() {
-        return companyID;
-    }
-
-    public void setCompanyID(int companyID) {
-        this.companyID = companyID;
     }
 
     public String getName() {
@@ -110,12 +75,20 @@ public class Courier {
         this.realTimeLocation = realTimeLocation;
     }
 
-    public String getRemarks() {
-        return remarks;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public Date getCreateDate() {
@@ -123,6 +96,21 @@ public class Courier {
     }
 
     public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Courier(int courierId, int objStatus, String name, String username, String passwordSALT, String passwordHASH, String contactNo, String realTimeLocation, String remark, String company, Date createDate) {
+
+        this.courierId = courierId;
+        this.objStatus = objStatus;
+        this.name = name;
+        this.username = username;
+        this.passwordSALT = passwordSALT;
+        this.passwordHASH = passwordHASH;
+        this.contactNo = contactNo;
+        this.realTimeLocation = realTimeLocation;
+        this.remark = remark;
+        this.company = company;
         this.createDate = createDate;
     }
 }

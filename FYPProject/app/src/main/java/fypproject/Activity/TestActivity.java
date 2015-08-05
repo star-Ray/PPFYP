@@ -2,6 +2,7 @@ package fypproject.Activity;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.location.GpsStatus;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
@@ -10,21 +11,25 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.volley.Cache;
-import com.android.volley.Network;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONObject;
+
+import fypproject.Connection.NetworkSingleton;
 import fypproject.R;
 
 public class TestActivity extends ActionBarActivity {
+
+    private NetworkSingleton networkSingleton;
+    private ImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +47,24 @@ public class TestActivity extends ActionBarActivity {
         final TextView textview = (TextView)findViewById(R.id.test_name);
 
         // Instantiate the cache
-        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+//        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
         // Set up the network to use HttpURLConnection as the HTTP client.
-        Network network = new BasicNetwork(new HurlStack());
+//        Network network = new BasicNetwork(new HurlStack());
 
         final ImageView imageView = (ImageView)findViewById(R.id.imageView);
 
         //RequestQueue
-        RequestQueue queue = new RequestQueue(cache, network);
-        queue.start();
+        networkSingleton = NetworkSingleton.getInstance(this.getApplicationContext());
+        imageLoader = networkSingleton.getImageLoader();
         String url = "http://maps.googleapis.com/maps/api/directions/json?origin=singapore&destination=malaysia";
         String imageUrl = "http://animalia-life.com/data_images/dog/dog2.jpg";
+        String jsonUrl = "http://eyetem-huiqiong2013.rhcloud.com/SimTech/admin/GetCourierByIdServlet?input={%22courierId%22:1}";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-//                        textview.setText("Response is: "+ response.substring(0,500));
                         textview.setText("Response is: " + response.substring(0, 2000));
                     }
                 }, new Response.ErrorListener() {
@@ -70,23 +74,25 @@ public class TestActivity extends ActionBarActivity {
             }
         });
 
-        ImageRequest imageRequest = new ImageRequest(imageUrl,
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap bitmap) {
-                        imageView.setImageBitmap(bitmap);
-                    }
-                }, 0, 0, null,
-                new Response.ErrorListener() {
-                    public void onErrorResponse(VolleyError error) {
-                        imageView.setImageResource(R.drawable.error);
-                    }
-                });
+        JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, jsonUrl, null, new Response.Listener<JSONObject>(){
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                textview.setText(jsonObject.toString());
+            }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // TODO
+            }
+        });
+
+        imageLoader.get(imageUrl, ImageLoader.getImageListener(imageView, R.drawable.error, R.drawable.error));
 
 
         // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-        queue.add(imageRequest);
+        networkSingleton.addToRequestQueue(stringRequest);
+//        networkSingleton.addToRequestQueue(imageRequest);
+        networkSingleton.addToRequestQueue(jsonRequest);
     }
 
     public void telephoneTesting(){

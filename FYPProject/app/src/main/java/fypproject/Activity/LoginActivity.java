@@ -9,14 +9,11 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 
-import fypproject.Entity.Courier;
-import fypproject.Entity.Item;
-import fypproject.Entity.Sender;
-import fypproject.Entity.Task;
-import fypproject.R;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
+import fypproject.Entity.Courier;
+import fypproject.Entity.Sender;
+import fypproject.R;
 
 
 public class LoginActivity extends Activity{
@@ -65,14 +62,12 @@ public class LoginActivity extends Activity{
         String password = input_password.getText().toString();
 
 //        ****** Create test user ******
-        Sender sender = createTestSender();
         Courier courier = createTestCourier();
 
         // validation of login credentials
-        if(sender.getUsername().equals(username) && sender.getPasswordSALT().equals(password)){
+        if(courier.getUsername().equals(username) && courier.getPasswordSALT().equals(password)){
             Gson gson = new Gson();
 
-            editor.putString("sender", gson.toJson(sender));
             editor.putString("courier", gson.toJson(courier));
 
             editor.apply();
@@ -90,23 +85,9 @@ public class LoginActivity extends Activity{
             dialog.show();
         }
     }
-
-    public Sender createTestSender(){
-        Sender sender = new Sender(1, 1, 1, "Ray_Sender", "98366640", "arnold.lee.2013", "123", "123", "boy", null, null);
-        ArrayList<Item> itemList = new ArrayList<Item>();
-        itemList.add(new Item(1,1,1,2.0,"Banana","dimen","image","nfcTagID", "barcode", "no remarks", null, null));
-        itemList.add(new Item(2,1,1,2.0,"Potato","dimen","image","nfcTagID", "barcode", "no remarks", null, null));
-
-        Task task = new Task(1,1,1,1,"Task1", "4444444", "startL", "endL", "sign", "OTP", "Ontime", "no remarks",
-                null, null, null, null, null, itemList);
-        ArrayList<Task> taskList = new ArrayList<Task>();
-        taskList.add(task);
-        sender.setTaskList(taskList);
-
-        return sender;
-    }
     public Courier createTestCourier(){
-        Courier courier = new Courier(1,1,"Arnold Lee", "arnold.lee.2013", "123", "123", "98765446", "Hougang", "no_remarks", null, 1, null);
+//        Courier courier = new Courier(1,1,"Arnold Lee", "arnold.lee.2013", "123", "123", "98765446", "Hougang", "no_remarks", null, 1, null);
+        Courier courier = new Courier(1,1,"Arnold Lee", "arnold.lee.2013", "123", "123", "98765446", "Hougang", "no_remarks", "company", null);
         return courier;
     }
 

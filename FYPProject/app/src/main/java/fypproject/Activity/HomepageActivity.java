@@ -27,13 +27,11 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import fypproject.Entity.Courier;
-import fypproject.Entity.Sender;
 import fypproject.R;
 
 
 public class HomepageActivity extends ActionBarActivity {
     private Intent intent;
-    private Sender sender;
     private Courier courier;
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
@@ -53,7 +51,6 @@ public class HomepageActivity extends ActionBarActivity {
         gson = new Gson();
         sharedPref = this.getSharedPreferences(getString(R.string.app_key), MODE_PRIVATE);
         editor = sharedPref.edit();
-        sender = gson.fromJson(sharedPref.getString("sender", null), Sender.class);
         courier = gson.fromJson(sharedPref.getString("courier", null), Courier.class);
 
         loadSwipeView(); //load swipe view
@@ -134,7 +131,7 @@ public class HomepageActivity extends ActionBarActivity {
 
 
 //        Drawer view
-        String[] drawerArr = new String[]{"My Profile", "Bidding", "NFC Page", "WriteNFC", "test1", "test2", "maps", "Settings", "Logout"};
+        String[] drawerArr = new String[]{"My Profile", "Bidding", "NFC Page", "WriteNFC", "test1", "test2", "maps", "Logout"};
         final ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_textview, drawerArr);
         final DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_menu_white_24dp, R.string.drawer_open, R.string.drawer_close){
@@ -164,8 +161,6 @@ public class HomepageActivity extends ActionBarActivity {
                         break;
                     case "NFC Page":
                         goToNFCPage();
-                        break;
-                    case "Settings":
                         break;
                     case "Logout":
                         goToLogout();

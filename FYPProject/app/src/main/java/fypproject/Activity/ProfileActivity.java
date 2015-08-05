@@ -41,7 +41,7 @@ public class ProfileActivity extends ActionBarActivity {
         TextView courier_name = (TextView)findViewById(R.id.content_courierName);
         TextView courier_contactNo = (TextView)findViewById(R.id.content_courierContactNo);
         TextView courier_dateJoined = (TextView)findViewById(R.id.content_courierDateJoined);
-        courier_id.setText(String.valueOf(courier.getID()));
+        courier_id.setText(String.valueOf(courier.getCourierId()));
         courier_name.setText(courier.getName());
         courier_contactNo.setText(courier.getContactNo());
 //        courier_dateJoined.setText(courier.getCreateDate()); **not ready yet
