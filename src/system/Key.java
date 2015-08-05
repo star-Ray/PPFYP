@@ -21,7 +21,7 @@ public class Key {
 	
 	public static final String SENDER = "sender";
 	public static final String SENDERS = "senders";
-	public static final String SENDERID = "senderID";
+	public static final String SENDERID = "senderId";
 	
 	public static final String COURIER = "courier";
 	public static final String COURIERS = "couriers";

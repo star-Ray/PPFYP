@@ -223,8 +223,13 @@
 
 		<div id="page-wrapper">
 			<div class="row">
-				<div class="col-lg-16">
+				<div class="col-lg-12">
 					<h1 class="page-header">Customer Management</h1>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary pull-right" data-toggle="modal"
+					data-target="#createCustomer" data-whatever="@mdo">Create New Customer
+					</button>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -236,11 +241,9 @@
 						<div class="panel-heading">View Customers</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#newtask" data-whatever="@mdo">Create New
-								Customer</button>
+							
 
-							<div class="modal fade" id="newtask" tabindex="-1" role="dialog"
+							<div class="modal fade" id="createCustomer" tabindex="-1" role="dialog"
 								aria-labelledby="exampleModalLabel">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -253,29 +256,48 @@
 										
 										</div>
 										<div class="modal-body">
-											<form>
+											<form class="form-horizontal" id="createCustomerForm"
+												onsubmit="createCustomer();return false;">
 												<div class="form-group">
-													<label for="receiver-name" class="control-label">Customer's
-														Name</label> <input type="text" class="form-control"
-														id="receiver-name">
+													<label for="name" class="col-sm-3 control-label">CustomerName</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" id="name" placeholder="Customer Name">
+													</div>
 												</div>
 												<div class="form-group">
-													<label for="receiver-contact" class="control-label">Customer's
-														Contact Number</label> <input type="text" class="form-control"
-														id="receiver-contact">
+													<label for="contactNo" class="col-sm-3 control-label">Contact Number</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" id="contactNo" placeholder="0000 0000">
+													</div>
 												</div>
 												<div class="form-group">
-													<label for="dropoff-location" class="control-label">Address</label>
-													<textarea class="form-control" id="dropoff-location"></textarea>
+													<label for="name" class="col-sm-3 control-label">UserName</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control" id="username" placeholder="Customer Name">
+													</div>
 												</div>
-
+												<div class="form-group">
+													<label for="password" class="col-sm-3 control-label">Password</label>
+													<div class="col-sm-9">
+														<input type="password" class="form-control" id="password"
+															placeholder="Password">
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="password2" class="col-sm-3 control-label">Confirm
+														Password</label>
+													<div class="col-sm-9">
+														<input type="password" class="form-control" id="password2"
+															placeholder="Confirm Password" oninput="passwordCheck(100);">
+													</div>
+												</div>
+												<div class="modal-footer">
+													<font color="red" id="message"></font>
+													<img src="../asset/img/ajax-loader.gif" class="my-loading sr-only">
+													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													<button type="submit" class="btn btn-primary">Add New Customer</button>
+												</div>
 											</form>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Add
-												New Customer</button>
 										</div>
 									</div>
 								</div>
@@ -283,15 +305,20 @@
 
 							<div class="dataTable_wrapper">
 								<table class="table table-striped table-bordered table-hover"
-									id="dataTables-example">
+									id="senderTable">
 									<thead>
 										<tr>
-											<th>Customer ID</th>
+											<th>CustomerID</th>
 											<th>Name</th>
-											<th>Contact Number</th>
+											<th>ContactNo</th>
+											<th>Username</th>
+											<th>JoinDate</th>
+											<th>companyId</th>
+											<th>Status</th>
+											<th>Options</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id="customers">
 										<tr class="odd gradeX">
 											<td>data</td>
 											<td>data</td>
@@ -312,7 +339,139 @@
 				<!-- /.row -->
 			</div>
 			<!-- /#page-wrapper -->
-
+			
+			<!-- Edit employee form section -->
+			<div class="modal fade" id="editCustomer" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Edit Customer</h4>
+						</div>
+						<div class="modal-body">
+							<form id="editCustomerForm" class="form-horizontal">
+								<div class="form-group">
+									<label for="name" class="col-sm-3 control-label">CustomerName</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="nameEdit" placeholder="Customer Name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="contactNo" class="col-sm-3 control-label">Contact Number</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="contactNoEdit" placeholder="0000 0000">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="name" class="col-sm-3 control-label">UserName</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="usernameEdit" placeholder="Customer Name">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<font color="red" id="messageEdit"></font>
+									<img src="../asset/img/ajax-loader.gif" class="my-loading sr-only">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-warning">Save</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="changeCustomerPassword"
+				class="modal fade bs-example-modal" tabindex="-1" role="dialog"
+				aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Change Password</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="changeCustomerPasswordForm"
+								onsubmit="changeCustomerPassword(0); return false;">
+								<div class="form-group">
+									<label for="passwordEdit" class="col-sm-2 control-label">Password</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" id="passwordEdit"
+											placeholder="Password" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password2Edit" class="col-sm-2 control-label">Confirm
+										Password</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" id="password2Edit"
+											placeholder="Confirm Password" required
+											oninput="passwordEditCheck(100);">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-8 col-xs-10">
+										<button type="submit" class="btn btn-info">Change</button>
+										<font color="red" id="messageChangePassword"></font> <img
+											src="/Payroll/asset/img/ajax-loader.gif"
+											class="my-loading sr-only">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" class="btn btn-default pull-right"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="deleteCustomer" class="modal fade bs-example-modal-lg"
+				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Delete Customer</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="deleteCustomerForm"
+								onsubmit="deleteCustomer(0); return false;">
+								<div class="form-group">
+									<label for="nameDelete" class="col-sm-2 control-label">Name</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="nameDelete"
+											placeholder="Please key in the employee name to confirm delete!"
+											required>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-8 col-xs-10">
+										<button type="submit" class="btn btn-danger">Delete</button>
+										<font color="red" id="messageDeleteCustomer"></font> <img
+											src="/Payroll/asset/img/ajax-loader.gif"
+											class="my-loading sr-only">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" class="btn btn-default pull-right"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- /#wrapper -->
 
@@ -334,15 +493,19 @@
 			src="../bower_components/datatables-responsive/js/dataTables.responsive.js"></script>
 		<!-- Custom Theme JavaScript -->
 		<script src="../dist/js/sb-admin-2.js"></script>
-
-		<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+		
+		<!-- Custom JavaScript -->
+		<script src="../js/customer.js"></script>
+		
+		<!-- Page-Level Demo Scripts - Tables - Use for reference 
 		<script>
 			$(document).ready(function() {
-				$('#dataTables-example').DataTable({
+				$('#senderTable').DataTable({
 					responsive : true
 				});
 			});
 		</script>
+		-->
 </body>
 
 </html>

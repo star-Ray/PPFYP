@@ -194,7 +194,6 @@ public class TaskCtrl {
 	//features
 	public static JSONObject getTasksByCompany(JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
-		
 		try{
 			Company company = CompanyDAO.getCompanyById((long) inputJson.get(Key.COMPANYID));
 			if(company != null){

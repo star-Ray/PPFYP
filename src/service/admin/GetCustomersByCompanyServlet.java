@@ -13,18 +13,18 @@ import org.json.simple.JSONObject;
 import system.Config;
 import system.Key;
 import system.Value;
-import controller.TaskCtrl;
+import controller.SenderCtrl;
 
 /**
  * @author RaySong
  */
-public class GetTasksByCompanyServlet extends HttpServlet {
+public class GetCustomersByCompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetTasksByCompanyServlet() {
+    public GetCustomersByCompanyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +58,7 @@ public class GetTasksByCompanyServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = TaskCtrl.getTasksByCompany(inputJson);
+			returnJson = SenderCtrl.getSendersByCompany(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

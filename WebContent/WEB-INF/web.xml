@@ -195,6 +195,14 @@
     <url-pattern>/admin/GetSenderByIdServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>GetCustomersByCompanyServlet</servlet-name>
+    <servlet-class>service.admin.GetCustomersByCompanyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetCustomersByCompanyServlet</servlet-name>
+    <url-pattern>/admin/GetCustomersByCompanyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>GetTaskByIdServlet</servlet-name>
     <servlet-class>service.admin.GetTaskByIdServlet</servlet-class>
   </servlet>

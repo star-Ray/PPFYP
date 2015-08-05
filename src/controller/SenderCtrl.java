@@ -2,12 +2,14 @@ package controller;
 
 import model.Sender;
 import model.Company;
+import model.Sender;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import persistence.SenderDAO;
 import persistence.CompanyDAO;
+import persistence.SenderDAO;
 import system.Encrypt;
 import system.Key;
 import system.Message;
@@ -149,5 +151,26 @@ public class SenderCtrl {
 	}
 	
 	//features
-	
+	public static JSONObject getSendersByCompany(JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		try{
+			Company company = CompanyDAO.getCompanyById((long) inputJson.get(Key.COMPANYID));
+			if(company != null){
+				JSONArray senderJArr = new JSONArray();
+				for(Sender s: SenderDAO.getSendersByCompany(company)){
+					senderJArr.add(s.toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, senderJArr);
+			}else{
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.COMPANYNOTEXIST);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
 }
