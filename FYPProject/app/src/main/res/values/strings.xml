@@ -15,6 +15,7 @@
     <string name="text_welcome_user">Welcome, User</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
+    <string name="date_format">"yyyy-MM-dd'T'HH:mm:ss"</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_world">Hello world!</string>

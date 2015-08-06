@@ -34,14 +34,14 @@ public class NetworkSingleton {
                         cache.put(url, bitmap);
                     }
                 });
-        System.out.println("NetworkSingleton created.");
+        System.out.println("NetworkSingleton: Created.");
     }
 
     public static synchronized NetworkSingleton getInstance(Context context) {
         if (networkInstance == null) {
             networkInstance = new NetworkSingleton(context);
         }
-        System.out.println("NetworkSingleton called.");
+        System.out.println("NetworkSingleton: Instance called.");
         return networkInstance;
     }
 
@@ -51,13 +51,13 @@ public class NetworkSingleton {
             // Activity or BroadcastReceiver if someone passes one in.
             requestQueue = Volley.newRequestQueue(mContext.getApplicationContext());
         }
-        System.out.println("NetworkSingleton RequestQueue is called.");
+        System.out.println("NetworkSingleton: RequestQueue is called.");
         return requestQueue;
     }
 
     public <T> void addToRequestQueue(Request<T> request) {
         getRequestQueue().add(request);
-        System.out.println("New request " + request + "  is added to NetworkSingleton queue!");
+        System.out.println("NetworkSingleton: New request " + request + "  is added to requestQueue!");
     }
 
     public ImageLoader getImageLoader() {

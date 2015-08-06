@@ -25,6 +25,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import fypproject.Entity.Courier;
 import fypproject.R;
@@ -48,7 +49,7 @@ public class HomepageActivity extends ActionBarActivity {
         setContentView(R.layout.activity_homepage);
 
 //        Initializing
-        gson = new Gson();
+        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         sharedPref = this.getSharedPreferences(getString(R.string.app_key), MODE_PRIVATE);
         editor = sharedPref.edit();
         courier = gson.fromJson(sharedPref.getString("courier", null), Courier.class);

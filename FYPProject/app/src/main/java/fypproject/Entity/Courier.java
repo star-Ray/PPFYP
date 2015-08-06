@@ -1,6 +1,8 @@
 package fypproject.Entity;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Arnold on 7/9/2015.
@@ -9,7 +11,28 @@ public class Courier {
     private int courierId, objStatus;
     private String name, username, passwordSALT, passwordHASH, contactNo, realTimeLocation, remark, company;
     private Date createDate;
-//    private ArrayList<Task> taskList;
+
+    public static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+
+    public Courier(int courierId, int objStatus, String name, String username, String passwordSALT, String passwordHASH,
+                   String contactNo, String realTimeLocation, String remark, String company, String strCreateDate) {
+        System.out.println("Creating new courier");
+        this.courierId = courierId;
+        this.objStatus = objStatus;
+        this.name = name;
+        this.username = username;
+        this.passwordSALT = passwordSALT;
+        this.passwordHASH = passwordHASH;
+        this.contactNo = contactNo;
+        this.realTimeLocation = realTimeLocation;
+        this.remark = remark;
+        this.company = company;
+        try {
+            this.createDate = new SimpleDateFormat(DATE_FORMAT).parse(strCreateDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     public int getCourierId() {
         return courierId;
@@ -99,18 +122,5 @@ public class Courier {
         this.createDate = createDate;
     }
 
-    public Courier(int courierId, int objStatus, String name, String username, String passwordSALT, String passwordHASH, String contactNo, String realTimeLocation, String remark, String company, Date createDate) {
 
-        this.courierId = courierId;
-        this.objStatus = objStatus;
-        this.name = name;
-        this.username = username;
-        this.passwordSALT = passwordSALT;
-        this.passwordHASH = passwordHASH;
-        this.contactNo = contactNo;
-        this.realTimeLocation = realTimeLocation;
-        this.remark = remark;
-        this.company = company;
-        this.createDate = createDate;
-    }
 }
