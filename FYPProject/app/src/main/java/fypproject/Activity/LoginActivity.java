@@ -62,6 +62,8 @@ public class LoginActivity extends Activity{
             editor.remove("action").apply();
             finish();
         }
+        EditText inputPassword = (EditText)findViewById(R.id.login_password);
+        inputPassword.setText("");
     }
 
     @Override
