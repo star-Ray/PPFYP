@@ -200,7 +200,7 @@ public class HomepageActivity extends ActionBarActivity {
             }
         };
 //         Add 3 tabs, specifying the tab's text and TabListener
-        String[] tabList = new String[]{"Previous", "Current", "Future"};
+        String[] tabList = new String[]{"Completed", "Ongoing", "Waiting"};
         for (int i = 0; i < tabList.length; i++) {
             actionBar.addTab(actionBar.newTab().setText(tabList[i]).setTabListener(tabListener));
         }
