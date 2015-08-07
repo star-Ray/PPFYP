@@ -31,7 +31,7 @@
         </activity>
         <activity
             android:name=".Activity.HomepageActivity"
-            android:label="@string/title_activity_homepage" >
+            android:label="@string/title_activity_homepage">
         </activity>
         <activity
             android:name=".Activity.ProfileActivity"

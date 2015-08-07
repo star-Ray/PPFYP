@@ -3,6 +3,25 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+
+        <item name="actionBarStyle">@style/MyActionBar</item>
+        <item name="actionBarTabBarStyle">@style/MyActionBarTabBar</item>
+        <item name="actionBarTabTextStyle">@style/MyActionBarTabText</item>
+
     </style>
+
+    <style name="MyActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="background">@color/purple</item>
+    </style>
+    <style name="MyActionBarTabText" parent="Widget.AppCompat.ActionBar.TabText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="MyActionBarTabBar" parent="Widget.AppCompat.ActionBar.TabBar">
+        <!--<item name="android:color">@color/indigo</item>-->
+        <!--<item name="android:colorBackground">@color/purple_jam</item>-->
+        <item name="android:background">@color/purple_jam</item>
+    </style>
+
 
 </resources>
