@@ -1,5 +1,7 @@
 package fypproject.Entity;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,10 +15,11 @@ public class Courier {
     private Date createDate;
 
     public static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+    private static final String TAG = "arnono/Courier";
 
     public Courier(int courierId, int objStatus, String name, String username, String passwordSALT, String passwordHASH,
                    String contactNo, String realTimeLocation, String remark, String company, String strCreateDate) {
-        System.out.println("Creating new courier");
+        Log.d(TAG, "Creating new courier.");
         this.courierId = courierId;
         this.objStatus = objStatus;
         this.name = name;

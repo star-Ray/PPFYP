@@ -6,7 +6,7 @@
     <string name="action_logout">Logout</string>
     <string name="action_search">Search</string>
     <string name="button_login">Log in</string>
-    <string name="dialog_message_login_fail">Oops! \nIt seems like your username or password is incorrect. \nPlease try again.</string>
+    <string name="dialog_message_login_fail">Oops! Something went wrong!\nPlease check your username and password and try again.</string>
     <string name="dialog_message_nfc_fail">It seems like your NFC is disabled. Please enable NFC to continue.</string>
     <string name="dialog_title_login_fail">Incorrect credentials</string>
     <string name="dialog_title_nfc_settings_fail">NFC settings</string>
