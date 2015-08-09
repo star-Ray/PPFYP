@@ -42,6 +42,8 @@ public class HomepageActivity extends ActionBarActivity {
     private android.support.v7.app.ActionBar actionBar;
 //    private android.support.v7.app.ActionBarDrawerToggle drawerToggle;
 
+    private static final String TAG = "arnono/HomepageActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

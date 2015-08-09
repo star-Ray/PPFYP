@@ -11,21 +11,19 @@ import java.util.Date;
  */
 public class Courier {
     private int courierId, objStatus;
-    private String name, username, passwordSALT, passwordHASH, contactNo, realTimeLocation, remark, company;
+    private String name, username, contactNo, realTimeLocation, remark, company;
     private Date createDate;
 
     public static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
     private static final String TAG = "arnono/Courier";
 
-    public Courier(int courierId, int objStatus, String name, String username, String passwordSALT, String passwordHASH,
-                   String contactNo, String realTimeLocation, String remark, String company, String strCreateDate) {
+    public Courier(int courierId, int objStatus, String name, String username, String contactNo,
+                   String realTimeLocation, String remark, String company, String strCreateDate) {
         Log.d(TAG, "Creating new courier.");
         this.courierId = courierId;
         this.objStatus = objStatus;
         this.name = name;
         this.username = username;
-        this.passwordSALT = passwordSALT;
-        this.passwordHASH = passwordHASH;
         this.contactNo = contactNo;
         this.realTimeLocation = realTimeLocation;
         this.remark = remark;
@@ -67,22 +65,6 @@ public class Courier {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPasswordSALT() {
-        return passwordSALT;
-    }
-
-    public void setPasswordSALT(String passwordSALT) {
-        this.passwordSALT = passwordSALT;
-    }
-
-    public String getPasswordHASH() {
-        return passwordHASH;
-    }
-
-    public void setPasswordHASH(String passwordHASH) {
-        this.passwordHASH = passwordHASH;
     }
 
     public String getContactNo() {

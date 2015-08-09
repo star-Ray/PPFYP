@@ -10,10 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
@@ -53,13 +50,16 @@ public class LoginActivity extends Activity{
         editor = sharedPref.edit();
         gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 
-        String courier = sharedPref.getString("courier", null);
-        if(courier != null){
+        String strCourier = sharedPref.getString("courier", null);
+        if(strCourier != null){
             Intent intent = new Intent(this, HomepageActivity.class);
             startActivity(intent);
         }
         networkSingleton = NetworkSingleton.getInstance(this.getApplicationContext());
         Log.d(TAG, "NetworkSingleton created");
+
+//        courier = getCourierFromWebService(1);
+        Log.d(TAG, "Courier1: " + courier);
     }
 
     @Override
@@ -85,6 +85,8 @@ public class LoginActivity extends Activity{
     // Login button press
     public void sendMessage(View view){
         Log.d(TAG, "sendMessage called");
+        Log.d(TAG, "Courier2: " + courier);
+        Log.d(TAG, "Threadname 1: " + Thread.currentThread().getName());
 
         EditText inputUsername = (EditText)findViewById(R.id.login_username);
         EditText inputPassword = (EditText)findViewById(R.id.login_password);
@@ -95,13 +97,16 @@ public class LoginActivity extends Activity{
 
         try {
             boolean authenticate = authenticateUser(username, password);
-            Log.d(TAG, "user authentication: " + authenticate);
+            Log.d(TAG, "User authentication: " + authenticate);
             if (authenticate){
 
-                getCourierFromWebService(1);
-                courier = createTestCourier(); // create test courier
-                Log.d(TAG, "This courier: " + courier);
+//                getCourierFromWebService(1);
+                Log.d(TAG, "Threadname 5: " + Thread.currentThread().getName());
+//                courier = createTestCourier(); // create test courier
+                Log.d(TAG, "Courier3: " + courier);
+                courier = createTestCourier();
                 if(courier == null){
+                    Log.d(TAG, "Courier is null exception thrown.");
                     throw new Exception("Courier is null");
                 }
 
@@ -133,7 +138,7 @@ public class LoginActivity extends Activity{
     }
 
     public static Courier createTestCourier(){
-        Courier courier = new Courier(1,1,"Arnold Lee", "arnold.lee.2013", "123", "123", "98765446", "Hougang", "no_remarks", "company", "2015-08-18T00:00:00");
+        Courier courier = new Courier(1,1,"Arnold Lee", "arnold.lee.2013", "98765446", "Hougang", "no_remarks", "company", "2015-08-18T00:00:00");
         return courier;
     }
 
@@ -144,7 +149,7 @@ public class LoginActivity extends Activity{
         return false;
     }
 
-    public Courier getCourierFromWebService(final int courierID) {
+    public void getCourierFromWebService(final int courierID) {
         Log.d(TAG, "getCourierFromWebService: start");
 
         final Courier[] arrCourier = new Courier[1];
@@ -152,31 +157,55 @@ public class LoginActivity extends Activity{
 
         Log.d(TAG, "Url: " + url);
 
-        new Thread(new Runnable() {
+
+
+        Thread threadA = new Thread(new Runnable() {
             @Override
             public void run() {
                 Log.d(TAG, "Thread runnable is running.");
+                Log.d(TAG, "Threadname 2: " + Thread.currentThread().getName());
                 RequestFuture<JSONObject> future = RequestFuture.newFuture();
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, future, future);
-                networkSingleton.addToRequestQueue(jsonObjectRequest);
+//                networkSingleton.addToRequestQueue(jsonObjectRequest);
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                queue.start();
+                queue.add(jsonObjectRequest);
                 Log.d(TAG, "JsonObjectRequest added to queue!");
 
                 try {
-                    JSONObject jsonObject = future.get(5, TimeUnit.SECONDS); // last 5 seconds
+                    Log.d(TAG, "Threadname 3: " + Thread.currentThread().getName());
+//                    JSONObject jsonObject = future.get(10, TimeUnit.SECONDS); // last 5 seconds
+                    JSONObject jsonObject = future.get();
                     Log.d(TAG, "getCourierFromWebService: response received.");
                     String content = jsonObject.getString("message");
                     Courier jsonCourier = gson.fromJson(content, Courier.class);
-                    Log.d(TAG, "getCourierFromWebService: jsonCourier: " + jsonCourier.getName());
+                    Log.d(TAG, "getCourierFromWebService: jsonCourier: " + jsonCourier);
+                    Log.d(TAG, "getCourierFromWebService: jsonCourierName: " + jsonCourier.toString());
                     arrCourier[0] = jsonCourier;
-                } catch (InterruptedException | ExecutionException | TimeoutException | JSONException e) {
+                    System.out.println("arr username: " + arrCourier[0].getUsername());
+                } catch (InterruptedException | ExecutionException  | JSONException  e) {
                     e.printStackTrace();
                 }
+                queue.stop();
             }
-        }).start();
+        });
+
+        try {
+            Log.d(TAG, "Threadname 4: " + Thread.currentThread().getName());
+            threadA.start();
+            threadA.join(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         Log.d(TAG, "getCourierFromWebService: end");
-        return arrCourier[0];
+//        return arrCourier[0];
     }
 
-
 }
+
+
+
+
+
