@@ -60,7 +60,7 @@
         android:layout_marginTop="30dp"
         android:background="@color/blue_login"
         android:capitalize="none"
-        android:onClick="sendMessage"
+        android:onClick="authenticateUser"
         android:text="@string/button_login"
         android:textColor="@color/white"
         android:textSize="20sp"

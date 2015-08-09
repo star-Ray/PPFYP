@@ -1,6 +1,7 @@
 package fypproject.Activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,19 +11,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.android.volley.RequestQueue;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.RequestFuture;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import fypproject.Connection.NetworkSingleton;
 import fypproject.Entity.Courier;
@@ -39,7 +35,7 @@ public class LoginActivity extends Activity{
     private Gson gson;
     private NetworkSingleton networkSingleton;
 
-    private Courier courier;
+//    private Courier courier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +50,11 @@ public class LoginActivity extends Activity{
         String strCourier = sharedPref.getString("courier", null);
         if(strCourier != null){
             Intent intent = new Intent(this, HomepageActivity.class);
+            Log.i(TAG, "Opening homepage");
             startActivity(intent);
         }
         networkSingleton = NetworkSingleton.getInstance(this.getApplicationContext());
         Log.d(TAG, "NetworkSingleton created");
-
-//        courier = getCourierFromWebService(1);
-        Log.d(TAG, "Courier1: " + courier);
     }
 
     @Override
@@ -83,125 +77,88 @@ public class LoginActivity extends Activity{
         finish();
     }
 
-    // Login button press
-    public void sendMessage(View view){
-        Log.d(TAG, "sendMessage called");
-        Log.d(TAG, "Courier2: " + courier);
-        Log.d(TAG, "Threadname 1: " + Thread.currentThread().getName());
-
-        EditText inputUsername = (EditText)findViewById(R.id.login_username);
-        EditText inputPassword = (EditText)findViewById(R.id.login_password);
-        String username = inputUsername.getText().toString();
-        String password = inputPassword.getText().toString();
-
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-
-        try {
-            boolean authenticate = authenticateUser(username, password);
-            Log.d(TAG, "User authentication: " + authenticate);
-            if (authenticate){
-
-//                getCourierFromWebService(1);
-                Log.d(TAG, "Threadname 5: " + Thread.currentThread().getName());
-//                courier = createTestCourier(); // create test courier
-                Log.d(TAG, "Courier3: " + courier);
-                courier = TestCreator.createTestCourier();
-                if(courier == null){
-                    Log.d(TAG, "Courier is null exception thrown.");
-                    throw new Exception("Courier is null");
-                }
-
-                editor.putString("courier", gson.toJson(courier));
-                editor.apply();
-
-                Intent intent = new Intent(this, HomepageActivity.class);
-                intent.putExtra("login", "");
-                startActivity(intent);
-
-            }else{
-                throw new Exception(getString(R.string.dialog_message_login_fail));
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.d(TAG, "Error occurred. Message: " + e.getMessage());
-
-            // Alert Dialog
-            alertBuilder.setTitle(R.string.dialog_title_login_fail).setMessage(e.getMessage());
-            alertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                }
-            });
-            AlertDialog alertDialog = alertBuilder.create();
-            alertDialog.show();
-        }
-    }
-
-//    public static Courier createTestCourier(){
-//        Courier courier = new Courier(1,1,"Arnold Lee", "arnold.lee.2013", "98765446", "Hougang", "no_remarks", "company", "2015-08-18T00:00:00");
-//        return courier;
-//    }
-
-    public boolean authenticateUser(String username, String password){
+    public boolean authenticateUser2(String username, String password){
         if(username.equals("zhurou.fan.2015") && password.equals("123")){
             return true;
         }
         return false;
     }
 
-    public void getCourierFromWebService(final int courierID) {
-        Log.d(TAG, "getCourierFromWebService: start");
+    public void authenticateUser(View view) {
+        Log.i(TAG, "authenticateUser: start");
+        final Context context = getApplicationContext();
 
-        final Courier[] arrCourier = new Courier[1];
-        final String url = "http://eyetem-huiqiong2013.rhcloud.com/SimTech/admin/GetCourierByIdServlet?input={%22courierId%22:" + courierID + "}";
-
-        Log.d(TAG, "Url: " + url);
-
-        Thread threadA = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Log.d(TAG, "Thread runnable is running.");
-                Log.d(TAG, "Threadname 2: " + Thread.currentThread().getName());
-                RequestFuture<JSONObject> future = RequestFuture.newFuture();
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, future, future);
-//                networkSingleton.addToRequestQueue(jsonObjectRequest);
-                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                queue.start();
-                queue.add(jsonObjectRequest);
-                Log.d(TAG, "JsonObjectRequest added to queue!");
-
-                try {
-                    Log.d(TAG, "Threadname 3: " + Thread.currentThread().getName());
-//                    JSONObject jsonObject = future.get(10, TimeUnit.SECONDS); // last 5 seconds
-                    JSONObject jsonObject = future.get();
-                    Log.d(TAG, "getCourierFromWebService: response received.");
-                    String content = jsonObject.getString("message");
-                    Courier jsonCourier = gson.fromJson(content, Courier.class);
-                    Log.d(TAG, "getCourierFromWebService: jsonCourier: " + jsonCourier);
-                    Log.d(TAG, "getCourierFromWebService: jsonCourierName: " + jsonCourier.toString());
-                    arrCourier[0] = jsonCourier;
-                    System.out.println("arr username: " + arrCourier[0].getUsername());
-                } catch (InterruptedException | ExecutionException  | JSONException  e) {
-                    e.printStackTrace();
-                }
-                queue.stop();
-            }
-        });
+//        getting user input
+        EditText inputUsername = (EditText)findViewById(R.id.login_username);
+        EditText inputPassword = (EditText)findViewById(R.id.login_password);
+        final String username = inputUsername.getText().toString();
+        final String password = inputPassword.getText().toString();
 
         try {
-            Log.d(TAG, "Threadname 4: " + Thread.currentThread().getName());
-            threadA.start();
-            threadA.join(10000);
-        } catch (InterruptedException e) {
+            if (username.length() == 0 || password.length() == 0) { // checking for invalid inputs
+                Log.d(TAG, "Courier is null exception thrown.");
+                throw new Exception("Courier is null");
+            }
+
+//            *********************** testing only ***********************
+            final String url = "http://eyetem-huiqiong2013.rhcloud.com/SimTech/admin/GetCourierByIdServlet?input={%22courierId%22:" + 3 + "}";
+//            *********************** testing only ***********************
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject jsonObject) {
+                    Log.d(TAG, "JsonObjectRequest received!");
+
+//                    *********************** testing only ***********************
+
+                    boolean authenticate = authenticateUser2(username, password);
+                    if (authenticate){
+                        Courier courier = TestCreator.createTestCourier();
+
+                        editor.putString("courier", gson.toJson(courier));
+                        editor.apply();
+
+                        Intent intent = new Intent(context, HomepageActivity.class);
+                        intent.putExtra("login", "");
+                        Log.i(TAG, "Opening homepage");
+                        startActivity(intent);
+                    }else{
+                        runAlertDialog("Authentication failed");
+                    }
+
+//                    *********************** testing only ***********************
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Log.e(TAG, "Error occurred at processLogin.");
+                }
+            });
+
+            networkSingleton.addToRequestQueue(jsonObjectRequest);
+            Log.i(TAG, "Request at processLogin added successfully!");
+
+        } catch (Exception e){
+            Log.e(TAG, "Error occurred at processLogin. Message: " + e.getMessage());
             e.printStackTrace();
+
+            runAlertDialog(e.getMessage()); // Alert Dialog
+        } finally {
+            Log.i(TAG, "authenticateUser: end");
         }
-
-
-        Log.d(TAG, "getCourierFromWebService: end");
-//        return arrCourier[0];
     }
 
+    public void runAlertDialog(String message){
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this.getApplicationContext());
+        alertBuilder.setTitle(R.string.dialog_title_login_fail).setMessage(message);
+        alertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
+    }
 }
 
 

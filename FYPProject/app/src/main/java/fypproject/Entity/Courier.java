@@ -18,7 +18,7 @@ public class Courier {
     private static final String TAG = "arnono/Courier";
 
     public Courier(int courierId, int objStatus, String name, String username, String contactNo,
-                   String realTimeLocation, String remark, String company, String strCreateDate) {
+                   String realTimeLocation, String remark, String company, String createDate) {
         Log.d(TAG, "Creating new courier.");
         this.courierId = courierId;
         this.objStatus = objStatus;
@@ -29,7 +29,7 @@ public class Courier {
         this.remark = remark;
         this.company = company;
         try {
-            this.createDate = new SimpleDateFormat(DATE_FORMAT).parse(strCreateDate);
+            this.createDate = new SimpleDateFormat(DATE_FORMAT).parse(createDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }

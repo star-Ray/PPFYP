@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,7 +15,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +38,9 @@ import fypproject.TestCreator;
 
 
 public class HomepageActivity extends ActionBarActivity {
+
+    private static final String TAG = "arnono/HomepageActivity";
+
     private Intent intent;
     private Courier courier;
     private static SharedPreferences sharedPref;
@@ -47,9 +50,6 @@ public class HomepageActivity extends ActionBarActivity {
     private ViewPager viewPager;
     private android.support.v7.app.ActionBar actionBar;
 //    private android.support.v7.app.ActionBarDrawerToggle drawerToggle;
-
-    private static final String TAG = "arnono/HomepageActivity";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
