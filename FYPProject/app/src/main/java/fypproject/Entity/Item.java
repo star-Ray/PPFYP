@@ -13,7 +13,7 @@ public class Item{
     private Date createDate;
 
     public Item(int ID, int taskID, int objStatus, double weight, String desc, String dimen, String image,
-                String nfcTag, String barcode, String remarks, Date createDate, ArrayList<Item> itemList) {
+                String nfcTag, String barcode, String remarks, Date createDate) {
         this.ID = ID;
         this.taskID = taskID;
         this.objStatus = objStatus;

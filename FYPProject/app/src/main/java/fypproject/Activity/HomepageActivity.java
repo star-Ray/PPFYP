@@ -16,27 +16,33 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
+
 import fypproject.Entity.Courier;
+import fypproject.Entity.Task;
 import fypproject.R;
+import fypproject.TestCreator;
 
 
 public class HomepageActivity extends ActionBarActivity {
     private Intent intent;
     private Courier courier;
-    private SharedPreferences sharedPref;
-    private SharedPreferences.Editor editor;
-    private Gson gson;
+    private static SharedPreferences sharedPref;
+    private static SharedPreferences.Editor editor;
+    private static Gson gson;
     private HomepageTabsPagerAdapter homepageTabsPagerAdapter;
     private ViewPager viewPager;
     private android.support.v7.app.ActionBar actionBar;
@@ -219,7 +225,6 @@ public class HomepageActivity extends ActionBarActivity {
         viewPager.setAdapter(homepageTabsPagerAdapter);
     }
 
-
     public static class HomepageTabsPagerAdapter extends FragmentPagerAdapter {
         public HomepageTabsPagerAdapter (FragmentManager fm){
             super(fm);
@@ -239,6 +244,7 @@ public class HomepageActivity extends ActionBarActivity {
             return 3;
         }
     }
+
     public static class HomepageFragment extends android.support.v4.app.Fragment {
         public static final String ARG_OBJECT = "object";
         private RecyclerView recyclerView;
@@ -267,7 +273,8 @@ public class HomepageActivity extends ActionBarActivity {
             recyclerView.setLayoutManager(layoutManager);
 
             // specify an adapter (see also next example)
-            String[] myDataset = new String[]{"bye1", "bye2", "bye3"};
+            ArrayList<Task> taskList = TestCreator.createTestTasks1();
+            ArrayList<Task> myDataset = taskList;
             taskListAdapter = new TaskListAdapter(myDataset);
             recyclerView.setAdapter(taskListAdapter);
         }
@@ -275,7 +282,7 @@ public class HomepageActivity extends ActionBarActivity {
 
     // recycler view
     public static class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
-        private String[] dataSet;
+        private ArrayList<Task> dataSet;
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
@@ -291,17 +298,20 @@ public class HomepageActivity extends ActionBarActivity {
                     @Override
                     public void onClick(View v) {
                         Context context = v.getContext();
-                        Intent intent = new Intent(context, TaskActivity.class);
-                        context.startActivity(intent);
+                        int position = getPosition();
+                        Task selectedTask = dataSet.get(position);
+                        Log.d(TAG, "Position selected: " + position);
 
+                        Intent intent = new Intent(context, TaskActivity.class);
+                        intent.putExtra("task", gson.toJson(selectedTask));
+                        context.startActivity(intent);
                     }
                 });
             }
-
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)
-        public TaskListAdapter(String[] myDataset) {
+        public TaskListAdapter(ArrayList<Task> myDataset) {
             dataSet = myDataset;
         }
 
@@ -318,13 +328,22 @@ public class HomepageActivity extends ActionBarActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-//            holder.getTitle().setText(mDataset[position]);
+
+            TextView recipient = (TextView)holder.view.findViewById(R.id.content_receiver);
+            TextView address = (TextView)holder.view.findViewById(R.id.content_address);
+            TextView time = (TextView)holder.view.findViewById(R.id.content_time);
+            TextView orderNo = (TextView)holder.view.findViewById(R.id.content_orderNo);
+
+            recipient.setText(dataSet.get(position).getReceiverName());
+            address.setText(dataSet.get(position).getEndLocation());
+//            time.setText(dataSet.get(position).getPlanEndTime().toString());
+            orderNo.setText(String.valueOf(dataSet.get(position).getID()));
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return dataSet.length;
+            return dataSet.size();
         }
 
     }

@@ -27,6 +27,7 @@ import java.util.concurrent.TimeoutException;
 import fypproject.Connection.NetworkSingleton;
 import fypproject.Entity.Courier;
 import fypproject.R;
+import fypproject.TestCreator;
 
 
 public class LoginActivity extends Activity{
@@ -104,7 +105,7 @@ public class LoginActivity extends Activity{
                 Log.d(TAG, "Threadname 5: " + Thread.currentThread().getName());
 //                courier = createTestCourier(); // create test courier
                 Log.d(TAG, "Courier3: " + courier);
-                courier = createTestCourier();
+                courier = TestCreator.createTestCourier();
                 if(courier == null){
                     Log.d(TAG, "Courier is null exception thrown.");
                     throw new Exception("Courier is null");
@@ -137,10 +138,10 @@ public class LoginActivity extends Activity{
         }
     }
 
-    public static Courier createTestCourier(){
-        Courier courier = new Courier(1,1,"Arnold Lee", "arnold.lee.2013", "98765446", "Hougang", "no_remarks", "company", "2015-08-18T00:00:00");
-        return courier;
-    }
+//    public static Courier createTestCourier(){
+//        Courier courier = new Courier(1,1,"Arnold Lee", "arnold.lee.2013", "98765446", "Hougang", "no_remarks", "company", "2015-08-18T00:00:00");
+//        return courier;
+//    }
 
     public boolean authenticateUser(String username, String password){
         if(username.equals("zhurou.fan.2015") && password.equals("123")){
@@ -156,8 +157,6 @@ public class LoginActivity extends Activity{
         final String url = "http://eyetem-huiqiong2013.rhcloud.com/SimTech/admin/GetCourierByIdServlet?input={%22courierId%22:" + courierID + "}";
 
         Log.d(TAG, "Url: " + url);
-
-
 
         Thread threadA = new Thread(new Runnable() {
             @Override
