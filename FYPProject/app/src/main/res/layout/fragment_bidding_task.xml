@@ -3,7 +3,7 @@
     android:id="@+id/recyclerList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/customborder"
+    android:background="@drawable/taskcustomborder"
     android:orientation="vertical"
     android:layout_marginBottom="5sp"
     android:padding="5sp">

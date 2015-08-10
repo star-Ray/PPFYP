@@ -33,5 +33,8 @@
     <string name="title_activity_bidding">My Bidding Activities</string>
 
     <string name="address">Address:</string>
+    <string name="title_activity_task2">Task2Activity</string>
+    <string name="title_activity_test3">Test3</string>
+    <string name="title_activity_main_activity1111">MainActivity1111</string>
 </resources>
 

@@ -124,10 +124,6 @@ public class HomepageActivity extends ActionBarActivity {
         intent = new Intent(this, WriteNFCActivity.class);
         startActivity(intent);
     }
-    public void goToTask(){
-        intent = new Intent(this, TaskActivity.class);
-        startActivity(intent);
-    }
     public void goToBidding(){
         intent = new Intent(this, BiddingActivity.class);
         startActivity(intent);
@@ -141,7 +137,7 @@ public class HomepageActivity extends ActionBarActivity {
 
 //        Drawer view
         String[] drawerArr = new String[]{"My Profile", "Bidding", "NFC Page", "WriteNFC", "test1", "test2", "maps", "Logout"};
-        final ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_textview, drawerArr);
+        final ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_item, drawerArr);
         final DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_menu_white_24dp, R.string.drawer_open, R.string.drawer_close){
 
@@ -149,11 +145,6 @@ public class HomepageActivity extends ActionBarActivity {
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerToggle.setHomeAsUpIndicator(R.drawable.ic_teamlogo1);
         drawerLayout.setDrawerListener(drawerToggle);
-
-
-
-
-
 
         ListView listView = (ListView)findViewById(R.id.homepage_drawer);
         listView.setAdapter(drawerAdapter);
@@ -208,7 +199,7 @@ public class HomepageActivity extends ActionBarActivity {
             }
         };
 //         Add 3 tabs, specifying the tab's text and TabListener
-        String[] tabList = new String[]{"Completed", "Ongoing", "Waiting"};
+        String[] tabList = new String[]{"Completed", "Ongoing", "Ballot"};
         for (int i = 0; i < tabList.length; i++) {
             actionBar.addTab(actionBar.newTab().setText(tabList[i]).setTabListener(tabListener));
         }
@@ -247,22 +238,19 @@ public class HomepageActivity extends ActionBarActivity {
 
     public static class HomepageFragment extends android.support.v4.app.Fragment {
         public static final String ARG_OBJECT = "object";
-        private RecyclerView recyclerView;
-        private RecyclerView.Adapter taskListAdapter;
-        private RecyclerView.LayoutManager layoutManager;
+        private static RecyclerView recyclerView;
+        private static RecyclerView.Adapter taskListAdapter;
+        private static RecyclerView.LayoutManager layoutManager;
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-            View rootView = inflater.inflate(R.layout.fragment_homepage, container, false);
-            Bundle args = getArguments();
-//            ((TextView)rootView.findViewById(R.id.text1)).setText(Integer.toString(args.getInt(ARG_OBJECT)));
+            View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
             loadRecyclerView(rootView);
-
             return rootView;
         }
 
         public void loadRecyclerView(View view){
-            recyclerView = (RecyclerView) view.findViewById(R.id.tasklist_recycler);
+            recyclerView = (RecyclerView) view.findViewById(R.id.taskRecyclerView);
 
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
@@ -275,13 +263,13 @@ public class HomepageActivity extends ActionBarActivity {
             // specify an adapter (see also next example)
             ArrayList<Task> taskList = TestCreator.createTestTasks1();
             ArrayList<Task> myDataset = taskList;
-            taskListAdapter = new TaskListAdapter(myDataset);
+            taskListAdapter = new HomepageTaskListAdapter(myDataset);
             recyclerView.setAdapter(taskListAdapter);
         }
     }
 
     // recycler view
-    public static class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHolder> {
+    public static class HomepageTaskListAdapter extends RecyclerView.Adapter<HomepageTaskListAdapter.ViewHolder> {
         private ArrayList<Task> dataSet;
 
         // Provide a reference to the views for each data item
@@ -289,10 +277,19 @@ public class HomepageActivity extends ActionBarActivity {
         // you provide access to all the views for a data item in a view holder
         public class ViewHolder extends RecyclerView.ViewHolder {
             public View view;
+            public TextView recipient;
+            public TextView address;
+            public TextView time;
+            public TextView orderNo;
 
             public ViewHolder(View v) {
                 super(v);
                 view = v;
+
+                recipient = (TextView)view.findViewById(R.id.content_receiver);
+                address = (TextView)view.findViewById(R.id.content_address);
+                time = (TextView)view.findViewById(R.id.content_time);
+                orderNo = (TextView)view.findViewById(R.id.content_orderNo);
 
                 v.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -310,16 +307,17 @@ public class HomepageActivity extends ActionBarActivity {
             }
         }
 
-        // Provide a suitable constructor (depends on the kind of dataset)
-        public TaskListAdapter(ArrayList<Task> myDataset) {
+//        constructor
+        public HomepageTaskListAdapter(ArrayList<Task> myDataset) {
             dataSet = myDataset;
         }
 
         // Create new views (invoked by the layout manager)
         @Override
-        public TaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_currenttask, parent, false); // create a new view
+        public HomepageTaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_tasklist, parent, false); // create a new view
             ViewHolder vh = new ViewHolder(v); // set the view's size, margins, paddings and layout parameters
+            Log.d(TAG, "Homepageadapter viewholder returned.");
             return vh;
         }
 
@@ -329,15 +327,10 @@ public class HomepageActivity extends ActionBarActivity {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
 
-            TextView recipient = (TextView)holder.view.findViewById(R.id.content_receiver);
-            TextView address = (TextView)holder.view.findViewById(R.id.content_address);
-            TextView time = (TextView)holder.view.findViewById(R.id.content_time);
-            TextView orderNo = (TextView)holder.view.findViewById(R.id.content_orderNo);
-
-            recipient.setText(dataSet.get(position).getReceiverName());
-            address.setText(dataSet.get(position).getEndLocation());
-//            time.setText(dataSet.get(position).getPlanEndTime().toString());
-            orderNo.setText(String.valueOf(dataSet.get(position).getID()));
+            holder.recipient.setText(dataSet.get(position).getReceiverName());
+            holder.address.setText(dataSet.get(position).getEndLocation());
+//            holder.time.setText(dataSet.get(position).getPlanEndTime().toString());
+            holder.orderNo.setText(String.valueOf(dataSet.get(position).getID()));
         }
 
         // Return the size of your dataset (invoked by the layout manager)

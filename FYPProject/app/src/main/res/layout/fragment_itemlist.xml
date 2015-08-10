@@ -1,10 +1,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/recyclerList"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5sp"
-    android:background="@drawable/customborder"
+    android:background="@drawable/itemcustomborder"
     android:orientation="vertical"
     android:padding="5sp">
 
