@@ -116,7 +116,6 @@ public class HomepageActivity extends ActionBarActivity {
 
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
-//        actionBar.
 
 //        Drawer view
         String[] drawerArr = new String[]{"My Profile", "NFC Page", "WriteNFC", "test1", "test2", "maps", "Logout"};

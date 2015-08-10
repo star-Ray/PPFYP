@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 import fypproject.R;
 
-public class BiddingActivity extends ActionBarActivity {
+public class BallotActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter biddingListAdapter;
