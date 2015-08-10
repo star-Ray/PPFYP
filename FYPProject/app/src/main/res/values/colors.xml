@@ -7,5 +7,6 @@
     <color name="purple">#800080</color>
     <color name="indigo">#4B0082</color>
     <color name="purple_jam">#6A287E</color>
+    <color name="list_border">#ffa8a8a4</color>
 
 </resources>

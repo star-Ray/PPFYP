@@ -44,8 +44,11 @@ public class TestCreator {
     public static ArrayList<Item> createTestItems(){
         ArrayList<Item> itemList = new ArrayList<Item>();
 
-        itemList.add(new Item(3,2,1,2,"chicken", "dimen", "image", "nfctag", "barcode", "remarks", null));
-        itemList.add(new Item(4,2,1,2,"duck", "dimen", "image", "nfctag", "barcode", "remarks", null));
+        itemList.add(new Item(1,1,1,2,"Honda", "dimen", "image", "nfctag", "barcode", "remarks", null));
+        itemList.add(new Item(2,1,1,2,"Toyota", "dimen", "image", "nfctag", "barcode", "remarks", null));
+        itemList.add(new Item(3,1,1,2,"Mercedes", "dimen", "image", "nfctag", "barcode", "remarks", null));
+        itemList.add(new Item(4,1,1,2,"BMW", "dimen", "image", "nfctag", "barcode", "remarks", null));
+        itemList.add(new Item(5,1,1,2,"Audi", "dimen", "image", "nfctag", "barcode", "remarks", null));
 
         return itemList;
     }

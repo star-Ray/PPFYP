@@ -3,5 +3,6 @@
     android:shape="rectangle">
     <corners android:radius="5dp"/>
     <padding android:left="10dp" android:right="10dp" android:top="10dp" android:bottom="10dp"/>
-    <solid android:color="#fff6a512"/>
+    <solid android:color="#fff6d691"/>
+    <stroke android:width="5px" android:color="@color/list_border"/>
 </shape>

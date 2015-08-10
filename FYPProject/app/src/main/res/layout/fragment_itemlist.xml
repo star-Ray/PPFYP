@@ -4,107 +4,106 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="5sp"
     android:background="@drawable/itemcustomborder"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="5sp">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <!--<LinearLayout-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:paddingBottom="10dp"-->
+    <!--android:paddingTop="10dp">-->
+
+    <TableLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="10dp">
+        android:layout_gravity="center_vertical"
+        android:layout_weight="4">
 
-        <TableLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_weight="2">
+        <!--1st row-->
+        <TableRow>
+            <TextView
+                android:id="@+id/title_description"
+                android:layout_weight="1"
+                android:width="0dp"
+                android:gravity="end"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp"
+                android:paddingTop="2sp"
+                android:text="@string/description"
+                android:textSize="20sp"/>
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/title_recipient"
-                    android:layout_weight="1"
-                    android:width="0dp"
-                    android:gravity="end"
-                    android:paddingLeft="5sp"
-                    android:paddingRight="5sp"
-                    android:text="To:"
-                    android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/content_description"
+                android:layout_weight="2"
+                android:width="0dp"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp"
+                android:paddingTop="2sp"
+                android:text="Paper Aeroplanes"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+        </TableRow>
 
-                <TextView
-                    android:id="@+id/content_receiver"
-                    android:layout_weight="2"
-                    android:width="0dp"
-                    android:paddingLeft="5sp"
-                    android:paddingRight="5sp"
-                    android:text="Ms. Ong Hui Qi"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"/>
-            </TableRow>
+        <!--2nd row-->
+        <TableRow>
+            <TextView
+                android:id="@+id/title_itemId"
+                android:layout_weight="1"
+                android:width="0dp"
+                android:gravity="end"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp"
+                android:paddingTop="2sp"
+                android:text="Item ID:"/>
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/title_address"
-                    android:layout_weight="1"
-                    android:width="0dp"
-                    android:gravity="end"
-                    android:paddingLeft="5sp"
-                    android:paddingRight="5sp"
-                    android:text="@string/address"/>
+            <TextView
+                android:id="@+id/content_itemId"
+                android:layout_weight="2"
+                android:width="0dp"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp"
+                android:paddingTop="2sp"
+                android:text="58476659"/>
+        </TableRow>
 
-                <TextView
-                    android:id="@+id/content_address"
-                    android:layout_weight="2"
-                    android:width="0dp"
-                    android:paddingLeft="5sp"
-                    android:paddingRight="5sp"
-                    android:text="123 Doraemon Street \nS234567"/>
-            </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/title_tagId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp"
+                android:paddingTop="2sp"
+                android:text="Tag ID:"/>
 
-        </TableLayout>
+            <TextView
+                android:id="@+id/content_tagId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="start"
+                android:paddingLeft="5sp"
+                android:paddingRight="5sp"
+                android:paddingTop="2sp"
+                android:text="NFC001"/>
+        </TableRow>
 
-        <ImageView
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:src="@drawable/image_chevron_right"/>
-    </LinearLayout>
+    </TableLayout>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <Button
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:background="@color/blue_login"
+        android:text="Load"
+        android:textColor="@color/white"/>
 
-        <TextView
-            android:id="@+id/content_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="10:00AM - 2:00PM"/>
-
-        <TextView
-            android:id="@+id/content_orderNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="58476659"/>
-
-    </LinearLayout>
 </LinearLayout>
+
+    <!--</LinearLayout>-->

@@ -317,7 +317,6 @@ public class HomepageActivity extends ActionBarActivity {
         public HomepageTaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_tasklist, parent, false); // create a new view
             ViewHolder vh = new ViewHolder(v); // set the view's size, margins, paddings and layout parameters
-            Log.d(TAG, "Homepageadapter viewholder returned.");
             return vh;
         }
 

@@ -36,7 +36,6 @@ public class Test2Activity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View v = inflater.inflate(R.layout.test, container);
             return v;
-//            return super.onCreateView(inflater, container, savedInstanceState);
         }
     }
 

@@ -1,190 +1,180 @@
-<!--<ScrollView-->
-<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"-->
-<!--android:fillViewport="false"-->
-<!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
-<!--android:paddingRight="@dimen/activity_horizontal_margin"-->
-<!--tools:context="fypproject.Activity.TaskActivity">-->
-
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="5sp">
-
-    <!--1st table layout-->
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="10dp"
-        android:padding="5sp">
-
-        <TableRow>
-            <TextView
-                android:id="@+id/title_receiver"
-                android:layout_weight="1"
-                android:width="0dp"
-                android:padding="5sp"
-                android:text="Receiver:"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/content_receiver"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:padding="5sp"
-                android:text="Mr. Song Rui"
-                android:textSize="15sp"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/title_contactNumber"
-                android:layout_weight="1"
-                android:width="0dp"
-                android:padding="5sp"
-                android:text="Contact No:"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/content_contactNumber"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:padding="5sp"
-                android:text="98765432"
-                android:textSize="15sp"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/title_address"
-                android:layout_weight="1"
-                android:width="0dp"
-                android:padding="5sp"
-                android:text="@string/address"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/content_address"
-                android:layout_weight="2"
-                android:width="0dp"
-                android:padding="5sp"
-                android:text="123 Hougang St 21 #11-02 \nS519929"
-                android:textSize="15sp"/>
-        </TableRow>
-    </TableLayout>
-
-    <!--line break-->
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-
-    <!--3rd table row-->
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:padding="5sp">
-
-        <TableRow>
-            <TextView
-                android:id="@+id/title_pickup"
-                android:layout_weight="1"
-                android:width="0dp"
-                android:padding="5sp"
-                android:text="Pickup Time:"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/title_delivery"
-                android:layout_weight="1"
-                android:width="0dp"
-                android:padding="5sp"
-                android:text="Delivery Time:"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                android:textStyle="bold"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/content_time1"
-                android:layout_weight="1"
-                android:width="0dp"
-                android:padding="5sp"
-                android:text="10:00AM - 2:00PM"
-                android:textSize="15sp" />
-            <TextView
-                android:id="@+id/content_time2"
-                android:layout_weight="1"
-                android:width="0dp"
-                android:padding="5sp"
-                android:text="10:00AM - 2:00PM"
-                android:textSize="15sp"/>
-        </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/content_day1"
-                android:layout_weight="1"
-                android:padding="5sp"
-                android:text="Today"
-                android:textSize="15sp" />
-            <TextView
-                android:id="@+id/content_day2"
-                android:layout_weight="1"
-                android:padding="5sp"
-                android:text="Tomorrow"
-                android:textSize="15sp"/>
-        </TableRow>
-    </TableLayout>
-
-    <!--line break-->
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-
-    <TextView
-        android:id="@+id/header_packageDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5sp"
-        android:layout_marginStart="5sp"
-        android:layout_marginTop="5dp"
-        android:text="Package Details"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold" />
-
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="10dp"-->
-        <!--android:layout_marginLeft="5sp"-->
-        <!--android:layout_marginStart="5sp"-->
-        <!--android:text="This is glass item. Handle with care."-->
-        <!--android:textSize="15sp"/>-->
+    android:fillViewport="false"
+    tools:context="fypproject.Activity.TaskActivity">
 
     <LinearLayout
-        android:id="@+id/item_list_container"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/hello_blank_fragment"-->
-            <!--android:textSize="30dp"-->
-            <!--android:layout_gravity="center"/>-->
+        <!--1st table layout-->
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="5sp">
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/title_receiver"
+                    android:layout_weight="1"
+                    android:width="0dp"
+                    android:padding="5sp"
+                    android:text="Receiver:"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/content_receiver"
+                    android:layout_weight="2"
+                    android:width="0dp"
+                    android:padding="5sp"
+                    android:text="Mr. Song Rui"
+                    android:textSize="15sp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/title_contactNumber"
+                    android:layout_weight="1"
+                    android:width="0dp"
+                    android:padding="5sp"
+                    android:text="Contact No:"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/content_contactNumber"
+                    android:layout_weight="2"
+                    android:width="0dp"
+                    android:padding="5sp"
+                    android:text="98765432"
+                    android:textSize="15sp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/title_address"
+                    android:layout_weight="1"
+                    android:width="0dp"
+                    android:padding="5sp"
+                    android:text="@string/address"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/content_address"
+                    android:layout_weight="2"
+                    android:width="0dp"
+                    android:padding="5sp"
+                    android:text="123 Hougang St 21 #11-02 \nS519929"
+                    android:textSize="15sp"/>
+            </TableRow>
+        </TableLayout>
+
+        <!--line break-->
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <!--2nd table row-->
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="5sp">
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/title_pickup"
+                    android:layout_weight="1"
+                    android:width="0dp"
+                    android:paddingLeft="5sp"
+                    android:paddingTop="5sp"
+                    android:text="Pickup Time:"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/title_delivery"
+                    android:layout_weight="1"
+                    android:width="0dp"
+                    android:paddingLeft="5sp"
+                    android:paddingTop="5sp"
+                    android:text="Delivery Time:"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/content_time1"
+                    android:layout_weight="1"
+                    android:width="0dp"
+                    android:paddingLeft="5sp"
+                    android:paddingTop="5sp"
+                    android:text="10:00AM - 2:00PM"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/content_time2"
+                    android:layout_weight="1"
+                    android:width="0dp"
+                    android:paddingLeft="5sp"
+                    android:paddingTop="5sp"
+                    android:text="10:00AM - 2:00PM"
+                    android:textSize="15sp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/content_day1"
+                    android:layout_weight="1"
+                    android:paddingLeft="5sp"
+                    android:paddingTop="5sp"
+                    android:text="Today"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/content_day2"
+                    android:layout_weight="1"
+                    android:paddingTop="5sp"
+                    android:text="Tomorrow"
+                    android:textSize="15sp"/>
+            </TableRow>
+        </TableLayout>
+
+        <!--line break-->
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:id="@+id/header_packageDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="5dp"
+            android:text="Attached Items"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/item_list_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/material_deep_teal_200"
+            android:orientation="vertical">
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
-
-    <!--</ScrollView>-->
+</ScrollView>

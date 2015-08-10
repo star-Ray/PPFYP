@@ -1,6 +1,5 @@
 package fypproject.Entity;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -9,7 +8,7 @@ import java.util.Date;
 public class Item{
     private int ID, taskID, objStatus;
     private double weight;
-    private String desc, dimen, image, nfcTag, barcode, remarks;
+    private String desc, dimen, image, nfcTag, barcode, remark;
     private Date createDate;
 
     public Item(int ID, int taskID, int objStatus, double weight, String desc, String dimen, String image,
@@ -23,7 +22,7 @@ public class Item{
         this.image = image;
         this.nfcTag = nfcTag;
         this.barcode = barcode;
-        this.remarks = remarks;
+        this.remark = remarks;
         this.createDate = createDate;
     }
 
@@ -101,11 +100,11 @@ public class Item{
     }
 
     public String getRemarks() {
-        return remarks;
+        return remark;
     }
 
     public void setRemarks(String remarks) {
-        this.remarks = remarks;
+        this.remark = remarks;
     }
 
     public Date getCreateDate() {

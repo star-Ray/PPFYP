@@ -18,6 +18,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 
+import fypproject.Adapter.MyLinearLayoutManager;
 import fypproject.Entity.Item;
 import fypproject.Entity.Task;
 import fypproject.R;
@@ -41,7 +42,6 @@ public class TaskActivity extends ActionBarActivity {
             fragmentTransaction.commit();
         }
 
-//        initializing
         gson = new GsonBuilder().setDateFormat(getString(R.string.date_format)).create();
     }
 
@@ -67,84 +67,76 @@ public class TaskActivity extends ActionBarActivity {
         Log.i(TAG, "TextViews are set.");
     }
 
-    //android.support.v4.app.Fragment
     public static class ItemListFragment extends android.support.v4.app.Fragment {
-
-        private static final String TAG = "arnono/ItemListFragment";
 
         private static RecyclerView recyclerView;
         private static RecyclerView.Adapter itemListAdapter;
         private static RecyclerView.LayoutManager layoutManager;
 
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            Log.d(TAG, "OnCreateView");
             View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
-            Log.d(TAG, "rootview context: " + rootView.getContext());
 
-            Log.d(TAG, "loadRecyclerView");
             recyclerView = (RecyclerView) rootView.findViewById(R.id.taskRecyclerView);
-            Log.d(TAG, "recyclerView: " + recyclerView);
-            recyclerView.setHasFixedSize(false);
-            layoutManager = new LinearLayoutManager(getActivity());
-
-            System.out.println("activity: " + getActivity());
+            recyclerView.setHasFixedSize(true);
+            layoutManager = new MyLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+//            layoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(layoutManager);
-//            ArrayList<Item> dataSet = TestCreator.createTestItems();
-            ArrayList<String> dataSet = new ArrayList<>();
-            dataSet.add("apples");
-            dataSet.add("banana");
-            System.out.println("Dataset: " + dataSet);
-            itemListAdapter = new TaskPageItemListAdapter(dataSet);
-            System.out.println("itemlistadapter: " + itemListAdapter);
-            recyclerView.setAdapter(itemListAdapter);
-            Log.d(TAG, "recyclerview string: " + recyclerView.toString());
 
-            Log.d(TAG, "returnRootView");
+            ArrayList<Item> dataSet = TestCreator.createTestItems();
+            itemListAdapter = new TaskPageItemListAdapter(dataSet);
+            recyclerView.setAdapter(itemListAdapter);
             return rootView;
         }
     }
 
     public static class TaskPageItemListAdapter extends RecyclerView.Adapter<TaskPageItemListAdapter.ViewHolder> {
-        private ArrayList<String> dataSet;
+        private ArrayList<Item> dataSet;
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
         // you provide access to all the views for a data item in a view holder
         public class ViewHolder extends RecyclerView.ViewHolder {
             public View view;
+            public TextView desc;
+            public TextView itemId;
+            public TextView tagId;
 
             public ViewHolder(View v) {
                 super(v);
                 view = v;
+
+                desc = (TextView) v.findViewById(R.id.content_description);
+                itemId = (TextView) v.findViewById(R.id.content_itemId);
+                tagId = (TextView) v.findViewById(R.id.content_tagId);
             }
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)
-        public TaskPageItemListAdapter(ArrayList<String> myDataset) {
+        public TaskPageItemListAdapter(ArrayList<Item> myDataset) {
             dataSet = myDataset;
         }
 
-        // Create new views (invoked by the layout manager)
-        @Override
+        @Override // Create new views (invoked by the layout manager)
         public TaskPageItemListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_itemlist, parent, false); // create a new view
             ViewHolder vh = new ViewHolder(v); // set the view's size, margins, paddings and layout parameters
             return vh;
         }
 
-        // Replace the contents of a view (invoked by the layout manager)
-        @Override
+        @Override // Replace the contents of a view (invoked by the layout manager)
         public void onBindViewHolder(ViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
+
+            holder.desc.setText(dataSet.get(position).getDesc());
+            holder.itemId.setText(String.valueOf(dataSet.get(position).getID()));
+            holder.tagId.setText(dataSet.get(position).getNfcTag());
         }
 
-        // Return the size of your dataset (invoked by the layout manager)
-        @Override
+        @Override // Return the size of your dataset (invoked by the layout manager)
         public int getItemCount() {
-//            return dataSet.size();
-            return 5;
+            return dataSet.size();
         }
-
     }
+
 }
