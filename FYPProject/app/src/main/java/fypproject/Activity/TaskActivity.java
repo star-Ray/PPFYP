@@ -1,5 +1,6 @@
 package fypproject.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -67,6 +69,7 @@ public class TaskActivity extends ActionBarActivity {
         Log.i(TAG, "TextViews are set.");
     }
 
+
     public static class ItemListFragment extends android.support.v4.app.Fragment {
 
         private static RecyclerView recyclerView;
@@ -89,6 +92,7 @@ public class TaskActivity extends ActionBarActivity {
         }
     }
 
+
     public static class TaskPageItemListAdapter extends RecyclerView.Adapter<TaskPageItemListAdapter.ViewHolder> {
         private ArrayList<Item> dataSet;
 
@@ -100,6 +104,7 @@ public class TaskActivity extends ActionBarActivity {
             public TextView desc;
             public TextView itemId;
             public TextView tagId;
+            public Button button;
 
             public ViewHolder(View v) {
                 super(v);
@@ -108,6 +113,35 @@ public class TaskActivity extends ActionBarActivity {
                 desc = (TextView) v.findViewById(R.id.content_description);
                 itemId = (TextView) v.findViewById(R.id.content_itemId);
                 tagId = (TextView) v.findViewById(R.id.content_tagId);
+                button = (Button)v.findViewById(R.id.button_load);
+
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        int position = getPosition();
+                        Item selectedItem = dataSet.get(position);
+                        Log.d(TAG, "Position selected: " + position);
+
+                        Intent intent = new Intent(context, ItemActivity.class);
+                        intent.putExtra("item", gson.toJson(selectedItem));
+                        context.startActivity(intent);
+                    }
+                });
+
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        int position = getPosition();
+                        Item selectedItem = dataSet.get(position);
+                        Log.d(TAG, "Position selected: " + position);
+
+                        Intent intent = new Intent(context, WriteNFCActivity.class);
+                        intent.putExtra("item", gson.toJson(selectedItem));
+                        context.startActivity(intent);
+                    }
+                });
             }
         }
 

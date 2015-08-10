@@ -7,17 +7,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,17 +31,16 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 
+import fypproject.Activity.HomepageFragments.BallotFragment;
+import fypproject.Activity.HomepageFragments.OngoingFragment;
 import fypproject.Entity.Courier;
 import fypproject.Entity.Task;
 import fypproject.R;
-import fypproject.TestCreator;
-
 
 public class HomepageActivity extends ActionBarActivity {
 
     private static final String TAG = "arnono/HomepageActivity";
 
-    private Intent intent;
     private Courier courier;
     private static SharedPreferences sharedPref;
     private static SharedPreferences.Editor editor;
@@ -49,7 +48,8 @@ public class HomepageActivity extends ActionBarActivity {
     private HomepageTabsPagerAdapter homepageTabsPagerAdapter;
     private ViewPager viewPager;
     private android.support.v7.app.ActionBar actionBar;
-//    private android.support.v7.app.ActionBarDrawerToggle drawerToggle;
+
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class HomepageActivity extends ActionBarActivity {
         setContentView(R.layout.activity_homepage);
 
 //        Initializing
-        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+        gson = new GsonBuilder().setDateFormat(getString(R.string.date_format)).create();
         sharedPref = this.getSharedPreferences(getString(R.string.app_key), MODE_PRIVATE);
         editor = sharedPref.edit();
         courier = gson.fromJson(sharedPref.getString("courier", null), Courier.class);
@@ -66,11 +66,24 @@ public class HomepageActivity extends ActionBarActivity {
         loadActionBarTabs(); //load Action bar tabs
         loadDrawer(); //load Drawer
 
-
 //        Load welcome toast if entered from login page
         if (getIntent().getStringExtra("login") != null){
             Toast.makeText(this, "Welcome, " + courier.getName(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+                    drawerLayout.closeDrawers();
+                }else{
+                    drawerLayout.openDrawer(Gravity.LEFT);
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -85,7 +98,7 @@ public class HomepageActivity extends ActionBarActivity {
         finish();
     }
 
-    public void goToLogout(){
+    public void processLogout(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Logout confirmation").setMessage("Leaving so soon? We will miss you");
         builder.setPositiveButton("Yes, I'm leaving!", new DialogInterface.OnClickListener() {
@@ -98,53 +111,17 @@ public class HomepageActivity extends ActionBarActivity {
         builder.setNegativeButton("No, I'm staying!", null);
         builder.create().show();
     }
-    public void goToMaps(){
-        Uri location = Uri.parse("https://www.google.com.sg/maps/dir/1.2771206,103.8564106/Suntec+Singapore+Convention+%26+Exhibition+Centre,+1+Raffles+Boulevard,+Suntec+City,+Singapore+039593/@1.2889031,103.8500284,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x31da19af38dd2bf3:0xd63e8cb2dacf54c7!2m2!1d103.857075!2d1.293455");
-        intent = new Intent(Intent.ACTION_VIEW, location);
-        startActivity(intent);
-    }
-    public void goToTest1(){
-        intent = new Intent(this, TestActivity.class);
-        startActivity(intent);
-    }
-    public void goToTest2(){
-        intent = new Intent(this, Test2Activity.class);
-        startActivity(intent);
-    }
-    public void goToNFCPage(){
-        intent = new Intent(this, ReadNFCActivity.class);
-        startActivityForResult(intent, 1);
-    }
-    public void goToMyProfilePage(){
-        intent = new Intent(this, ProfileActivity.class);
-        intent.putExtra("Arnold", "Arnold really rocks");
-        startActivity(intent);
-    }
-    public void goToWriteNFC(){
-        intent = new Intent(this, WriteNFCActivity.class);
-        startActivity(intent);
-    }
-    public void goToBidding(){
-        intent = new Intent(this, BiddingActivity.class);
-        startActivity(intent);
-    }
 
     public void loadDrawer(){
 
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
+//        actionBar.
 
 //        Drawer view
-        String[] drawerArr = new String[]{"My Profile", "Bidding", "NFC Page", "WriteNFC", "test1", "test2", "maps", "Logout"};
+        String[] drawerArr = new String[]{"My Profile", "NFC Page", "WriteNFC", "test1", "test2", "maps", "Logout"};
         final ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_item, drawerArr);
-        final DrawerLayout drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        final ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.ic_menu_white_24dp, R.string.drawer_open, R.string.drawer_close){
-
-        };
-        drawerToggle.setDrawerIndicatorEnabled(true);
-        drawerToggle.setHomeAsUpIndicator(R.drawable.ic_teamlogo1);
-        drawerLayout.setDrawerListener(drawerToggle);
+       drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
         ListView listView = (ListView)findViewById(R.id.homepage_drawer);
         listView.setAdapter(drawerAdapter);
@@ -152,32 +129,33 @@ public class HomepageActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String itemTitle = drawerAdapter.getItem(position);
+                Context context = getApplicationContext();
+                Intent intent = null;
                 switch (itemTitle) {
                     case "My Profile":
-                        goToMyProfilePage();
-                        break;
-                    case "Bidding":
-                        goToBidding();
+                        intent = new Intent(context, ProfileActivity.class);
                         break;
                     case "NFC Page":
-                        goToNFCPage();
+                        intent = new Intent(context, ReadNFCActivity.class);
                         break;
                     case "Logout":
-                        goToLogout();
+                        processLogout();
                         break;
                     case "test1":
-                        goToTest1();
+                        intent = new Intent(context, TestActivity.class);
                         break;
                     case "test2":
-                        goToTest2();
+                        intent = new Intent(context, Test2Activity.class);
                         break;
                     case "maps":
-                        goToMaps();
+                        Uri location = Uri.parse("https://www.google.com.sg/maps/dir/1.2771206,103.8564106/Suntec+Singapore+Convention+%26+Exhibition+Centre,+1+Raffles+Boulevard,+Suntec+City,+Singapore+039593/@1.2889031,103.8500284,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x31da19af38dd2bf3:0xd63e8cb2dacf54c7!2m2!1d103.857075!2d1.293455");
+                        intent = new Intent(Intent.ACTION_VIEW, location);
                         break;
                     case "WriteNFC":
-                        goToWriteNFC();
+                        intent = new Intent(context, WriteNFCActivity.class);
                         break;
                 }
+                startActivity(intent);
                 drawerLayout.closeDrawers();
             }
         });
@@ -223,50 +201,58 @@ public class HomepageActivity extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int i){
-            Fragment fragment = new HomepageFragment();
-            Bundle args = new Bundle();
-            args.putInt(HomepageFragment.ARG_OBJECT, i + 1);
-            fragment.setArguments(args);
+            Fragment fragment = null;
+            switch(i){
+                case 0:
+                    fragment = new OngoingFragment();
+                    break;
+                case 1:
+                    fragment = new OngoingFragment();
+                    break;
+                case 2:
+                    fragment = new BallotFragment();
+                    break;
+            }
             return fragment;
         }
 
         @Override
-        public int getCount(){
-            return 3;
+        public int getCount() {
+            return 3; // to be adjusted according to the number of tabs
         }
     }
 
-    public static class HomepageFragment extends android.support.v4.app.Fragment {
-        public static final String ARG_OBJECT = "object";
-        private static RecyclerView recyclerView;
-        private static RecyclerView.Adapter taskListAdapter;
-        private static RecyclerView.LayoutManager layoutManager;
-
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-            View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
-
-            loadRecyclerView(rootView);
-            return rootView;
-        }
-
-        public void loadRecyclerView(View view){
-            recyclerView = (RecyclerView) view.findViewById(R.id.taskRecyclerView);
-
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
-            recyclerView.setHasFixedSize(true);
-
-            // use a linear layout manager
-            layoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(layoutManager);
-
-            // specify an adapter (see also next example)
-            ArrayList<Task> taskList = TestCreator.createTestTasks1();
-            ArrayList<Task> myDataset = taskList;
-            taskListAdapter = new HomepageTaskListAdapter(myDataset);
-            recyclerView.setAdapter(taskListAdapter);
-        }
-    }
+//    public static class HomepageFragment extends android.support.v4.app.Fragment {
+////        public static final String ARG_OBJECT = "object";
+//        private static RecyclerView recyclerView;
+//        private static RecyclerView.Adapter taskListAdapter;
+//        private static RecyclerView.LayoutManager layoutManager;
+//
+//        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+//            View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+//
+//            loadRecyclerView(rootView);
+//            return rootView;
+//        }
+//
+//        public void loadRecyclerView(View view){
+//            recyclerView = (RecyclerView) view.findViewById(R.id.taskRecyclerView);
+//
+//            // use this setting to improve performance if you know that changes
+//            // in content do not change the layout size of the RecyclerView
+//            recyclerView.setHasFixedSize(true);
+//
+//            // use a linear layout manager
+//            layoutManager = new LinearLayoutManager(getActivity());
+//            recyclerView.setLayoutManager(layoutManager);
+//
+//            // specify an adapter (see also next example)
+//            ArrayList<Task> taskList = TestCreator.createTestTasks1();
+//            ArrayList<Task> myDataset = taskList;
+//            taskListAdapter = new HomepageTaskListAdapter(myDataset);
+//            recyclerView.setAdapter(taskListAdapter);
+//        }
+//    }
 
     // recycler view
     public static class HomepageTaskListAdapter extends RecyclerView.Adapter<HomepageTaskListAdapter.ViewHolder> {

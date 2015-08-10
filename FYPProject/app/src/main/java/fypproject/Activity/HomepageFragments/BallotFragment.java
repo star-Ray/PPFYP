@@ -1,7 +1,6 @@
-package fypproject.Activity;
+package fypproject.Activity.HomepageFragments;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,34 +13,48 @@ import java.util.Arrays;
 
 import fypproject.R;
 
-public class BiddingActivity extends ActionBarActivity {
+public class BallotFragment extends android.support.v4.app.Fragment {
+
+    private static final String TAG = "arnono/BallotFragment";
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter biddingListAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.Adapter ballotListAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bidding);
+    }
 
-        recyclerView = (RecyclerView) findViewById(R.id.bidding_recycler);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_ballot, container, false);
+    }
+
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.bidding_recycler);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
         ArrayList<String> myDataset = new ArrayList<String>(Arrays.asList("bye1", "bye2", "bye3"));
-        biddingListAdapter = new BiddingListAdapter(myDataset);
-        recyclerView.setAdapter(biddingListAdapter);
+        ballotListAdapter = new BallotListAdapter(myDataset);
+        recyclerView.setAdapter(ballotListAdapter);
     }
 
-    public class BiddingListAdapter extends RecyclerView.Adapter<BiddingListAdapter.ViewHolder> {
+    public class BallotListAdapter extends RecyclerView.Adapter<BallotListAdapter.ViewHolder> {
         private ArrayList<String> mDataset;
 
         // Provide a reference to the views for each data item
@@ -84,13 +97,13 @@ public class BiddingActivity extends ActionBarActivity {
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)
-        public BiddingListAdapter(ArrayList<String> myDataset) {
+        public BallotListAdapter(ArrayList<String> myDataset) {
             mDataset = myDataset;
         }
 
         // Create new views (invoked by the layout manager)
         @Override
-        public BiddingListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public BallotListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             // create a new view
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_bidding_task, parent, false);
 
@@ -116,4 +129,5 @@ public class BiddingActivity extends ActionBarActivity {
 
 
     }
+
 }
