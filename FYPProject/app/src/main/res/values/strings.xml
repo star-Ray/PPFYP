@@ -18,7 +18,8 @@
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
     <string name="date_format">"yyyy-MM-dd'T'HH:mm:ss"</string>
-    <string name="text_welcome_user">Welcome, User</string>
+
+    <string name="sample_long_text">THIS IS A SUPER LONG SAMPLE TEXT POTATO THIS IS A SUPER LONG SAMPLE TEXT POTATO THIS IS A SUPER LONG SAMPLE TEXT POTATO THIS IS A SUPER LONG SAMPLE TEXT POTATO THIS IS A SUPER LONG SAMPLE TEXT POTATOTHIS IS A SUPER LONG SAMPLE TEXT POTATO</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -28,7 +29,7 @@
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_test2">Test2Activity</string>
-    <string name="title_activity_read_nfc">ReadNFCActivity</string>
+    <string name="title_activity_read_nfc">Read NFC Tag</string>
     <string name="title_activity_write_nfc">WriteNFCActivity</string>
     <string name="title_activity_tab">TabActivity</string>
     <string name="title_activity_bidding">My Bidding Activities</string>

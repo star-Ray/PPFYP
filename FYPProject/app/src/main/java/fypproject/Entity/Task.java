@@ -1,6 +1,5 @@
 package fypproject.Entity;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,20 +7,19 @@ import java.util.Date;
  * Created by Arnold on 7/9/2015.
  */
 public class Task {
-    private int ID, officerID, courierID, senderID;
+    private int taskId, officerId, courierId, senderId;
     private String receiverName, receiverContact, startLocation, endLocation, signature, oneTimePass, taskStatus, remarks;
     private Date planStartTime, planEndTime, actualStartTime, actualEndTime, createDate;
     private ArrayList<Item> itemList;
 
-    public Task(int ID, int officerID, int courierID, int senderID,
-                String receiverName, String receiverContact, String startLocation,
-                String endLocation, String signature, String oneTimePass, String taskStatus,
-                String remarks, Timestamp planStartTime, Timestamp planEndTime, Timestamp actualStartTime,
-                Timestamp actualEndTime, Date createDate, ArrayList<Item> itemList) {
-        this.ID = ID;
-        this.officerID = officerID;
-        this.courierID = courierID;
-        this.senderID = senderID;
+    public Task(int taskId, int officerId, int courierId, int senderId, String receiverName, String receiverContact,
+                String startLocation, String endLocation, String signature, String oneTimePass, String taskStatus,
+                String remarks, Date planStartTime, Date planEndTime, Date actualStartTime, Date actualEndTime,
+                Date createDate, ArrayList<Item> itemList) {
+        this.taskId = taskId;
+        this.officerId = officerId;
+        this.courierId = courierId;
+        this.senderId = senderId;
         this.receiverName = receiverName;
         this.receiverContact = receiverContact;
         this.startLocation = startLocation;
@@ -38,44 +36,36 @@ public class Task {
         this.itemList = itemList;
     }
 
-    public ArrayList<Item> getItemList() {
-        return itemList;
+    public int getTaskId() {
+        return taskId;
     }
 
-    public void setItemList(ArrayList<Item> itemList) {
-        this.itemList = itemList;
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
     }
 
-    public int getID() {
-        return ID;
+    public int getOfficerId() {
+        return officerId;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setOfficerId(int officerId) {
+        this.officerId = officerId;
     }
 
-    public int getOfficerID() {
-        return officerID;
+    public int getCourierId() {
+        return courierId;
     }
 
-    public void setOfficerID(int officerID) {
-        this.officerID = officerID;
+    public void setCourierId(int courierId) {
+        this.courierId = courierId;
     }
 
-    public int getCourierID() {
-        return courierID;
+    public int getSenderId() {
+        return senderId;
     }
 
-    public void setCourierID(int courierID) {
-        this.courierID = courierID;
-    }
-
-    public int getSenderID() {
-        return senderID;
-    }
-
-    public void setSenderID(int senderID) {
-        this.senderID = senderID;
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
     }
 
     public String getReceiverName() {
@@ -180,5 +170,13 @@ public class Task {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public ArrayList<Item> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(ArrayList<Item> itemList) {
+        this.itemList = itemList;
     }
 }

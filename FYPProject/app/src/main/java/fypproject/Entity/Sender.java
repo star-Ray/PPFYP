@@ -7,18 +7,17 @@ import java.util.Date;
  * Created by Arnold on 7/9/2015.
  */
 public class Sender {
-    private int ID, objStatus, companyID;
+    private int senderId, objStatus, companyId;
     private String name, contactNo, username, passwordSALT, passwordHASH, remarks;
     private Date createDate;
     private ArrayList<Task> taskList;
 
-    public Sender(int ID, int objStatus, int companyID, String name, String contactNo,
-                  String username, String passwordSALT, String passwordHASH, String remarks,
-                  Date createDate, ArrayList<Task> taskList) {
-
-        this.ID = ID;
+    public Sender(int senderId, int objStatus, int companyId, String name,
+                  String contactNo, String username, String passwordSALT, String passwordHASH,
+                  String remarks, Date createDate, ArrayList<Task> taskList) {
+        this.senderId = senderId;
         this.objStatus = objStatus;
-        this.companyID = companyID;
+        this.companyId = companyId;
         this.name = name;
         this.contactNo = contactNo;
         this.username = username;
@@ -29,20 +28,12 @@ public class Sender {
         this.taskList = taskList;
     }
 
-    public ArrayList<Task> getTaskList() {
-        return taskList;
+    public int getSenderId() {
+        return senderId;
     }
 
-    public void setTaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
     }
 
     public int getObjStatus() {
@@ -53,12 +44,12 @@ public class Sender {
         this.objStatus = objStatus;
     }
 
-    public int getCompanyID() {
-        return companyID;
+    public int getCompanyId() {
+        return companyId;
     }
 
-    public void setCompanyID(int companyID) {
-        this.companyID = companyID;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     public String getName() {
@@ -115,5 +106,13 @@ public class Sender {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
     }
 }

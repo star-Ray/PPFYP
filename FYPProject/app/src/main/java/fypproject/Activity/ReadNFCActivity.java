@@ -10,11 +10,9 @@ import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
+import android.util.Log;
+import android.widget.TextView;
 
-import fypproject.R;
 import com.nxp.nfclib.classic.MFClassic;
 import com.nxp.nfclib.exceptions.SmartCardException;
 import com.nxp.nfclib.icode.ICodeSLI;
@@ -41,9 +39,12 @@ import com.nxp.nfcliblite.cards.Plus;
 
 import java.io.IOException;
 
+import fypproject.R;
+
 public class ReadNFCActivity extends ActionBarActivity {
 
-//    private static final String MIME_TEXT_PLAIN = "text/plain";
+    private static final String TAG = "arnono/ReadNFCAct";
+
     private NxpNfcLibLite libInstance = null;
 
     @Override
@@ -51,32 +52,10 @@ public class ReadNFCActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_nfc);
 
-        if(checkNFCEnabled()){
+        if (checkNFCEnabled()) {
             libInstance = NxpNfcLibLite.getInstance();
             libInstance.registerActivity(this);
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_read_nfc, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -97,28 +76,78 @@ public class ReadNFCActivity extends ActionBarActivity {
 
     public void readNTag(NTag tag){
         try {
-            Toast.makeText(this, "connecting...", Toast.LENGTH_SHORT).show();
             tag.connect();
-            Toast.makeText(this, "connected", Toast.LENGTH_SHORT).show();
+            Log.i(TAG, "Connected to Tag");
+
+            Log.i(TAG, "Tag Name: " + tag.getTagName());
+            Log.i(TAG, "Tag Type: " + tag.getType());
+            Log.i(TAG, "Tag Details: " + tag.getCardDetails().toString());
+            Log.i(TAG, "Tag Card Name: " + tag.getCardDetails().sCardName);
+            Log.i(TAG, "Tag Free Memory: " + tag.getCardDetails().freeMemory);
+            Log.i(TAG, "Tag Total Memory: " + tag.getCardDetails().totalMemory);
+
             NdefMessage message = tag.readNDEF();
-            System.out.println("message: " + message.toString());
-            Toast.makeText(this, "message: " + message.toString(), Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Tag contents: " + message.toString());
+
             NdefRecord[] records = message.getRecords();
             byte[] data = records[0].getPayload();
             String text = new String(data, "UTF-8");
-            System.out.println("message: " + text);
-            Toast.makeText(this, "message: " + text, Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Tag message: " + text);
+
+            TextView textView = (TextView) findViewById(R.id.content_message);
+            textView.setText(text);
 
             tag.close();
-            Toast.makeText(this, "connection close", Toast.LENGTH_SHORT).show();
+            Log.i(TAG, "Tag disconnected");
 
         } catch (IOException | SmartCardException | FormatException e) {
             e.printStackTrace();
         }
     }
 
+    public boolean checkNFCEnabled(){
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+//        Stop here if device does not support NFC
+        if (nfcAdapter == null){
+            builder.setTitle("Missing NFC Hardware").setMessage("This device does not support NFC.");
+            builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish(); //to end this activity and return
+                }
+            });
+            builder.create().show();
+
+            finish(); //to end this activity and return
+            return false;
+        }
+
+//        Check if NFC is enabled
+        boolean isEnabled = nfcAdapter.isEnabled();
+        if (!isEnabled) {
+            builder.setTitle(R.string.dialog_title_nfc_settings_fail).setMessage(R.string.dialog_message_nfc_fail);
+            builder.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish(); //to end this activity and return
+                }
+            });
+            builder.create().show();
+        }
+        return isEnabled;
+    }
+
     @Override
     protected void onNewIntent(Intent intent) {
+        Log.i(TAG, "New intent detected!");
         libInstance.filterIntent(intent, new Inxpnfcliblitecallback() {
             @Override
             public void onUltraLightCardDetected(Ultralight ultralight) {
@@ -210,38 +239,6 @@ public class ReadNFCActivity extends ActionBarActivity {
 
             }
         });
-    }
-
-    public boolean checkNFCEnabled(){
-        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-
-//        Stop here if device does not support NFC
-        if (nfcAdapter == null){
-            Toast.makeText(this, "This device does not support NFC.", Toast.LENGTH_LONG).show();
-            finish(); //to end this activity and return
-            return false;
-        }
-
-//        Check if NFC is enabled
-        boolean isEnabled = nfcAdapter.isEnabled();
-        if (!isEnabled) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.dialog_title_nfc_settings_fail).setMessage(R.string.dialog_message_nfc_fail);
-            builder.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish(); //to end this activity and return
-                }
-            });
-            builder.create().show();
-        }
-        return isEnabled;
     }
 
 }

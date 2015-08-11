@@ -51,7 +51,7 @@ public class ItemActivity extends ActionBarActivity {
     }
 
     public void setViews(Item item){
-        String title = "Item ID: " + String.valueOf(item.getID() + " - Summary");
+        String title = "Item ID: " + String.valueOf(item.getItemId() + " - Summary");
         try {
             getSupportActionBar().setTitle(title);
         }catch (NullPointerException e){
@@ -63,7 +63,7 @@ public class ItemActivity extends ActionBarActivity {
         TextView desc = (TextView) findViewById(R.id.content_description);
         TextView tagId = (TextView) findViewById(R.id.content_tagId);
 
-        itemId.setText(String.valueOf(item.getID()));
+        itemId.setText(String.valueOf(item.getItemId()));
         desc.setText(item.getDesc());
         tagId.setText(item.getNfcTag());
     }

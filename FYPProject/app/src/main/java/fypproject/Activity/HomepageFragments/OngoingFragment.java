@@ -16,7 +16,6 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 
-import fypproject.Activity.HomepageActivity;
 import fypproject.Activity.TaskActivity;
 import fypproject.Entity.Task;
 import fypproject.R;
@@ -26,10 +25,6 @@ public class OngoingFragment extends android.support.v4.app.Fragment {
 
     private static final String TAG = "arnono/OngoingFragment";
 
-    private static RecyclerView recyclerView;
-    private static RecyclerView.Adapter taskListAdapter;
-    private static RecyclerView.LayoutManager layoutManager;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
@@ -38,20 +33,20 @@ public class OngoingFragment extends android.support.v4.app.Fragment {
     }
 
     public void loadRecyclerView(View view){
-        recyclerView = (RecyclerView) view.findViewById(R.id.taskRecyclerView);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.taskRecyclerView);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
         ArrayList<Task> taskList = TestCreator.createTestTasks1();
         ArrayList<Task> myDataset = taskList;
-        taskListAdapter = new OngoingTaskListAdapter(myDataset);
+        RecyclerView.Adapter taskListAdapter = new OngoingTaskListAdapter(myDataset);
         recyclerView.setAdapter(taskListAdapter);
     }
 
@@ -116,7 +111,7 @@ public class OngoingFragment extends android.support.v4.app.Fragment {
             holder.recipient.setText(dataSet.get(position).getReceiverName());
             holder.address.setText(dataSet.get(position).getEndLocation());
 //            holder.time.setText(dataSet.get(position).getPlanEndTime().toString());
-            holder.orderNo.setText(String.valueOf(dataSet.get(position).getID()));
+            holder.orderNo.setText(String.valueOf(dataSet.get(position).getTaskId()));
         }
 
         // Return the size of your dataset (invoked by the layout manager)

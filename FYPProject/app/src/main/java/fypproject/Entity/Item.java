@@ -5,16 +5,15 @@ import java.util.Date;
 /**
  * Created by Arnold on 7/9/2015.
  */
-public class Item{
-    private int ID, taskID, objStatus;
+public class Item {
+    private int itemId, taskId, objStatus;
     private double weight;
     private String desc, dimen, image, nfcTag, barcode, remark;
     private Date createDate;
 
-    public Item(int ID, int taskID, int objStatus, double weight, String desc, String dimen, String image,
-                String nfcTag, String barcode, String remarks, Date createDate) {
-        this.ID = ID;
-        this.taskID = taskID;
+    public Item(int itemId, int taskId, int objStatus, double weight, String desc, String dimen, String image, String nfcTag, String barcode, String remark, Date createDate) {
+        this.itemId = itemId;
+        this.taskId = taskId;
         this.objStatus = objStatus;
         this.weight = weight;
         this.desc = desc;
@@ -22,25 +21,24 @@ public class Item{
         this.image = image;
         this.nfcTag = nfcTag;
         this.barcode = barcode;
-        this.remark = remarks;
+        this.remark = remark;
         this.createDate = createDate;
     }
 
-
-    public int getID() {
-        return ID;
+    public int getItemId() {
+        return itemId;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
-    public int getTaskID() {
-        return taskID;
+    public int getTaskId() {
+        return taskId;
     }
 
-    public void setTaskID(int taskID) {
-        this.taskID = taskID;
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
     }
 
     public int getObjStatus() {
@@ -99,12 +97,12 @@ public class Item{
         this.barcode = barcode;
     }
 
-    public String getRemarks() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemarks(String remarks) {
-        this.remark = remarks;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Date getCreateDate() {

@@ -16,28 +16,24 @@ import fypproject.R;
 
 public class BallotActivity extends ActionBarActivity {
 
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter biddingListAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bidding);
 
-        recyclerView = (RecyclerView) findViewById(R.id.bidding_recycler);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.bidding_recycler);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
         ArrayList<String> myDataset = new ArrayList<String>(Arrays.asList("bye1", "bye2", "bye3"));
-        biddingListAdapter = new BiddingListAdapter(myDataset);
+        RecyclerView.Adapter biddingListAdapter = new BiddingListAdapter(myDataset);
         recyclerView.setAdapter(biddingListAdapter);
     }
 

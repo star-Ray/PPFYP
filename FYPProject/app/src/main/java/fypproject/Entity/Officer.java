@@ -6,16 +6,14 @@ import java.util.Date;
  * Created by Arnold on 7/9/2015.
  */
 public class Officer {
-    private int ID, objStatus, companyID;
+    private int officerId, objStatus, companyId;
     private String name, username, passwordSALT, passwordHASH, remarks;
     private Date createDate;
 
-    public Officer(int ID, int objStatus, int companyID, String name, String username,
-                   String passwordSALT, String passwordHASH, String remarks, Date createDate) {
-
-        this.ID = ID;
+    public Officer(int officerId, int objStatus, int companyId, String name, String username, String passwordSALT, String passwordHASH, String remarks, Date createDate) {
+        this.officerId = officerId;
         this.objStatus = objStatus;
-        this.companyID = companyID;
+        this.companyId = companyId;
         this.name = name;
         this.username = username;
         this.passwordSALT = passwordSALT;
@@ -24,12 +22,12 @@ public class Officer {
         this.createDate = createDate;
     }
 
-    public int getID() {
-        return ID;
+    public int getOfficerId() {
+        return officerId;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setOfficerId(int officerId) {
+        this.officerId = officerId;
     }
 
     public int getObjStatus() {
@@ -40,12 +38,12 @@ public class Officer {
         this.objStatus = objStatus;
     }
 
-    public int getCompanyID() {
-        return companyID;
+    public int getCompanyId() {
+        return companyId;
     }
 
-    public void setCompanyID(int companyID) {
-        this.companyID = companyID;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
     public String getName() {

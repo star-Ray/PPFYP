@@ -57,7 +57,7 @@ public class TaskActivity extends ActionBarActivity {
     }
 
     private void setViews(Task task){
-        String title = "Task ID: " + String.valueOf(task.getID() + " - Summary");
+        String title = "Task ID: " + String.valueOf(task.getTaskId() + " - Summary");
         try {
             getSupportActionBar().setTitle(title);
         }catch (NullPointerException e){
@@ -167,7 +167,7 @@ public class TaskActivity extends ActionBarActivity {
             // - replace the contents of the view with that element
 
             holder.desc.setText(dataSet.get(position).getDesc());
-            holder.itemId.setText(String.valueOf(dataSet.get(position).getID()));
+            holder.itemId.setText(String.valueOf(dataSet.get(position).getItemId()));
             holder.tagId.setText(dataSet.get(position).getNfcTag());
         }
 

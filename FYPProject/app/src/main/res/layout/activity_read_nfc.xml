@@ -1,35 +1,60 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fypproject.Activity.ReadNFCActivity">
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <TextView
-        android:id="@+id/nfc_sample_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/image_nfc_logo"
-        android:layout_centerHorizontal="true"
-        android:padding="30dp"
-        android:text="sample_title"
-        android:textSize="12dp" />
-
+    <!--nfc icon-->
     <ImageView
-        android:id="@+id/image_nfc_logo"
-        android:layout_width="200sp"
-        android:layout_height="200sp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/ic_nfc_black_24dp" />
+        android:id="@+id/img_nfc_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/img_nfc_logo" />
 
+    <!--help text-->
     <TextView
+        android:id="@+id/content_help_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/image_nfc_logo"
-        android:layout_centerHorizontal="true"
-        android:padding="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
         android:text="Place device near NFC Tag"
-        android:textSize="20dp"
+        android:textSize="20sp"/>
+
+    <!--line break-->
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <!--message title-->
+    <TextView
+        android:id="@+id/title_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:layout_marginStart="5sp"
+        android:layout_marginTop="10dp"
+        android:text="Message"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         android:textStyle="bold"/>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/blackborder">
+
+        <TextView
+            android:id="@+id/content_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

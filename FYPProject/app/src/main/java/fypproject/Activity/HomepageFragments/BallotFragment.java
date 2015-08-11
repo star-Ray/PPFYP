@@ -17,10 +17,6 @@ public class BallotFragment extends android.support.v4.app.Fragment {
 
     private static final String TAG = "arnono/BallotFragment";
 
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.Adapter ballotListAdapter;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +34,19 @@ public class BallotFragment extends android.support.v4.app.Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.bidding_recycler);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.bidding_recycler);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
         ArrayList<String> myDataset = new ArrayList<String>(Arrays.asList("bye1", "bye2", "bye3"));
-        ballotListAdapter = new BallotListAdapter(myDataset);
+        RecyclerView.Adapter ballotListAdapter = new BallotListAdapter(myDataset);
         recyclerView.setAdapter(ballotListAdapter);
     }
 
