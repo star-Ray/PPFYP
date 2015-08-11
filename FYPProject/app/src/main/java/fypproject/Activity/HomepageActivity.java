@@ -32,6 +32,7 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 
 import fypproject.Activity.HomepageFragments.BallotFragment;
+import fypproject.Activity.HomepageFragments.CompletedFragment;
 import fypproject.Activity.HomepageFragments.OngoingFragment;
 import fypproject.Entity.Courier;
 import fypproject.Entity.Task;
@@ -130,32 +131,33 @@ public class HomepageActivity extends ActionBarActivity {
                 String itemTitle = drawerAdapter.getItem(position);
                 Context context = getApplicationContext();
                 Intent intent = null;
-                switch (itemTitle) {
-                    case "My Profile":
-                        intent = new Intent(context, ProfileActivity.class);
-                        break;
-                    case "NFC Page":
-                        intent = new Intent(context, ReadNFCActivity.class);
-                        break;
-                    case "Logout":
-                        processLogout();
-                        break;
-                    case "test1":
-                        intent = new Intent(context, TestActivity.class);
-                        break;
-                    case "test2":
-                        intent = new Intent(context, Test2Activity.class);
-                        break;
-                    case "maps":
-                        Uri location = Uri.parse("https://www.google.com.sg/maps/dir/1.2771206,103.8564106/Suntec+Singapore+Convention+%26+Exhibition+Centre,+1+Raffles+Boulevard,+Suntec+City,+Singapore+039593/@1.2889031,103.8500284,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x31da19af38dd2bf3:0xd63e8cb2dacf54c7!2m2!1d103.857075!2d1.293455");
-                        intent = new Intent(Intent.ACTION_VIEW, location);
-                        break;
-                    case "WriteNFC":
-                        intent = new Intent(context, WriteNFCActivity.class);
-                        break;
+                if (itemTitle.equals("Logout")) {
+                    processLogout();
+                } else {
+                    switch (itemTitle) {
+                        case "My Profile":
+                            intent = new Intent(context, ProfileActivity.class);
+                            break;
+                        case "NFC Page":
+                            intent = new Intent(context, ReadNFCActivity.class);
+                            break;
+                        case "test1":
+                            intent = new Intent(context, TestActivity.class);
+                            break;
+                        case "test2":
+                            intent = new Intent(context, Test2Activity.class);
+                            break;
+                        case "maps":
+                            Uri location = Uri.parse("https://www.google.com.sg/maps/dir/1.2771206,103.8564106/Suntec+Singapore+Convention+%26+Exhibition+Centre,+1+Raffles+Boulevard,+Suntec+City,+Singapore+039593/@1.2889031,103.8500284,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x31da19af38dd2bf3:0xd63e8cb2dacf54c7!2m2!1d103.857075!2d1.293455");
+                            intent = new Intent(Intent.ACTION_VIEW, location);
+                            break;
+                        case "WriteNFC":
+                            intent = new Intent(context, WriteNFCActivity.class);
+                            break;
+                    }
+                    startActivity(intent);
+                    drawerLayout.closeDrawers();
                 }
-                startActivity(intent);
-                drawerLayout.closeDrawers();
             }
         });
     }
@@ -203,7 +205,7 @@ public class HomepageActivity extends ActionBarActivity {
             Fragment fragment = null;
             switch(i){
                 case 0:
-                    fragment = new OngoingFragment();
+                    fragment = new CompletedFragment();
                     break;
                 case 1:
                     fragment = new OngoingFragment();
@@ -254,74 +256,74 @@ public class HomepageActivity extends ActionBarActivity {
 //    }
 
     // recycler view
-    public static class HomepageTaskListAdapter extends RecyclerView.Adapter<HomepageTaskListAdapter.ViewHolder> {
-        private ArrayList<Task> dataSet;
-
-        // Provide a reference to the views for each data item
-        // Complex data items may need more than one view per item, and
-        // you provide access to all the views for a data item in a view holder
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public View view;
-            public TextView recipient;
-            public TextView address;
-            public TextView time;
-            public TextView orderNo;
-
-            public ViewHolder(View v) {
-                super(v);
-                view = v;
-
-                recipient = (TextView)view.findViewById(R.id.content_receiver);
-                address = (TextView)view.findViewById(R.id.content_address);
-                time = (TextView)view.findViewById(R.id.content_time);
-                orderNo = (TextView)view.findViewById(R.id.content_orderNo);
-
-                v.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Context context = v.getContext();
-                        int position = getPosition();
-                        Task selectedTask = dataSet.get(position);
-                        Log.d(TAG, "Position selected: " + position);
-
-                        Intent intent = new Intent(context, TaskActivity.class);
-                        intent.putExtra("task", gson.toJson(selectedTask));
-                        context.startActivity(intent);
-                    }
-                });
-            }
-        }
-
-//        constructor
-        public HomepageTaskListAdapter(ArrayList<Task> myDataset) {
-            dataSet = myDataset;
-        }
-
-        // Create new views (invoked by the layout manager)
-        @Override
-        public HomepageTaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_tasklist, parent, false); // create a new view
-            ViewHolder vh = new ViewHolder(v); // set the view's size, margins, paddings and layout parameters
-            return vh;
-        }
-
-        // Replace the contents of a view (invoked by the layout manager)
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            // - get element from your dataset at this position
-            // - replace the contents of the view with that element
-
-            holder.recipient.setText(dataSet.get(position).getReceiverName());
-            holder.address.setText(dataSet.get(position).getEndLocation());
-//            holder.time.setText(dataSet.get(position).getPlanEndTime().toString());
-            holder.orderNo.setText(String.valueOf(dataSet.get(position).getID()));
-        }
-
-        // Return the size of your dataset (invoked by the layout manager)
-        @Override
-        public int getItemCount() {
-            return dataSet.size();
-        }
-
-    }
+//    public static class HomepageTaskListAdapter extends RecyclerView.Adapter<HomepageTaskListAdapter.ViewHolder> {
+//        private ArrayList<Task> dataSet;
+//
+//        // Provide a reference to the views for each data item
+//        // Complex data items may need more than one view per item, and
+//        // you provide access to all the views for a data item in a view holder
+//        public class ViewHolder extends RecyclerView.ViewHolder {
+//            public View view;
+//            public TextView recipient;
+//            public TextView address;
+//            public TextView time;
+//            public TextView orderNo;
+//
+//            public ViewHolder(View v) {
+//                super(v);
+//                view = v;
+//
+//                recipient = (TextView)view.findViewById(R.id.content_receiver);
+//                address = (TextView)view.findViewById(R.id.content_address);
+//                time = (TextView)view.findViewById(R.id.content_time);
+//                orderNo = (TextView)view.findViewById(R.id.content_orderNo);
+//
+//                v.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Context context = v.getContext();
+//                        int position = getPosition();
+//                        Task selectedTask = dataSet.get(position);
+//                        Log.d(TAG, "Position selected: " + position);
+//
+//                        Intent intent = new Intent(context, TaskActivity.class);
+//                        intent.putExtra("task", gson.toJson(selectedTask));
+//                        context.startActivity(intent);
+//                    }
+//                });
+//            }
+//        }
+//
+////        constructor
+//        public HomepageTaskListAdapter(ArrayList<Task> myDataset) {
+//            dataSet = myDataset;
+//        }
+//
+//        // Create new views (invoked by the layout manager)
+//        @Override
+//        public HomepageTaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_ongoing_tasklist, parent, false); // create a new view
+//            ViewHolder vh = new ViewHolder(v); // set the view's size, margins, paddings and layout parameters
+//            return vh;
+//        }
+//
+//        // Replace the contents of a view (invoked by the layout manager)
+//        @Override
+//        public void onBindViewHolder(ViewHolder holder, int position) {
+//            // - get element from your dataset at this position
+//            // - replace the contents of the view with that element
+//
+//            holder.recipient.setText(dataSet.get(position).getReceiverName());
+//            holder.address.setText(dataSet.get(position).getEndLocation());
+////            holder.time.setText(dataSet.get(position).getPlanEndTime().toString());
+//            holder.orderNo.setText(String.valueOf(dataSet.get(position).getID()));
+//        }
+//
+//        // Return the size of your dataset (invoked by the layout manager)
+//        @Override
+//        public int getItemCount() {
+//            return dataSet.size();
+//        }
+//
+//    }
 }

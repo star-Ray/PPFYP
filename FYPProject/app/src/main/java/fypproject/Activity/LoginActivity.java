@@ -26,7 +26,7 @@ import fypproject.R;
 import fypproject.TestCreator;
 
 
-public class LoginActivity extends Activity{
+public class LoginActivity extends Activity {
 
     private static final String TAG = "arnono/LoginActivity";
 
@@ -34,8 +34,6 @@ public class LoginActivity extends Activity{
     private SharedPreferences.Editor editor;
     private Gson gson;
     private NetworkSingleton networkSingleton;
-
-//    private Courier courier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +43,7 @@ public class LoginActivity extends Activity{
 //        initializing
         sharedPref = this.getSharedPreferences(getString(R.string.app_key), MODE_PRIVATE);
         editor = sharedPref.edit();
-        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+        gson = new GsonBuilder().setDateFormat(getString(R.string.date_format)).create();
 
         String strCourier = sharedPref.getString("courier", null);
         if(strCourier != null){
@@ -68,20 +66,19 @@ public class LoginActivity extends Activity{
         EditText inputPassword = (EditText)findViewById(R.id.login_password);
         inputPassword.setText("");
 
+//        TODO: For Testing ********************************************
         inputUsername.setText("zhurou.fan.2015");
         inputPassword.setText("123");
     }
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         finish();
     }
 
     public boolean authenticateUser2(String username, String password){
-        if(username.equals("zhurou.fan.2015") && password.equals("123")){
-            return true;
-        }
-        return false;
+        return username.equals("zhurou.fan.2015") && password.equals("123");
     }
 
     public void authenticateUser(View view) {
@@ -97,10 +94,11 @@ public class LoginActivity extends Activity{
         try {
             if (username.length() == 0 || password.length() == 0) { // checking for invalid inputs
                 Log.d(TAG, "Courier is null exception thrown.");
-                throw new Exception("Courier is null");
+//                throw new Exception("Courier is null");
+//                runAlertDialog("Courier isn null");
             }
 
-//            *********************** testing only ***********************
+//            *********************** TODO: testing only ***********************
             final String url = "http://eyetem-huiqiong2013.rhcloud.com/SimTech/admin/GetCourierByIdServlet?input={%22courierId%22:" + 3 + "}";
 //            *********************** testing only ***********************
 
@@ -109,7 +107,7 @@ public class LoginActivity extends Activity{
                 public void onResponse(JSONObject jsonObject) {
                     Log.d(TAG, "JsonObjectRequest received!");
 
-//                    *********************** testing only ***********************
+//                    *********************** TODO: testing only ***********************
 
                     boolean authenticate = authenticateUser2(username, password);
                     if (authenticate){
@@ -123,7 +121,16 @@ public class LoginActivity extends Activity{
                         Log.i(TAG, "Opening homepage");
                         startActivity(intent);
                     }else{
-                        runAlertDialog("Authentication failed");
+//                        runAlertDialog("Authentication failed");
+                        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getApplicationContext());
+                        alertBuilder.setTitle(R.string.dialog_title_login_fail).setMessage("authentication failed");
+                        alertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                            }
+                        });
+                        AlertDialog alertDialog = alertBuilder.create();
+                        alertDialog.show();
                     }
 
 //                    *********************** testing only ***********************
@@ -131,7 +138,8 @@ public class LoginActivity extends Activity{
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    Log.e(TAG, "Error occurred at processLogin.");
+                    Log.e(TAG, "Error. Device is not connected to network.");
+//                    runAlertDialog("Device is not connected to network.");
                 }
             });
 
@@ -142,14 +150,16 @@ public class LoginActivity extends Activity{
             Log.e(TAG, "Error occurred at processLogin. Message: " + e.getMessage());
             e.printStackTrace();
 
-            runAlertDialog(e.getMessage()); // Alert Dialog
+//            runAlertDialog(e.getMessage()); // Alert Dialog
         } finally {
             Log.i(TAG, "authenticateUser: end");
         }
     }
 
     public void runAlertDialog(String message){
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this.getApplicationContext());
+        Log.d(TAG, "context: " + getApplicationContext());
+
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getApplicationContext());
         alertBuilder.setTitle(R.string.dialog_title_login_fail).setMessage(message);
         alertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override

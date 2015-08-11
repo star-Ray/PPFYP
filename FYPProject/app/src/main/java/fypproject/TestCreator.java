@@ -9,6 +9,7 @@ import fypproject.Entity.Task;
 /**
  * Created by Arnold on 8/9/2015.
  */
+//TODO: TEST CLASS
 public class TestCreator {
 
     public static Courier createTestCourier(){
@@ -28,33 +29,28 @@ public class TestCreator {
         taskList.add(new Task(3,1,1,1,"Prof. Ben Gan", "45688962", "startlocation", "1 Victoria Street. Singapore Management University \nS546789", "signature", "OTP", "Ongoing", "remarks", null, null, null, null, null, itemList));
         taskList.add(new Task(4,1,1,1,"Mr. Lim", "45688962", "startlocation", "1 Victoria Street. Singapore Management University \nS546789", "signature", "OTP", "Ongoing", "remarks", null, null, null, null, null, itemList));
         taskList.add(new Task(5,1,1,1,"Mr. Ong", "45688962", "startlocation", "1 Victoria Street. Singapore Management University \nS546789", "signature", "OTP", "Ongoing", "remarks", null, null, null, null, null, itemList));
+
         return taskList;
     }
     public static ArrayList<Task> createTestTasks2(){
         ArrayList<Task> taskList = new ArrayList<Task>();
-        ArrayList<Item> itemList2 = new ArrayList<Item>();
+        ArrayList<Item> itemList = new ArrayList<Item>();
 
-        itemList2.add(new Item(3,2,1,2,"chicken", "dimen", "image", "nfctag", "barcode", "remarks", null));
-        itemList2.add(new Item(4,2,1,2,"duck", "dimen", "image", "nfctag", "barcode", "remarks", null));
-
-        taskList.add(new Task(2,1,1,1,"receiver1", "receivernum", "startlocation", "endLocation", "signature", "OTP", "Ongoing", "remarks", null, null, null, null, null, itemList2));
+        taskList.add(new Task(4,1,1,1,"Lilo", "45688962", "startlocation", "Universal Studios Singapore \nS546789", "signature", "OTP", "Completed", "remarks", null, null, null, null, null, itemList));
+        taskList.add(new Task(5,1,1,1,"Stitch", "45688962", "startlocation", "Planet from another Universe \nS546789", "signature", "OTP", "Completed", "remarks", null, null, null, null, null, itemList));
         return taskList;
     }
 
     public static ArrayList<Item> createTestItems(){
         ArrayList<Item> itemList = new ArrayList<Item>();
 
-        itemList.add(new Item(1,1,1,2,"Honda", "dimen", "image", "nfctag", "barcode", "remarks", null));
-        itemList.add(new Item(2,1,1,2,"Toyota", "dimen", "image", "nfctag", "barcode", "remarks", null));
-        itemList.add(new Item(3,1,1,2,"Mercedes", "dimen", "image", "nfctag", "barcode", "remarks", null));
-        itemList.add(new Item(4,1,1,2,"BMW", "dimen", "image", "nfctag", "barcode", "remarks", null));
-        itemList.add(new Item(5,1,1,2,"Audi", "dimen", "image", "nfctag", "barcode", "remarks", null));
+        itemList.add(new Item(1,1,1,2,"Honda", "dimen", "image", "null", "barcode", "remarks", null));
+        itemList.add(new Item(2,1,1,2,"Toyota", "dimen", "image", "TAG002", "barcode", "remarks", null));
+        itemList.add(new Item(3,1,1,2,"Mercedes", "dimen", "image", "TAG003", "barcode", "remarks", null));
+        itemList.add(new Item(4,1,1,2,"BMW", "dimen", "image", "TAG004", "barcode", "remarks", null));
+        itemList.add(new Item(5,1,1,2,"Audi", "dimen", "image", "TAG005", "barcode", "remarks", null));
 
         return itemList;
     }
-
-
-
-
 
 }

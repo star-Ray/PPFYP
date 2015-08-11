@@ -21,59 +21,76 @@
             android:layout_marginTop="10dp"
             android:padding="5sp">
 
+            <!--receiver-->
             <TableRow>
                 <TextView
                     android:id="@+id/title_receiver"
                     android:layout_weight="1"
                     android:width="0dp"
-                    android:padding="5sp"
+                    android:paddingLeft="5sp"
+                    android:paddingRight="5sp"
+                    android:paddingTop="5sp"
                     android:text="Receiver:"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/content_receiver"
                     android:layout_weight="2"
                     android:width="0dp"
-                    android:padding="5sp"
+                    android:paddingLeft="5sp"
+                    android:paddingRight="5sp"
+                    android:paddingTop="5sp"
                     android:text="Mr. Song Rui"
-                    android:textSize="15sp"/>
+                    android:textSize="17sp"/>
             </TableRow>
+
+            <!--contact no-->
             <TableRow>
                 <TextView
                     android:id="@+id/title_contactNumber"
                     android:layout_weight="1"
                     android:width="0dp"
-                    android:padding="5sp"
+                    android:paddingLeft="5sp"
+                    android:paddingRight="5sp"
+                    android:paddingTop="5sp"
                     android:text="Contact No:"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/content_contactNumber"
                     android:layout_weight="2"
                     android:width="0dp"
-                    android:padding="5sp"
+                    android:paddingLeft="5sp"
+                    android:paddingRight="5sp"
+                    android:paddingTop="5sp"
                     android:text="98765432"
-                    android:textSize="15sp"/>
+                    android:textSize="17sp"/>
             </TableRow>
+
+            <!--address-->
             <TableRow>
                 <TextView
                     android:id="@+id/title_address"
                     android:layout_weight="1"
                     android:width="0dp"
-                    android:padding="5sp"
+                    android:paddingLeft="5sp"
+                    android:paddingRight="5sp"
+                    android:paddingTop="5sp"
                     android:text="@string/address"
                     android:textColor="@color/black"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/content_address"
                     android:layout_weight="2"
                     android:width="0dp"
-                    android:padding="5sp"
+                    android:paddingLeft="5sp"
+                    android:paddingRight="5sp"
+                    android:paddingTop="5sp"
                     android:text="123 Hougang St 21 #11-02 \nS519929"
-                    android:textSize="15sp"/>
+                    android:textSize="17sp"/>
             </TableRow>
         </TableLayout>
 
@@ -119,6 +136,7 @@
                     android:layout_weight="1"
                     android:width="0dp"
                     android:paddingLeft="5sp"
+                    android:paddingRight="5sp"
                     android:paddingTop="5sp"
                     android:text="10:00AM - 2:00PM"
                     android:textSize="15sp" />
@@ -127,6 +145,7 @@
                     android:layout_weight="1"
                     android:width="0dp"
                     android:paddingLeft="5sp"
+                    android:paddingRight="5sp"
                     android:paddingTop="5sp"
                     android:text="10:00AM - 2:00PM"
                     android:textSize="15sp"/>
@@ -136,12 +155,15 @@
                     android:id="@+id/content_day1"
                     android:layout_weight="1"
                     android:paddingLeft="5sp"
+                    android:paddingRight="5sp"
                     android:paddingTop="5sp"
                     android:text="Today"
                     android:textSize="15sp" />
                 <TextView
                     android:id="@+id/content_day2"
                     android:layout_weight="1"
+                    android:paddingLeft="5sp"
+                    android:paddingRight="5sp"
                     android:paddingTop="5sp"
                     android:text="Tomorrow"
                     android:textSize="15sp"/>

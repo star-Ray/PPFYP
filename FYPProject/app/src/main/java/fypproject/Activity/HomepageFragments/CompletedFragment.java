@@ -22,9 +22,8 @@ import fypproject.Entity.Task;
 import fypproject.R;
 import fypproject.TestCreator;
 
-public class OngoingFragment extends android.support.v4.app.Fragment {
-
-    private static final String TAG = "arnono/OngoingFragment";
+public class CompletedFragment extends android.support.v4.app.Fragment {
+    private static final String TAG = "arnono/CompletedFrag";
 
     private static RecyclerView recyclerView;
     private static RecyclerView.Adapter taskListAdapter;
@@ -49,13 +48,13 @@ public class OngoingFragment extends android.support.v4.app.Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        ArrayList<Task> taskList = TestCreator.createTestTasks1();
+        ArrayList<Task> taskList = TestCreator.createTestTasks2();
         ArrayList<Task> myDataset = taskList;
-        taskListAdapter = new OngoingTaskListAdapter(myDataset);
+        taskListAdapter = new CompletedTaskListAdapter(myDataset);
         recyclerView.setAdapter(taskListAdapter);
     }
 
-    public static class OngoingTaskListAdapter extends RecyclerView.Adapter<OngoingTaskListAdapter.ViewHolder> {
+    public static class CompletedTaskListAdapter extends RecyclerView.Adapter<CompletedTaskListAdapter.ViewHolder> {
         private ArrayList<Task> dataSet;
         Gson gson = new GsonBuilder().setDateFormat(R.string.date_format).create();
 
@@ -95,14 +94,14 @@ public class OngoingFragment extends android.support.v4.app.Fragment {
         }
 
         //        constructor
-        public OngoingTaskListAdapter(ArrayList<Task> myDataset) {
+        public CompletedTaskListAdapter(ArrayList<Task> myDataset) {
             dataSet = myDataset;
         }
 
         // Create new views (invoked by the layout manager)
         @Override
-        public OngoingTaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_ongoing_tasklist, parent, false); // create a new view
+        public CompletedTaskListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_completed_tasklist, parent, false); // create a new view
             ViewHolder vh = new ViewHolder(v); // set the view's size, margins, paddings and layout parameters
             return vh;
         }

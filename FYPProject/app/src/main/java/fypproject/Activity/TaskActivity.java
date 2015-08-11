@@ -3,7 +3,6 @@ package fypproject.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,18 +37,12 @@ public class TaskActivity extends ActionBarActivity {
         setContentView(R.layout.activity_task);
 
         if(savedInstanceState == null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.item_list_container, new ItemListFragment());
             fragmentTransaction.commit();
         }
 
         gson = new GsonBuilder().setDateFormat(getString(R.string.date_format)).create();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         Intent receivedIntent = getIntent();
         String jsonTask = receivedIntent.getStringExtra("task");
@@ -58,7 +51,20 @@ public class TaskActivity extends ActionBarActivity {
         setViews(task);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     private void setViews(Task task){
+        String title = "Task ID: " + String.valueOf(task.getID() + " - Summary");
+        try {
+            getSupportActionBar().setTitle(title);
+        }catch (NullPointerException e){
+            Log.e(TAG, "ActionBar not available. " + e.getMessage());
+            e.printStackTrace();
+        }
+
         TextView receiver = (TextView)findViewById(R.id.content_receiver);
         TextView contactNo = (TextView)findViewById(R.id.content_contactNumber);
         TextView address = (TextView)findViewById(R.id.content_address);
@@ -68,7 +74,6 @@ public class TaskActivity extends ActionBarActivity {
         address.setText(task.getEndLocation());
         Log.i(TAG, "TextViews are set.");
     }
-
 
     public static class ItemListFragment extends android.support.v4.app.Fragment {
 
@@ -91,7 +96,6 @@ public class TaskActivity extends ActionBarActivity {
             return rootView;
         }
     }
-
 
     public static class TaskPageItemListAdapter extends RecyclerView.Adapter<TaskPageItemListAdapter.ViewHolder> {
         private ArrayList<Item> dataSet;
