@@ -2,14 +2,11 @@ package controller;
 
 import model.Sender;
 import model.Company;
-import model.Sender;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import persistence.SenderDAO;
 import persistence.CompanyDAO;
-import persistence.SenderDAO;
 import system.Encrypt;
 import system.Key;
 import system.Message;
@@ -167,6 +164,26 @@ public class SenderCtrl {
 				returnJson.put(Key.MESSAGE, Message.COMPANYNOTEXIST);
 			}
 		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+
+	public static JSONObject changeSenderPassword(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Sender sender = SenderDAO.getSenderById((long) inputJson.get(Key.SENDERID));
+			String password = (String) inputJson.get(Key.PASSWORD);
+			String passwordSalt = Encrypt.nextSalt();
+			String passwordHash = Encrypt.generateSaltedHash(password,passwordSalt);
+			sender.setPasswordSalt(passwordSalt);
+			sender.setPasswordHash(passwordHash);
+			SenderDAO.modifySender(sender);
+			returnJson.put(Key.STATUS, Value.SUCCESS);
+			returnJson.put(Key.MESSAGE, sender.toJson());
+		} catch (Exception e) {
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);

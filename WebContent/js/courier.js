@@ -3,20 +3,20 @@ if (companyId == null) {
     window.location.replace('../pages/login.html');;
 } else {
     $(document).ready(function() {
-    	getCustomersByCompany();
+    	getCouriersByCompany();
     });
 }
 
 var SENDERS = [];
 
-function getCustomersByCompany() {
+function getCouriersByCompany() {
     var input = {};
     input.companyId = Number(companyId);
 
     var inputStr = JSON.stringify(input);
     inputStr = encodeURIComponent(inputStr);
     $.ajax({
-        url: '../admin/GetCustomersByCompanyServlet?input=' + inputStr,
+        url: '../admin/GetCouriersByCompanyServlet?input=' + inputStr,
         method: 'GET',
         dataType: 'json',
         error: function(err) {
@@ -27,20 +27,19 @@ function getCustomersByCompany() {
             var status = data.status;
             var message = data.message;
             if (status == 1) {
-                var senders = message;
-                //console.log(JSON.stringify(senders))
-                SENDERS = senders;
+                var couriers = message;
+                //console.log(JSON.stringify(couriers))
+                SENDERS = couriers;
                 var html = '';
-                for (var o in senders) {
-                    var sender = senders[o];
+                for (var o in couriers) {
+                    var courier = couriers[o];
 
-                    var senderId = sender.senderId;
-                    var name = sender.name;
-                    var contactNo = sender.contactNo;
-                    var username = sender.username;
-                    var date = sender.createDate;
-                    var companyId = sender.company.companyId;
-                    var status = sender.objStatus;
+                    var courierId = courier.courierId;
+                    var name = courier.name;
+                    var contactNo = courier.contactNo;
+                    var username = courier.username;
+                    var date = courier.createDate;
+                    var status = courier.objStatus;
                     var objStatus = '';
                     switch (status) {
                         case 0:
@@ -55,26 +54,26 @@ function getCustomersByCompany() {
                     }
 
                     html += '\
-					<tr id="sender-' + senderId + '">\
-						<td id="senderId-' + senderId + '">' + senderId + '</td>\
-						<td id="name-' + senderId + '">' + name + '</td>\
-						<td id="contactNo-' + senderId + '">' + contactNo + '</td>\
-						<td id="username-' + senderId + '">' + username + '</td>\
+					<tr id="courier-' + courierId + '">\
+						<td id="courierId-' + courierId + '">' + courierId + '</td>\
+						<td id="name-' + courierId + '">' + name + '</td>\
+						<td id="contactNo-' + courierId + '">' + contactNo + '</td>\
+						<td id="username-' + courierId + '">' + username + '</td>\
+						<td id="location-' + courierId + '"></td>\
 						<td>' + date.replace("T", "  ") + '</td>\
-						<td id="companyId-' + senderId + '">' + companyId + '</td>\
-						<td id="objStatus-' + senderId + '">' + objStatus + '</td>\
+						<td id="objStatus-' + courierId + '">' + objStatus + '</td>\
 						<td>\
-							<button class="btn btn-sm btn-success fa fa-file-powerpoint-o" onclick="launchViewTask(' + senderId + ')" title="Tasks"></button>\
-							<button class="btn btn-sm btn-warning fa fa-pencil" onclick="launchEditCustomer(' + senderId + ')" title="Edit"></button>\
-							<button class="btn btn-sm btn-info fa fa-eraser" onclick="launchChangeCustomerPassword(' + senderId + ')" title="Change Password"></button>\
-							<button class="btn btn-sm btn-danger fa fa-trash-o" onclick="launchDeleteCustomer(' + senderId + ')" title="Delete"></button>\
+							<button class="btn btn-sm btn-success fa fa-file-powerpoint-o" onclick="launchViewTask(' + courierId + ')" title="Tasks"></button>\
+							<button class="btn btn-sm btn-warning fa fa-pencil" onclick="launchEditCourier(' + courierId + ')" title="Edit"></button>\
+							<button class="btn btn-sm btn-info fa fa-eraser" onclick="launchChangeCourierPassword(' + courierId + ')" title="Change Password"></button>\
+							<button class="btn btn-sm btn-danger fa fa-trash-o" onclick="launchDeleteCourier(' + courierId + ')" title="Delete"></button>\
 						</td>\
 					</tr>';
                 }
 
-                $("#customers").html(html);
+                $("#couriers").html(html);
 
-                $("#senderTable").DataTable({
+                $("#courierTable").DataTable({
                     destroy: true,
                     searching: true,
                     responsive: true
@@ -86,7 +85,7 @@ function getCustomersByCompany() {
     });
 }
 
-function createCustomer() {
+function createCourier() {
     $("#message").html('');
     $(".my-loading").removeClass('sr-only');
     // console.log("print out the companyId");
@@ -110,7 +109,7 @@ function createCustomer() {
         inputStr = encodeURIComponent(inputStr);
 
         $.ajax({
-                url: '../admin/CreateSenderServlet?input=' + inputStr,
+                url: '../admin/CreateCourierServlet?input=' + inputStr,
                 method: 'POST',
                 dataType: 'json',
                 error: function(err) {
@@ -122,17 +121,17 @@ function createCustomer() {
                     var status = data.status;
                     var message = data.message;
                     if (status == 1) {
-                        $("#senderTable").DataTable().destroy();
-                        var sender = message;
-                        SENDERS.push(sender);
+                        $("#courierTable").DataTable().destroy();
+                        var courier = message;
+                        SENDERS.push(courier);
 
-                        var senderId = sender.senderId;
-                        var name = sender.name;
-                        var contactNo = sender.contactNo;
-                        var username = sender.username;
-                        var date = sender.createDate;
-                        var companyId = sender.company.companyId;
-                        var status = sender.objStatus;
+                        var courierId = courier.courierId;
+                        var name = courier.name;
+                        var contactNo = courier.contactNo;
+                        var username = courier.username;
+                        var date = courier.createDate;
+                        var companyId = courier.company.companyId;
+                        var status = courier.objStatus;
                         var objStatus = '';
                         switch (status) {
                             case 0:
@@ -147,26 +146,26 @@ function createCustomer() {
                         }
 
                         var html = '\
-    					<tr id="sender-' + senderId + '">\
-    						<td id="senderId-' + senderId + '">' + senderId + '</td>\
-    						<td id="name-' + senderId + '">' + name + '</td>\
-    						<td id="contactNo-' + senderId + '">' + contactNo + '</td>\
-    						<td id="username-' + senderId + '">' + username + '</td>\
+    					<tr id="courier-' + courierId + '">\
+    						<td id="courierId-' + courierId + '">' + courierId + '</td>\
+    						<td id="name-' + courierId + '">' + name + '</td>\
+    						<td id="contactNo-' + courierId + '">' + contactNo + '</td>\
+    						<td id="username-' + courierId + '">' + username + '</td>\
     						<td>' + date.replace("T", "  ") + '</td>\
-    						<td id="companyId-' + senderId + '">' + companyId + '</td>\
-    						<td id="objStatus-' + senderId + '">' + objStatus + '</td>\
+    						<td id="companyId-' + courierId + '">' + companyId + '</td>\
+    						<td id="objStatus-' + courierId + '">' + objStatus + '</td>\
     						<td>\
-    							<button class="btn btn-sm btn-success fa fa-file-powerpoint-o" onclick="launchViewTask(' + senderId + ')" title="Tasks"></button>\
-    							<button class="btn btn-sm btn-warning fa fa-pencil" onclick="launchEditCustomer(' + senderId + ')" title="Edit"></button>\
-    							<button class="btn btn-sm btn-info fa fa-eraser" onclick="launchChangeCustomerPassword(' + senderId + ')" title="Change Password"></button>\
-    							<button class="btn btn-sm btn-danger fa fa-trash-o" onclick="launchDeleteCustomer(' + senderId + ')" title="Delete"></button>\
+    							<button class="btn btn-sm btn-success fa fa-file-powerpoint-o" onclick="launchViewTask(' + courierId + ')" title="Tasks"></button>\
+    							<button class="btn btn-sm btn-warning fa fa-pencil" onclick="launchEditCourier(' + courierId + ')" title="Edit"></button>\
+    							<button class="btn btn-sm btn-info fa fa-eraser" onclick="launchChangeCourierPassword(' + courierId + ')" title="Change Password"></button>\
+    							<button class="btn btn-sm btn-danger fa fa-trash-o" onclick="launchDeleteCourier(' + courierId + ')" title="Delete"></button>\
     						</td>\
     					</tr>';
 
-                        $("#customers").append(html);
+                        $("#couriers").append(html);
                         $(".my-loading").addClass('sr-only');
-                        $("#createCustomer").modal('hide');
-                        $("#senderTable").DataTable({
+                        $("#createCourier").modal('hide');
+                        $("#courierTable").DataTable({
                             responsive: true
                         });
                     } else {
@@ -197,27 +196,27 @@ function passwordCheck(ms) {
     }, ms);
 }
 
-function launchEditCustomer(id) {
-    var sender = {};
+function launchEditCourier(id) {
+    var courier = {};
     for (var o in SENDERS) {
         var tempEmp = SENDERS[o];
-        if (tempEmp.senderId == id) {
-            sender = tempEmp;
+        if (tempEmp.courierId == id) {
+            courier = tempEmp;
             break;
         }
     }
-    var name = sender.name;
-    var contactNo = sender.contactNo;
-    var username = sender.username;
-    $("#editCustomerForm").attr('onsubmit','editCustomer(' + id + '); return false;');
+    var name = courier.name;
+    var contactNo = courier.contactNo;
+    var username = courier.username;
+    $("#editCourierForm").attr('onsubmit','editCourier(' + id + '); return false;');
     $("#nameEdit").val(name);
     $("#contactNoEdit").val(contactNo);
     $("#usernameEdit").val(username);
-    $("#editCustomer").modal('show');
+    $("#editCourier").modal('show');
     
 }
 
-function editCustomer(id) {
+function editCourier(id) {
     $("#messageEdit").html('');
     $(".my-loading").removeClass('sr-only');
     var input = {};
@@ -226,7 +225,7 @@ function editCustomer(id) {
     var contactNoEdit = $("#contactNoEdit").val();
     var usernameEdit = $("#usernameEdit").val()
     
-    input.senderId = Number(id);
+    input.courierId = Number(id);
     input.name = nameEdit;
     input.contactNo = contactNoEdit;
     input.username = usernameEdit;
@@ -235,7 +234,7 @@ function editCustomer(id) {
     inputStr = encodeURIComponent(inputStr);
 
     $.ajax({
-        url: '../admin/UpdateSenderServlet?input=' + inputStr,
+        url: '../admin/UpdateCourierServlet?input=' + inputStr,
         method: 'GET',
         dataType: 'json',
         error: function(err) {
@@ -256,13 +255,13 @@ function editCustomer(id) {
                 $("#username-" + id).html(username);
                 $("#contactNo-" + id).html(contactNo);
                 for (var o in SENDERS) {
-                    var sender = SENDERS[o];
-                    if (sender.senderId == id) {
+                    var courier = SENDERS[o];
+                    if (courier.courierId == id) {
                         SENDERS[o] = message;
                         break;
                     }
                 }
-                $("#editCustomer").modal('hide');
+                $("#editCourier").modal('hide');
             } else {
                 $("#messageEdit").html(message);
             }
@@ -271,10 +270,10 @@ function editCustomer(id) {
     });
 }
 
-function launchChangeCustomerPassword(id) {
-    $("#changeCustomerPasswordForm").attr('onsubmit',
-        'changeCustomerPassword(' + id + '); return false;');
-    $("#changeCustomerPassword").modal('show');
+function launchChangeCourierPassword(id) {
+    $("#changeCourierPasswordForm").attr('onsubmit',
+        'changeCourierPassword(' + id + '); return false;');
+    $("#changeCourierPassword").modal('show');
 }
 
 function passwordEditCheck(ms) {
@@ -291,7 +290,7 @@ function passwordEditCheck(ms) {
     }, ms);
 }
 
-function changeCustomerPassword(id) {
+function changeCourierPassword(id) {
     $("#messageChangePassword").html('');
     $(".my-loading").removeClass('sr-only');
     var input = {};
@@ -302,14 +301,14 @@ function changeCustomerPassword(id) {
         $("#messageChangePassword").html("Please confirm your password again!");
         $(".my-loading").addClass('sr-only');
     } else {
-        input.senderId = id;
+        input.courierId = id;
         input.password = password;
 
         var inputStr = JSON.stringify(input);
         inputStr = encodeURIComponent(inputStr);
 
         $.ajax({
-            url: '../admin/ChangeCustomerPasswordServlet?input=' + inputStr,
+            url: '../admin/ChangeCourierPasswordServlet?input=' + inputStr,
             method: 'GET',
             async: false,
             dataType: 'json',
@@ -321,7 +320,7 @@ function changeCustomerPassword(id) {
                 var status = data.status;
                 var message = data.message;
                 if (status == 1) {
-                    $("#changeCustomerPassword").modal('hide');
+                    $("#changeCourierPassword").modal('hide');
                 } else {
                     $("#messageChangePassword").html(message);
                 }
@@ -331,32 +330,32 @@ function changeCustomerPassword(id) {
     }
 }
 
-function launchDeleteCustomer(id) {
-    $("#deleteCustomerForm").attr('onsubmit',
-        'deleteCustomer(' + id + '); return false;');
-    $("#deleteCustomer").modal('show');
+function launchDeleteCourier(id) {
+    $("#deleteCourierForm").attr('onsubmit',
+        'deleteCourier(' + id + '); return false;');
+    $("#deleteCourier").modal('show');
 }
 
-function deleteCustomer(id) {
-    $("#messageDeleteCustomer").html('');
+function deleteCourier(id) {
+    $("#messageDeleteCourier").html('');
     $(".my-loading").removeClass('sr-only');
-    var sender = {};
+    var courier = {};
     for (var o in SENDERS) {
         var tempSen = SENDERS[o];
-        if (tempSen.senderId == id) {
-            sender = tempSen;
+        if (tempSen.courierId == id) {
+            courier = tempSen;
             break;
         }
     }
-    var name = sender.name;
+    var name = courier.name;
     var nameDelete = $("#nameDelete").val();
     var input = {};
-    input.senderId = id;
+    input.courierId = id;
     var inputStr = JSON.stringify(input);
     inputStr = encodeURIComponent(inputStr);
     if (nameDelete == name) {
         $.ajax({
-            url: '../admin/DeleteSenderServlet?input=' + inputStr,
+            url: '../admin/DeleteCourierServlet?input=' + inputStr,
             method: 'GET',
             async: false,
             dataType: 'json',
@@ -370,16 +369,16 @@ function deleteCustomer(id) {
                 if (status == 1) {
                     var tempCus = message;
                     var objStatus = tempCus.objStatus;
-                    $("#sender-" + id).remove();
-                    $("#deleteCustomer").modal('hide');
+                    $("#courier-" + id).remove();
+                    $("#deleteCourier").modal('hide');
                 } else {
-                    $("#messageDeleteCustomer").html(message);
+                    $("#messageDeleteCourier").html(message);
                 }
                 $(".my-loading").addClass('sr-only');
             }
         });
     } else {
-        $("#messageDeleteCustomer").html('The sender name mis-match!');
+        $("#messageDeleteCourier").html('The courier name mis-match!');
         $(".my-loading").addClass('sr-only');
     }
 }
@@ -387,7 +386,7 @@ function deleteCustomer(id) {
 function launchViewTask(id) {
     window.location.href = "managedeliverytask.html#" + id;
     var inputStr = JSON.stringify(id);
-    localStorage.setItem('senderId', inputStr);
+    localStorage.setItem('courierId', inputStr);
 }
 
 // upload image

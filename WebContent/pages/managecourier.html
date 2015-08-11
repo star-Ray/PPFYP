@@ -188,10 +188,10 @@
 						<i class="fa fa-caret-down"></i>
 				</a>
 					<ul class="dropdown-menu dropdown-user">
-						<li><a href="profile.html"><i class="fa fa-user fa-fw"></i> User
-								Profile</a></li>
-						<li><a href="setting.html"><i class="fa fa-gear fa-fw"></i> Settings</a>
-						</li>
+						<li><a href="profile.html"><i class="fa fa-user fa-fw"></i>
+								User Profile</a></li>
+						<li><a href="setting.html"><i class="fa fa-gear fa-fw"></i>
+								Settings</a></li>
 						<li class="divider"></li>
 						<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
 								Logout</a></li>
@@ -213,28 +213,29 @@
 								</span>
 							</div> <!-- /input-group -->
 						</li>
-						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
-						</li>
-						<li><a href="managedeliverytask.html"><i class="fa fa-bar-chart-o fa-fw"></i>Manage
-								Delivery Task<span class="fa arrow"></span></a>
+						<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a></li>
+						<li><a href="managedeliverytask.html"><i
+								class="fa fa-bar-chart-o fa-fw"></i>Manage Delivery Task<span
+								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
+								<li><a href="managedeliverytask.html">View All Task</a></li>
 								<li><a href="trackprogress.html">Track Progress</a></li>
 								<li><a href="createtask.html">Create New Delivery Task</a></li>
 							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="managedeliverytask.html"><i class="fa fa-bar-chart-o fa-fw"></i>Task
-								Assignment<span class="fa arrow"></span></a>
+						<li><a href="managetask.html"><i
+								class="fa fa-bar-chart-o fa-fw"></i>Task Assignment<span
+								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="direct.html">Direct Assignment</a></li>
 								<li><a href="broadcast.html">Broadcast Assignment</a></li>
 							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="managecourier.html"><i class="fa fa-table fa-fw"></i>Manage
+						<li><a href="#"><i class="fa fa-table fa-fw"></i>Manage
 								Couriers</a></li>
-						<li><a href="managecustomer.html"><i class="fa fa-table fa-fw"></i>Manage
-								Customers</a></li>
+						<li><a href="managecustomer.html"><i
+								class="fa fa-table fa-fw"></i>Manage Couriers</a></li>
 
-						<li><a href="manageaccount.html"><i class="fa fa-sitemap fa-fw"></i>
-								Account Management</a>
-</li>
+						<li><a href="manageaccount.html"><i
+								class="fa fa-sitemap fa-fw"></i> Account Management</a></li>
 					</ul>
 				</div>
 				<!-- /.sidebar-collapse -->
@@ -246,6 +247,11 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">Courier Management</h1>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary pull-right"
+						data-toggle="modal" data-target="#createCourier"
+						data-whatever="@mdo">Create New Courier</button>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -263,14 +269,15 @@
 										<tr>
 											<th>Courier ID</th>
 											<th>Name</th>
-											<th>Contact Number</th>
-											<th>Real Time Location</th>
+											<th>ContactNo</th>
+											<th>Username</th>
+											<th>Real-TimeLocation</th>
 											<th>Status</th>
-											<th>Create Date</th>
-											<th>Remark</th>
+											<th>JoinDate</th>
+											<th>Option</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id='couriers'>
 										<tr class="odd gradeX">
 											<td align="center">data</td>
 											<td>data</td>
@@ -300,6 +307,209 @@
 			</div>
 			<!-- /#page-wrapper -->
 
+			<!-- Create courier -->
+			<div class="modal fade" id="createCourier" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="exampleModalLabel">New Courier</h4>
+
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="createCourierForm"
+								onsubmit="createCourier();return false;">
+								<div class="form-group">
+									<label for="name" class="col-sm-3 control-label">CourierName</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="name"
+											placeholder="Courier Name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="contactNo" class="col-sm-3 control-label">Contact
+										Number</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="contactNo"
+											placeholder="0000 0000">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="name" class="col-sm-3 control-label">UserName</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="username"
+											placeholder="Courier Name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="col-sm-3 control-label">Password</label>
+									<div class="col-sm-9">
+										<input type="password" class="form-control" id="password"
+											placeholder="Password">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password2" class="col-sm-3 control-label">Confirm
+										Password</label>
+									<div class="col-sm-9">
+										<input type="password" class="form-control" id="password2"
+											placeholder="Confirm Password" oninput="passwordCheck(100);">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<font color="red" id="message"></font> <img
+										src="../asset/img/ajax-loader.gif" class="my-loading sr-only">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">Add New
+										Courier</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Edit courier form section -->
+			<div class="modal fade" id="editCourier" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Edit Courier</h4>
+						</div>
+						<div class="modal-body">
+							<form id="editCourierForm" class="form-horizontal">
+								<div class="form-group">
+									<label for="name" class="col-sm-3 control-label">CourierName</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="nameEdit"
+											placeholder="Courier Name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="contactNo" class="col-sm-3 control-label">Contact
+										Number</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="contactNoEdit"
+											placeholder="0000 0000">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="name" class="col-sm-3 control-label">UserName</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="usernameEdit"
+											placeholder="Courier Name">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<font color="red" id="messageEdit"></font> <img
+										src="../asset/img/ajax-loader.gif" class="my-loading sr-only">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-warning">Save</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="changeCourierPassword" class="modal fade bs-example-modal"
+				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Change Password</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="changeCourierPasswordForm"
+								onsubmit="changeCourierPassword(0); return false;">
+								<div class="form-group">
+									<label for="passwordEdit" class="col-sm-2 control-label">Password</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" id="passwordEdit"
+											placeholder="Password" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password2Edit" class="col-sm-2 control-label">Confirm
+										Password</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" id="password2Edit"
+											placeholder="Confirm Password" required
+											oninput="passwordEditCheck(100);">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-8 col-xs-10">
+										<button type="submit" class="btn btn-info">Change</button>
+										<font color="red" id="messageChangePassword"></font> <img
+											src="../asset/img/ajax-loader.gif" class="my-loading sr-only">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" class="btn btn-default pull-right"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="deleteCourier" class="modal fade bs-example-modal-lg"
+				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Delete Courier</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="deleteCourierForm"
+								onsubmit="deleteCourier(0); return false;">
+								<div class="form-group">
+									<label for="nameDelete" class="col-sm-2 control-label">Name</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="nameDelete"
+											placeholder="Please key in the employee name to confirm delete!"
+											required>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-8 col-xs-10">
+										<button type="submit" class="btn btn-danger">Delete</button>
+										<font color="red" id="messageDeleteCourier"></font> <img
+											src="../asset/img/ajax-loader.gif" class="my-loading sr-only">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" class="btn btn-default pull-right"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 		<!-- /#wrapper -->
 
@@ -322,14 +532,8 @@
 		<!-- Custom Theme JavaScript -->
 		<script src="../dist/js/sb-admin-2.js"></script>
 
-		<!-- Page-Level Demo Scripts - Tables - Use for reference -->
-		<script>
-			$(document).ready(function() {
-				$('#dataTables-example').DataTable({
-					responsive : true
-				});
-			});
-		</script>
+		<!-- Custom JavaScript -->
+		<script src="../js/courier.js"></script>
 </body>
 
 </html>

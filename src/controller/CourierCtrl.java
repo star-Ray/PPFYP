@@ -2,11 +2,15 @@ package controller;
 
 import model.Company;
 import model.Courier;
+import model.Courier;
+import model.Courier;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import persistence.CompanyDAO;
+import persistence.CourierDAO;
+import persistence.CourierDAO;
 import persistence.CourierDAO;
 import system.Encrypt;
 import system.Key;
@@ -172,6 +176,49 @@ public class CourierCtrl {
 			returnJson.put(Key.MESSAGE, e);
 		}
 		
+		return returnJson;
+	}
+
+	public static JSONObject getCouriersByCompany(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try{
+			Company company = CompanyDAO.getCompanyById((long) inputJson.get(Key.COMPANYID));
+			if(company != null){
+				JSONArray courierJArr = new JSONArray();
+				for(Courier c: CourierDAO.getCouriersByCompany(company)){
+					courierJArr.add(c.toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, courierJArr);
+			}else{
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.COMPANYNOTEXIST);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+
+	public static JSONObject changeCourierPassword(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Courier courier = CourierDAO.getCourierById((long) inputJson.get(Key.SENDERID));
+			String password = (String) inputJson.get(Key.PASSWORD);
+			String passwordSalt = Encrypt.nextSalt();
+			String passwordHash = Encrypt.generateSaltedHash(password,passwordSalt);
+			courier.setPasswordSalt(passwordSalt);
+			courier.setPasswordHash(passwordHash);
+			CourierDAO.modifyCourier(courier);
+			returnJson.put(Key.STATUS, Value.SUCCESS);
+			returnJson.put(Key.MESSAGE, courier.toJson());
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
 		return returnJson;
 	}
 }
