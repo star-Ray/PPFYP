@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -110,7 +109,7 @@ public class HomepageActivity extends ActionBarActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
 
 //        Drawer view
-        String[] drawerArr = new String[]{"My Profile", "Read NFC Tag", "Write to NFC Tag", "test1", "test2", "maps", "Logout"};
+        String[] drawerArr = new String[]{"My Profile", "Read NFC Tag", "Write to NFC Tag", "Maps", "test1", "test2", "Logout"};
         final ArrayAdapter<String> drawerAdapter = new ArrayAdapter<String>(this, R.layout.drawer_item, drawerArr);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 
@@ -138,10 +137,8 @@ public class HomepageActivity extends ActionBarActivity {
                         case "test2":
                             intent = new Intent(context, Test2Activity.class);
                             break;
-                        case "maps":
-//                            Uri location = Uri.parse("https://www.google.com.sg/maps/dir/1.2771206,103.8564106/Suntec+Singapore+Convention+%26+Exhibition+Centre,+1+Raffles+Boulevard,+Suntec+City,+Singapore+039593/@1.2889031,103.8500284,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x31da19af38dd2bf3:0xd63e8cb2dacf54c7!2m2!1d103.857075!2d1.293455");
-//                            intent = new Intent(Intent.ACTION_VIEW, location);
-                            intent = new Intent(context, MapTestActivity.class);
+                        case "Maps":
+                            intent = new Intent(context, MapActivity.class);
                             break;
                         case "Write to NFC Tag":
                             intent = new Intent(context, WriteNFCActivity.class);

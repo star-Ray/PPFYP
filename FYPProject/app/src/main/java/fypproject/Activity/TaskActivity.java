@@ -60,6 +60,8 @@ public class TaskActivity extends ActionBarActivity {
 
     private void setViews(Task task){
         String title = "Task ID: " + String.valueOf(task.getTaskId() + " - Summary");
+        final Context context = getApplicationContext();
+
         try {
             getSupportActionBar().setTitle(title);
         }catch (NullPointerException e){
@@ -79,8 +81,9 @@ public class TaskActivity extends ActionBarActivity {
         address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri location = Uri.parse("https://www.google.com.sg/maps/dir/1.2771206,103.8564106/Suntec+Singapore+Convention+%26+Exhibition+Centre,+1+Raffles+Boulevard,+Suntec+City,+Singapore+039593/@1.2889031,103.8500284,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x31da19af38dd2bf3:0xd63e8cb2dacf54c7!2m2!1d103.857075!2d1.293455");
-                Intent intent = new Intent(Intent.ACTION_VIEW, location);
+                Intent intent = new Intent(context, MapActivity.class);
+                intent.putExtra("longitude", 1.23);
+                intent.putExtra("latitude", 1.23);
                 startActivity(intent);
             }
         });
@@ -102,7 +105,6 @@ public class TaskActivity extends ActionBarActivity {
             recyclerView = (RecyclerView) rootView.findViewById(R.id.taskRecyclerView);
             recyclerView.setHasFixedSize(true);
             layoutManager = new MyLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-//            layoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(layoutManager);
 
             ArrayList<Item> dataSet = TestCreator.createTestItems();

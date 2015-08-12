@@ -114,7 +114,7 @@
             android:value="@string/API_KEY" />
 
         <activity
-            android:name=".Activity.MapTestActivity"
+            android:name=".Activity.MapActivity"
             android:label="@string/title_activity_test3" >
         </activity>
     </application>
