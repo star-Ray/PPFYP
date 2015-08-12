@@ -115,7 +115,7 @@
 
         <activity
             android:name=".Activity.MapActivity"
-            android:label="@string/title_activity_test3" >
+            android:label="@string/title_activity_map" >
         </activity>
     </application>
 

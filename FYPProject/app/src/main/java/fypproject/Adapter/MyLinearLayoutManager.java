@@ -52,7 +52,7 @@ public class MyLinearLayoutManager extends LinearLayoutManager {
             case View.MeasureSpec.UNSPECIFIED:
         }
 
-        System.out.println("heightMode: " + heightMode);
+//        System.out.println("heightMode: " + heightMode);
         switch (heightMode) {
             case View.MeasureSpec.EXACTLY:
                 height = heightSize;

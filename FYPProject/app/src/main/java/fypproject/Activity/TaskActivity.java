@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -82,8 +83,8 @@ public class TaskActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MapActivity.class);
-                intent.putExtra("longitude", 1.23);
-                intent.putExtra("latitude", 1.23);
+                LatLng location = new LatLng(1.30, 103.8); //singapore
+                intent.putExtra("location", gson.toJson(location));
                 startActivity(intent);
             }
         });

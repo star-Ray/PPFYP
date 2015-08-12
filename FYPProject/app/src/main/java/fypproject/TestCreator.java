@@ -1,5 +1,7 @@
 package fypproject;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 
 import fypproject.Entity.Courier;
@@ -52,5 +54,18 @@ public class TestCreator {
 
         return itemList;
     }
+
+    public static ArrayList<LatLng> getTestLocations(){
+        ArrayList<LatLng> list = new ArrayList<>();
+
+        list.add(new LatLng(1.296568, 103.852118)); //smu
+        list.add(new LatLng(1.34831, 103.683135)); //ntu
+        list.add(new LatLng(1.340374, 103.963195)); //sutd
+        list.add(new LatLng(1.296643, 103.776394)); //nus
+        list.add(new LatLng(1.329471, 103.776137)); //sim
+
+        return list;
+    }
+
 
 }

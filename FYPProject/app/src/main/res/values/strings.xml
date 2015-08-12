@@ -35,7 +35,7 @@
     <string name="title_activity_tab">TabActivity</string>
     <string name="title_activity_bidding">My Bidding Activities</string>
     <string name="title_activity_task2">Task2Activity</string>
-    <string name="title_activity_test3">Test3</string>
+    <string name="title_activity_map">Map</string>
     <string name="title_activity_main_activity1111">MainActivity1111</string>
     <string name="title_activity_item">ItemActivity</string>
 </resources>
