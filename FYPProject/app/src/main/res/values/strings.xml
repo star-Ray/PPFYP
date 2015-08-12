@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">CDMS</string>
     <string name="app_key">arnold.fypproject</string>
+    <string name="API_KEY">AIzaSyBfwLXljS4HlZ4fyary1T6YctIB0yezshc</string>
 
     <string name="address">Address:</string>
     <string name="action_settings">Settings</string>
@@ -30,7 +31,7 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_test2">Test2Activity</string>
     <string name="title_activity_read_nfc">Read NFC Tag</string>
-    <string name="title_activity_write_nfc">WriteNFCActivity</string>
+    <string name="title_activity_write_nfc">Write NFC Tag</string>
     <string name="title_activity_tab">TabActivity</string>
     <string name="title_activity_bidding">My Bidding Activities</string>
     <string name="title_activity_task2">Task2Activity</string>

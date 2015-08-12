@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -83,6 +84,7 @@ public class WriteNFCActivity extends ActionBarActivity {
     }
 
     public void writeTag(NTag tag){
+        TextView textStatus = (TextView) findViewById(R.id.content_status);
         try {
             String jsonItem = getIntent().getStringExtra("item");
             if(jsonItem == null){
@@ -93,6 +95,7 @@ public class WriteNFCActivity extends ActionBarActivity {
             NdefMessage message = new NdefMessage(record);
 
             tag.connect();
+            textStatus.setText("Connected to Tag");
             Log.i(TAG, "Connected to Tag");
 
             Log.i(TAG, "Tag Name: " + tag.getTagName());
@@ -103,9 +106,11 @@ public class WriteNFCActivity extends ActionBarActivity {
             Log.i(TAG, "Tag Total Memory: " + tag.getCardDetails().totalMemory);
             
             tag.writeNDEF(message);
+            textStatus.setText("Writing to Tag...");
             Log.d(TAG, "Writing message to Tag.");
             
             tag.close();
+            textStatus.setText("Write complete");
             Log.i(TAG, "Tag disconnected");
 
         } catch (IOException | SmartCardException e) {

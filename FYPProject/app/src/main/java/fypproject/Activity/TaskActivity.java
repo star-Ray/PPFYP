@@ -2,6 +2,7 @@ package fypproject.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -73,7 +75,20 @@ public class TaskActivity extends ActionBarActivity {
         contactNo.setText(task.getReceiverContact());
         address.setText(task.getEndLocation());
         Log.i(TAG, "TextViews are set.");
+
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri location = Uri.parse("https://www.google.com.sg/maps/dir/1.2771206,103.8564106/Suntec+Singapore+Convention+%26+Exhibition+Centre,+1+Raffles+Boulevard,+Suntec+City,+Singapore+039593/@1.2889031,103.8500284,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x31da19af38dd2bf3:0xd63e8cb2dacf54c7!2m2!1d103.857075!2d1.293455");
+                Intent intent = new Intent(Intent.ACTION_VIEW, location);
+                startActivity(intent);
+            }
+        });
     }
+
+
+
+
 
     public static class ItemListFragment extends android.support.v4.app.Fragment {
 

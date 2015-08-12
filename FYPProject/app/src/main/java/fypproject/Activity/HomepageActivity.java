@@ -139,8 +139,9 @@ public class HomepageActivity extends ActionBarActivity {
                             intent = new Intent(context, Test2Activity.class);
                             break;
                         case "maps":
-                            Uri location = Uri.parse("https://www.google.com.sg/maps/dir/1.2771206,103.8564106/Suntec+Singapore+Convention+%26+Exhibition+Centre,+1+Raffles+Boulevard,+Suntec+City,+Singapore+039593/@1.2889031,103.8500284,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x31da19af38dd2bf3:0xd63e8cb2dacf54c7!2m2!1d103.857075!2d1.293455");
-                            intent = new Intent(Intent.ACTION_VIEW, location);
+//                            Uri location = Uri.parse("https://www.google.com.sg/maps/dir/1.2771206,103.8564106/Suntec+Singapore+Convention+%26+Exhibition+Centre,+1+Raffles+Boulevard,+Suntec+City,+Singapore+039593/@1.2889031,103.8500284,15z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x31da19af38dd2bf3:0xd63e8cb2dacf54c7!2m2!1d103.857075!2d1.293455");
+//                            intent = new Intent(Intent.ACTION_VIEW, location);
+                            intent = new Intent(context, MapTestActivity.class);
                             break;
                         case "Write to NFC Tag":
                             intent = new Intent(context, WriteNFCActivity.class);

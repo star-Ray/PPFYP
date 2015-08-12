@@ -107,30 +107,25 @@
         android:layout_height="1dp"
         android:background="@android:color/darker_gray"/>
 
-    <TextView
-        android:id="@+id/text_name2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_name"
-        android:layout_alignStart="@+id/text_name"
-        android:layout_alignTop="@+id/text_name"
-        android:layout_marginTop="50dp"
-        android:text="Insert shared pref"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+    <!--<TextView-->
+        <!--android:id="@+id/text_name2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignLeft="@+id/text_name"-->
+        <!--android:layout_alignStart="@+id/text_name"-->
+        <!--android:layout_alignTop="@+id/text_name"-->
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:text="Insert shared pref"-->
+        <!--android:textSize="30sp"-->
+        <!--android:textStyle="bold" />-->
 
-    <Button
-        android:id="@+id/button_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:onClick="openCamera"
-        android:text="Camera" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"></RelativeLayout>
+    <!--<Button-->
+        <!--android:id="@+id/button_camera"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:onClick="openCamera"-->
+        <!--android:text="Camera" />-->
 
 </LinearLayout>

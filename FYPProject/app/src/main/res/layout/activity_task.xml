@@ -87,6 +87,7 @@
                     android:id="@+id/content_address"
                     android:layout_weight="2"
                     android:width="0dp"
+                    android:background="@drawable/blackborder"
                     android:paddingLeft="5sp"
                     android:paddingRight="5sp"
                     android:paddingTop="5sp"

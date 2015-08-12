@@ -23,9 +23,9 @@ public class MyLinearLayoutManager extends LinearLayoutManager {
         final int heightSize = View.MeasureSpec.getSize(heightSpec);
         int width = 0;
         int height = 0;
-        System.out.println("getItemCount: " + getItemCount());
+//        System.out.println("getItemCount: " + getItemCount());
         for (int i = 0; i < getItemCount(); i++) {
-            System.out.println("oldHeight: " + height);
+//            System.out.println("oldHeight: " + height);
             measureScrapChild(recycler, i,
                     View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
                     View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
@@ -42,9 +42,9 @@ public class MyLinearLayoutManager extends LinearLayoutManager {
                     width = mMeasuredDimension[0];
                 }
             }
-            System.out.println("newHeight: " + height);
+//            System.out.println("newHeight: " + height);
         }
-        System.out.println("widthMode: " + widthMode);
+//        System.out.println("widthMode: " + widthMode);
         switch (widthMode) {
             case View.MeasureSpec.EXACTLY:
                 width = widthSize;
