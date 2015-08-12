@@ -10,6 +10,7 @@ public class Value {
 	public static final String DRAFT = "draft";
 	public static final String SUBMITTED = "submitted";
 	public static final String APPROVE = "approve";
+	public static final String COLLECTED = "collected";
 	public static final String REJECT = "reject";
 	public static final String CANCEL = "cancel";
 	public static final String COMPLETE = "complete";
