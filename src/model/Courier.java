@@ -218,7 +218,7 @@ public class Courier {
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
 		
-		returnJson.put(Key.COMPANY, this.company);
+		returnJson.put(Key.COMPANY, this.company.toJson());
 		
 		return returnJson;
 	}
@@ -236,7 +236,7 @@ public class Courier {
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
 		
-		returnJson.put(Key.COMPANY, this.company);
+		returnJson.put(Key.COMPANY, this.company.toJson());
 		
 		JSONArray taskJArr = new JSONArray();
 		for(Task t : TaskDAO.getTasksByCourier(this)){

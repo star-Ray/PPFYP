@@ -205,7 +205,7 @@ public class CourierCtrl {
 	public static JSONObject changeCourierPassword(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Courier courier = CourierDAO.getCourierById((long) inputJson.get(Key.SENDERID));
+			Courier courier = CourierDAO.getCourierById((long) inputJson.get(Key.COURIERID));
 			String password = (String) inputJson.get(Key.PASSWORD);
 			String passwordSalt = Encrypt.nextSalt();
 			String passwordHash = Encrypt.generateSaltedHash(password,passwordSalt);

@@ -7,13 +7,14 @@ if (companyId == null) {
     });
 }
 
-var SENDERS = [];
+var COURIERS = [];
 
 function getCouriersByCompany() {
     var input = {};
     input.companyId = Number(companyId);
 
     var inputStr = JSON.stringify(input);
+    //console.log(inputStr);
     inputStr = encodeURIComponent(inputStr);
     $.ajax({
         url: '../admin/GetCouriersByCompanyServlet?input=' + inputStr,
@@ -29,7 +30,7 @@ function getCouriersByCompany() {
             if (status == 1) {
                 var couriers = message;
                 //console.log(JSON.stringify(couriers))
-                SENDERS = couriers;
+                COURIERS = couriers;
                 var html = '';
                 for (var o in couriers) {
                     var courier = couriers[o];
@@ -123,7 +124,7 @@ function createCourier() {
                     if (status == 1) {
                         $("#courierTable").DataTable().destroy();
                         var courier = message;
-                        SENDERS.push(courier);
+                        COURIERS.push(courier);
 
                         var courierId = courier.courierId;
                         var name = courier.name;
@@ -198,8 +199,8 @@ function passwordCheck(ms) {
 
 function launchEditCourier(id) {
     var courier = {};
-    for (var o in SENDERS) {
-        var tempEmp = SENDERS[o];
+    for (var o in COURIERS) {
+        var tempEmp = COURIERS[o];
         if (tempEmp.courierId == id) {
             courier = tempEmp;
             break;
@@ -254,10 +255,10 @@ function editCourier(id) {
                 $("#name-" + id).html(name);
                 $("#username-" + id).html(username);
                 $("#contactNo-" + id).html(contactNo);
-                for (var o in SENDERS) {
-                    var courier = SENDERS[o];
+                for (var o in COURIERS) {
+                    var courier = COURIERS[o];
                     if (courier.courierId == id) {
-                        SENDERS[o] = message;
+                        COURIERS[o] = message;
                         break;
                     }
                 }
@@ -340,8 +341,8 @@ function deleteCourier(id) {
     $("#messageDeleteCourier").html('');
     $(".my-loading").removeClass('sr-only');
     var courier = {};
-    for (var o in SENDERS) {
-        var tempSen = SENDERS[o];
+    for (var o in COURIERS) {
+        var tempSen = COURIERS[o];
         if (tempSen.courierId == id) {
             courier = tempSen;
             break;

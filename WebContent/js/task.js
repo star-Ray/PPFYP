@@ -1,6 +1,6 @@
 var companyId = localStorage.getItem('companyId');
 if(companyId==null){
-	window.location.replace('/Payroll/login.html');;
+	window.location.replace('../pages/login.html');;
 }else{
 	$(document).ready(function(){
 		getTasksByCompany();
@@ -15,7 +15,7 @@ function getTasksByCompany(){
 	
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
-	console.log("entered the get task function");
+	//console.log("entered the get task function");
 	$.ajax({
 		url: '/Payroll/admin/GetTasksByCompanyServlet?input='+inputStr,
 		method: 'GET',
