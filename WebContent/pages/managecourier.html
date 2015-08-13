@@ -229,10 +229,12 @@
 								<li><a href="direct.html">Direct Assignment</a></li>
 								<li><a href="broadcast.html">Broadcast Assignment</a></li>
 							</ul> <!-- /.nav-second-level --></li>
-						<li><a href="#"><i class="fa fa-table fa-fw"></i>Manage
-								Couriers</a></li>
-						<li><a href="managecustomer.html"><i
-								class="fa fa-table fa-fw"></i>Manage Customers</a></li>
+						<li>
+							<a href="#"><i class="fa fa-table fa-fw"></i>Manage Couriers</a>
+						</li>
+						<li>
+							<a href="managecustomer.html"><i class="fa fa-table fa-fw"></i>Manage Customers</a>
+						</li>
 
 						<li><a href="manageaccount.html"><i
 								class="fa fa-sitemap fa-fw"></i> Account Management</a></li>
@@ -278,24 +280,7 @@
 										</tr>
 									</thead>
 									<tbody id='couriers'>
-										<tr class="odd gradeX">
-											<td align="center">data</td>
-											<td>data</td>
-											<td>data</td>
-											<td align="center">data</td>
-											<td class="center">data</td>
-											<td class="center">data</td>
-											<td class="center">data</td>
-										</tr>
-										<tr class="even gradeC">
-											<td align="center">data</td>
-											<td>data</td>
-											<td>data</td>
-											<td align="center">data</td>
-											<td class="center">data</td>
-											<td class="center">data</td>
-											<td class="center">data</td>
-										</tr>
+										
 									</tbody>
 								</table>
 							</div>
@@ -497,6 +482,209 @@
 									<div class="col-sm-offset-2 col-sm-8 col-xs-10">
 										<button type="submit" class="btn btn-danger">Delete</button>
 										<font color="red" id="messageDeleteCourier"></font> <img
+											src="../asset/img/ajax-loader.gif" class="my-loading sr-only">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" class="btn btn-default pull-right"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Create task -->
+			<div class="modal fade" id="createTask" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="exampleModalLabel">New Task</h4>
+
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="createTaskForm"
+								onsubmit="createTask();return false;">
+								<div class="form-group">
+									<label for="name" class="col-sm-3 control-label">TaskName</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="name"
+											placeholder="Task Name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="contactNo" class="col-sm-3 control-label">Contact
+										Number</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="contactNo"
+											placeholder="0000 0000">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="name" class="col-sm-3 control-label">UserName</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="username"
+											placeholder="Task Name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="col-sm-3 control-label">Password</label>
+									<div class="col-sm-9">
+										<input type="password" class="form-control" id="password"
+											placeholder="Password">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password2" class="col-sm-3 control-label">Confirm
+										Password</label>
+									<div class="col-sm-9">
+										<input type="password" class="form-control" id="password2"
+											placeholder="Confirm Password" oninput="passwordCheck(100);">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<font color="red" id="message"></font> <img
+										src="../asset/img/ajax-loader.gif" class="my-loading sr-only">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">Add New
+										Task</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Edit task form section -->
+			<div class="modal fade" id="editTask" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Edit Task</h4>
+						</div>
+						<div class="modal-body">
+							<form id="editTaskForm" class="form-horizontal">
+								<div class="form-group">
+									<label for="name" class="col-sm-3 control-label">TaskName</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="nameEdit"
+											placeholder="Task Name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="contactNo" class="col-sm-3 control-label">Contact
+										Number</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="contactNoEdit"
+											placeholder="0000 0000">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="name" class="col-sm-3 control-label">UserName</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control" id="usernameEdit"
+											placeholder="Task Name">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<font color="red" id="messageEdit"></font> <img
+										src="../asset/img/ajax-loader.gif" class="my-loading sr-only">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-warning">Save</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="changeTaskPassword" class="modal fade bs-example-modal"
+				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Change Password</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="changeTaskPasswordForm"
+								onsubmit="changeTaskPassword(0); return false;">
+								<div class="form-group">
+									<label for="passwordEdit" class="col-sm-2 control-label">Password</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" id="passwordEdit"
+											placeholder="Password" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password2Edit" class="col-sm-2 control-label">Confirm
+										Password</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" id="password2Edit"
+											placeholder="Confirm Password" required
+											oninput="passwordEditCheck(100);">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-8 col-xs-10">
+										<button type="submit" class="btn btn-info">Change</button>
+										<font color="red" id="messageChangePassword"></font> <img
+											src="../asset/img/ajax-loader.gif" class="my-loading sr-only">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" class="btn btn-default pull-right"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="deleteTask" class="modal fade bs-example-modal-lg"
+				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">Delete Task</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="deleteTaskForm"
+								onsubmit="deleteTask(0); return false;">
+								<div class="form-group">
+									<label for="nameDelete" class="col-sm-2 control-label">Name</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="nameDelete"
+											placeholder="Please key in the employee name to confirm delete!"
+											required>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-8 col-xs-10">
+										<button type="submit" class="btn btn-danger">Delete</button>
+										<font color="red" id="messageDeleteTask"></font> <img
 											src="../asset/img/ajax-loader.gif" class="my-loading sr-only">
 									</div>
 									<div class="col-xs-2">

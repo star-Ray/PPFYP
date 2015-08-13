@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Jul 23, 2015 9:47:59 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Aug 13, 2015 2:05:15 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
  <class name="model.Task" table="TASK">
   <id name="taskId" type="long">
@@ -14,27 +14,41 @@
   <property generated="never" lazy="false" name="receiverContact" type="java.lang.String">
    <column name="RECEIVERCONTACT"/>
   </property>
-  <property access="field" generated="never" lazy="false"
-   name="planStartTime" type="java.util.Date">
+  <property generated="never" lazy="false" name="planStartTime" type="java.util.Date">
    <column name="PLANSTARTTIME"/>
   </property>
-  <property access="field" generated="never" lazy="false"
-   name="planEndTime" type="java.util.Date">
+  <property generated="never" lazy="false" name="planEndTime" type="java.util.Date">
    <column name="PLANENDTIME"/>
   </property>
-  <property access="field" generated="never" lazy="false"
-   name="actualStartTime" type="java.util.Date">
+  <property generated="never" lazy="false" name="actualStartTime" type="java.util.Date">
    <column name="ACTUALSTARTTIME"/>
   </property>
-  <property access="field" generated="never" lazy="false"
-   name="actualEndTime" type="java.util.Date">
+  <property generated="never" lazy="false" name="actualEndTime" type="java.util.Date">
    <column name="ACTUALENDTIME"/>
   </property>
-  <property generated="never" lazy="false" name="startLocation" type="java.lang.String">
-   <column name="STARTLOCATION"/>
+  <property generated="never" lazy="false" name="startAddress" type="java.lang.String">
+   <column name="STARTADDRESS"/>
   </property>
-  <property generated="never" lazy="false" name="endLocation" type="java.lang.String">
-   <column name="ENDLOCATION"/>
+  <property generated="never" lazy="false" name="startLon" type="double">
+   <column name="STARTLON"/>
+  </property>
+  <property generated="never" lazy="false" name="startLat" type="double">
+   <column name="STARTLAT"/>
+  </property>
+  <property generated="never" lazy="false" name="startPostalCode" type="long">
+   <column name="STARTPOSTALCODE"/>
+  </property>
+  <property generated="never" lazy="false" name="endAddress" type="java.lang.String">
+   <column name="ENDADDRESS"/>
+  </property>
+  <property generated="never" lazy="false" name="endLon" type="double">
+   <column name="ENDLON"/>
+  </property>
+  <property generated="never" lazy="false" name="endLat" type="double">
+   <column name="ENDLAT"/>
+  </property>
+  <property generated="never" lazy="false" name="endPostalCode" type="long">
+   <column name="ENDPOSTALCODE"/>
   </property>
   <property generated="never" lazy="false" name="signature" type="java.lang.String">
    <column name="SIGNATURE"/>
