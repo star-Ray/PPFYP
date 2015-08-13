@@ -8,22 +8,27 @@ import java.util.Date;
  */
 public class Task {
     private int taskId, officerId, courierId, senderId;
-    private String receiverName, receiverContact, startLocation, endLocation, signature, oneTimePass, taskStatus, remarks;
+    private double startLat, startLng, endLat, endLng;
+    private String receiverName, receiverContact, startAddress, endAddress, signature, oneTimePass, taskStatus, remarks;
     private Date planStartTime, planEndTime, actualStartTime, actualEndTime, createDate;
     private ArrayList<Item> itemList;
 
-    public Task(int taskId, int officerId, int courierId, int senderId, String receiverName, String receiverContact,
-                String startLocation, String endLocation, String signature, String oneTimePass, String taskStatus,
-                String remarks, Date planStartTime, Date planEndTime, Date actualStartTime, Date actualEndTime,
-                Date createDate, ArrayList<Item> itemList) {
+    public Task(int taskId, int officerId, int courierId, int senderId, double startLat, double startLng, double endLat,
+                double endLng, String receiverName, String receiverContact, String startAddress, String endAddress, String signature,
+                String oneTimePass, String taskStatus, String remarks, Date planStartTime, Date planEndTime, Date actualStartTime,
+                Date actualEndTime, Date createDate, ArrayList<Item> itemList) {
         this.taskId = taskId;
         this.officerId = officerId;
         this.courierId = courierId;
         this.senderId = senderId;
+        this.startLat = startLat;
+        this.startLng = startLng;
+        this.endLat = endLat;
+        this.endLng = endLng;
         this.receiverName = receiverName;
         this.receiverContact = receiverContact;
-        this.startLocation = startLocation;
-        this.endLocation = endLocation;
+        this.startAddress = startAddress;
+        this.endAddress = endAddress;
         this.signature = signature;
         this.oneTimePass = oneTimePass;
         this.taskStatus = taskStatus;
@@ -68,6 +73,38 @@ public class Task {
         this.senderId = senderId;
     }
 
+    public double getStartLat() {
+        return startLat;
+    }
+
+    public void setStartLat(double startLat) {
+        this.startLat = startLat;
+    }
+
+    public double getStartLng() {
+        return startLng;
+    }
+
+    public void setStartLng(double startLng) {
+        this.startLng = startLng;
+    }
+
+    public double getEndLat() {
+        return endLat;
+    }
+
+    public void setEndLat(double endLat) {
+        this.endLat = endLat;
+    }
+
+    public double getEndLng() {
+        return endLng;
+    }
+
+    public void setEndLng(double endLng) {
+        this.endLng = endLng;
+    }
+
     public String getReceiverName() {
         return receiverName;
     }
@@ -84,20 +121,20 @@ public class Task {
         this.receiverContact = receiverContact;
     }
 
-    public String getStartLocation() {
-        return startLocation;
+    public String getStartAddress() {
+        return startAddress;
     }
 
-    public void setStartLocation(String startLocation) {
-        this.startLocation = startLocation;
+    public void setStartAddress(String startAddress) {
+        this.startAddress = startAddress;
     }
 
-    public String getEndLocation() {
-        return endLocation;
+    public String getEndAddress() {
+        return endAddress;
     }
 
-    public void setEndLocation(String endLocation) {
-        this.endLocation = endLocation;
+    public void setEndAddress(String endAddress) {
+        this.endAddress = endAddress;
     }
 
     public String getSignature() {

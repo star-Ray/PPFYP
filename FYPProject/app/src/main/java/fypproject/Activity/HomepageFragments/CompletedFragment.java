@@ -109,7 +109,7 @@ public class CompletedFragment extends android.support.v4.app.Fragment {
             // - replace the contents of the view with that element
 
             holder.recipient.setText(dataSet.get(position).getReceiverName());
-            holder.address.setText(dataSet.get(position).getEndLocation());
+            holder.address.setText(dataSet.get(position).getEndAddress());
 //            holder.time.setText(dataSet.get(position).getPlanEndTime().toString());
             holder.orderNo.setText(String.valueOf(dataSet.get(position).getTaskId()));
         }

@@ -15,7 +15,7 @@ import fypproject.R;
 
 public class BallotFragment extends android.support.v4.app.Fragment {
 
-    private static final String TAG = "arnono/BallotFragment";
+    private static final String TAG = "arnono/BallotFrag";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -32,7 +32,7 @@ import fypproject.R;
 
 public class HomepageActivity extends ActionBarActivity {
 
-    private static final String TAG = "arnono/HomepageActivity";
+    private static final String TAG = "arnono/HomepageAct";
 
     private static SharedPreferences sharedPref;
     private static SharedPreferences.Editor editor;

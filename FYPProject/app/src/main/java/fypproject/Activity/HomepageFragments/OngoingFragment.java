@@ -23,7 +23,7 @@ import fypproject.TestCreator;
 
 public class OngoingFragment extends android.support.v4.app.Fragment {
 
-    private static final String TAG = "arnono/OngoingFragment";
+    private static final String TAG = "arnono/OngoingFrag";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
@@ -109,7 +109,7 @@ public class OngoingFragment extends android.support.v4.app.Fragment {
             // - replace the contents of the view with that element
 
             holder.recipient.setText(dataSet.get(position).getReceiverName());
-            holder.address.setText(dataSet.get(position).getEndLocation());
+            holder.address.setText(dataSet.get(position).getEndAddress());
 //            holder.time.setText(dataSet.get(position).getPlanEndTime().toString());
             holder.orderNo.setText(String.valueOf(dataSet.get(position).getTaskId()));
         }

@@ -30,7 +30,12 @@ import fypproject.TestCreator;
 
 public class MapActivity extends ActionBarActivity implements OnMapReadyCallback {
 
-    private static final String TAG = "arnono/mapActivity";
+    private static final String TAG = "arnono/mapAct";
+
+    private static final float ZOOM_COUNTRY = 10;
+    private static final float ZOOM_LOCATION = 16;
+
+    private static final LatLng LOC_SINGAPORE = new LatLng(1.364499, 103.824353);
 
     private Gson gson;
     private MapFragment mMapFragment;
@@ -64,14 +69,15 @@ public class MapActivity extends ActionBarActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap map) {
         Log.i(TAG, "Map is ready.");
-        LatLng location = new LatLng(1.296696, 103.852134);
+        LatLng location = LOC_SINGAPORE;
 
-        String jsonLocation = getIntent().getStringExtra("location");
+        String jsonLocation = getIntent().getStringExtra("endAddress");
         if(jsonLocation != null){
             location = gson.fromJson(jsonLocation, LatLng.class);
         }
 
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 16));
+//        map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, ZOOM_LOCATION));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, ZOOM_COUNTRY));
         map.addMarker(new MarkerOptions()
                 .position(location)
                 .title("New Location"));

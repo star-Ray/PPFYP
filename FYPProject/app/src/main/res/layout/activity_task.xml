@@ -87,13 +87,32 @@
                     android:id="@+id/content_address"
                     android:layout_weight="2"
                     android:width="0dp"
-                    android:background="@drawable/blackborder"
                     android:paddingLeft="5sp"
+                    android:background="@drawable/blackborder"
                     android:paddingRight="5sp"
                     android:paddingTop="5sp"
                     android:text="123 Hougang St 21 #11-02 \nS519929"
                     android:textSize="17sp"/>
             </TableRow>
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/title_map_button"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:width="0dp"-->
+                    <!--android:paddingLeft="5sp"-->
+                    <!--android:paddingRight="5sp"-->
+                    <!--android:paddingTop="5sp"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textSize="17sp"-->
+                    <!--android:textStyle="bold"/>-->
+                <!--<Button-->
+                    <!--android:id="@+id/content_map_button"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:width="0dp"-->
+                    <!--android:text="Show in Maps"-->
+                    <!--android:textSize="15sp"/>-->
+            <!--</TableRow>-->
         </TableLayout>
 
         <!--line break-->

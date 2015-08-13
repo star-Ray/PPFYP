@@ -18,7 +18,7 @@ import fypproject.R;
 
 public class ProfileActivity extends ActionBarActivity {
 
-    private static final String TAG = "arnono/ProfileActivity";
+    private static final String TAG = "arnono/ProfileAct";
 
     Intent intent;
     Courier courier;

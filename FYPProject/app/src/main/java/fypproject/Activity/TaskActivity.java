@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
@@ -30,7 +32,7 @@ import fypproject.TestCreator;
 
 public class TaskActivity extends ActionBarActivity {
 
-    private static final String TAG = "arnono/TaskActivity";
+    private static final String TAG = "arnono/TaskAct";
 
     public static Gson gson;
 
@@ -39,17 +41,17 @@ public class TaskActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
-        if(savedInstanceState == null) {
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.item_list_container, new ItemListFragment());
-            fragmentTransaction.commit();
-        }
-
         gson = new GsonBuilder().setDateFormat(getString(R.string.date_format)).create();
 
         Intent receivedIntent = getIntent();
         String jsonTask = receivedIntent.getStringExtra("task");
         Task task = gson.fromJson(jsonTask, Task.class);
+
+        if(savedInstanceState == null) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.item_list_container, ItemListFragment.newInstance(task));
+            fragmentTransaction.commit();
+        }
 
         setViews(task);
     }
@@ -76,7 +78,7 @@ public class TaskActivity extends ActionBarActivity {
 
         receiver.setText(task.getReceiverName());
         contactNo.setText(task.getReceiverContact());
-        address.setText(task.getEndLocation());
+        address.setText(task.getEndAddress());
         Log.i(TAG, "TextViews are set.");
 
         address.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +86,7 @@ public class TaskActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(context, MapActivity.class);
                 LatLng location = new LatLng(1.30, 103.8); //singapore
-                intent.putExtra("location", gson.toJson(location));
+                intent.putExtra("endAddress", gson.toJson(location));
                 startActivity(intent);
             }
         });
@@ -100,6 +102,27 @@ public class TaskActivity extends ActionBarActivity {
         private static RecyclerView.Adapter itemListAdapter;
         private static RecyclerView.LayoutManager layoutManager;
 
+        private ArrayList<Item> itemList;
+
+        public ItemListFragment(){}
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (getArguments() != null) {
+                String jsonTask = getArguments().getString("task");
+                itemList = gson.fromJson(jsonTask, Task.class).getItemList();
+            }
+        }
+
+        public static ItemListFragment newInstance (Task task){
+            ItemListFragment fragment = new ItemListFragment();
+            Bundle args = new Bundle();
+            args.putString("task", gson.toJson(task));
+            fragment.setArguments(args);
+            return fragment;
+        }
+
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
@@ -108,7 +131,7 @@ public class TaskActivity extends ActionBarActivity {
             layoutManager = new MyLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
             recyclerView.setLayoutManager(layoutManager);
 
-            ArrayList<Item> dataSet = TestCreator.createTestItems();
+            ArrayList<Item> dataSet = itemList;
             itemListAdapter = new TaskPageItemListAdapter(dataSet);
             recyclerView.setAdapter(itemListAdapter);
             return rootView;

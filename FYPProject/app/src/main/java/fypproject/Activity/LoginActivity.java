@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -28,7 +29,7 @@ import fypproject.TestCreator;
 
 public class LoginActivity extends Activity {
 
-    private static final String TAG = "arnono/LoginActivity";
+    private static final String TAG = "arnono/LoginAct";
 
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
@@ -111,15 +112,15 @@ public class LoginActivity extends Activity {
 
                     boolean authenticate = authenticateUser2(username, password);
                     if (authenticate){
-                        Courier courier = TestCreator.createTestCourier();
-
-                        editor.putString("courier", gson.toJson(courier));
-                        editor.apply();
-
-                        Intent intent = new Intent(context, HomepageActivity.class);
-                        intent.putExtra("login", "");
-                        Log.i(TAG, "Opening homepage");
-                        startActivity(intent);
+//                        Courier courier = TestCreator.createTestCourier();
+//
+//                        editor.putString("courier", gson.toJson(courier));
+//                        editor.apply();
+//
+//                        Intent intent = new Intent(context, HomepageActivity.class);
+//                        intent.putExtra("login", "");
+//                        Log.i(TAG, "Opening homepage");
+//                        startActivity(intent);
                     }else{
 //                        runAlertDialog("Authentication failed");
                         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getApplicationContext());
@@ -138,13 +139,25 @@ public class LoginActivity extends Activity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    Log.e(TAG, "Error. Device is not connected to network.");
+                    Log.e(TAG, "Error. Invalid / no response received.");
+                    Toast.makeText(context, "Error. Invalid / no response received.", Toast.LENGTH_LONG).show();
 //                    runAlertDialog("Device is not connected to network.");
                 }
             });
 
             networkSingleton.addToRequestQueue(jsonObjectRequest);
             Log.i(TAG, "Request at processLogin added successfully!");
+
+            // added to prevent dependency on network
+            Courier courier = TestCreator.createTestCourier();
+
+            editor.putString("courier", gson.toJson(courier));
+            editor.apply();
+
+            Intent intent = new Intent(context, HomepageActivity.class);
+            intent.putExtra("login", "");
+            Log.i(TAG, "Opening homepage");
+            startActivity(intent);
 
         } catch (Exception e){
             Log.e(TAG, "Error occurred at processLogin. Message: " + e.getMessage());
