@@ -1,6 +1,6 @@
 var companyId = localStorage.getItem('companyId');
 if (companyId == null) {
-    window.location.replace('../pages/login.html');;
+    window.location.replace('../pages/login.html');
 } else {
     $(document).ready(function() {
     	getCustomersByCompany();

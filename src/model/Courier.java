@@ -19,7 +19,8 @@ public class Courier {
 	private String passwordSalt;
 	private String passwordHash;
 	private String contactNo;
-	private String realTimeLocation;
+	private double curLat;
+	private double curLon;
 
 	private long objStatus;
 	private Date createDate;
@@ -29,8 +30,8 @@ public class Courier {
 	private Set<Task> tasks;
 	
 	public Courier(){}
-
-	public Courier(Company company, String name, String username, String passwordSalt, String passwordHash, String contactNo, String realTimeLocation) {
+	
+	public Courier(Company company, String name, String username, String passwordSalt, String passwordHash, String contactNo) {
 		super();
 		this.setCompany(company);
 		this.name = name;
@@ -38,7 +39,20 @@ public class Courier {
 		this.passwordSalt = passwordSalt;
 		this.passwordHash = passwordHash;
 		this.contactNo = contactNo;
-		this.setRealTimeLocation(realTimeLocation);
+		this.setObjStatus(Value.ACTIVED);
+		this.setCreateDate(new Date());
+	}
+	
+	public Courier(Company company, String name, String username, String passwordSalt, String passwordHash, String contactNo, Double curLat, Double curLon) {
+		super();
+		this.setCompany(company);
+		this.name = name;
+		this.username = username;
+		this.passwordSalt = passwordSalt;
+		this.passwordHash = passwordHash;
+		this.contactNo = contactNo;
+		this.setCurLat(curLat);
+		this.setCurLon(curLon);
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -128,20 +142,6 @@ public class Courier {
 	}
 
 	/**
-	 * @return the realTimeLocation
-	 */
-	public String getRealTimeLocation() {
-		return realTimeLocation;
-	}
-
-	/**
-	 * @param realTimeLocation the realTimeLocation to set
-	 */
-	public void setRealTimeLocation(String realTimeLocation) {
-		this.realTimeLocation = realTimeLocation;
-	}
-
-	/**
 	 * @return the objStatus
 	 */
 	public long getObjStatus() {
@@ -197,6 +197,34 @@ public class Courier {
 		this.tasks = tasks;
 	}
 	
+	/**
+	 * @return the curLat
+	 */
+	public double getCurLat() {
+		return curLat;
+	}
+
+	/**
+	 * @param curLat the curLat to set
+	 */
+	public void setCurLat(double curLat) {
+		this.curLat = curLat;
+	}
+
+	/**
+	 * @return the curLon
+	 */
+	public double getCurLon() {
+		return curLon;
+	}
+
+	/**
+	 * @param curLon the curLon to set
+	 */
+	public void setCurLon(double curLon) {
+		this.curLon = curLon;
+	}
+	
 	public Company getCompany() {
 		return company;
 	}
@@ -212,7 +240,8 @@ public class Courier {
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.USERNAME, this.username);
 		returnJson.put(Key.CONTACTNO, this.contactNo);
-		returnJson.put(Key.REALTIMELOCATION, this.realTimeLocation);
+		returnJson.put(Key.CURLAT, this.curLat);
+		returnJson.put(Key.CURLON, this.curLon);
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -230,7 +259,8 @@ public class Courier {
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.USERNAME, this.username);
 		returnJson.put(Key.CONTACTNO, this.contactNo);
-		returnJson.put(Key.REALTIMELOCATION, this.realTimeLocation);
+		returnJson.put(Key.CURLAT, this.curLat);
+		returnJson.put(Key.CURLON, this.curLon);
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

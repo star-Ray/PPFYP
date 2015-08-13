@@ -29,6 +29,8 @@ public class Key {
 	public static final String CONTACTNO = "contactNo";
 	public static final String EMAIL = "email";
 	public static final String REALTIMELOCATION = "realTimeLocation";
+	public static final String CURLAT = "curLat";
+	public static final String CURLON = "curLon";
 	
 	public static final String ITEM = "item";
 	public static final String ITEMS = "items";
@@ -53,8 +55,14 @@ public class Key {
 	public static final String PLANENDTIME = "planEndTime";
 	public static final String ACTUALSTARTTIME = "actualStartTime";
 	public static final String ACTUALENDTIME = "actualEndTime";
-	public static final String STARTLOCATION = "startLocation";
-	public static final String ENDLOCATION = "endLocation";
+	public static final String STARTADDRESS = "startAddress";
+	public static final String STARTLON = "startLon";
+	public static final String STARTLAT = "startLat";
+	public static final String STARTPOSTALCODE = "startPostalCode";
+	public static final String ENDADDRESS = "endAddress";
+	public static final String ENDLON = "endLon";
+	public static final String ENDLAT = "endLat";
+	public static final String ENDPOSTALCODE = "endPostalCode";
 	public static final String SIGNATURE = "signature";
 	public static final String VERIFYPASS = "verifyPass";
 	public static final String TASKSTATUS = "taskStatus";

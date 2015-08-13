@@ -36,7 +36,7 @@ public class CourierCtrl {
 				String contactNo = (String) inputJson.get(Key.CONTACTNO);
 				String realTimeLocation = (String) inputJson.get(Key.REALTIMELOCATION);
 				
-				Courier courier = new Courier(company, name, username, passwordSalt, passwordHash, contactNo, realTimeLocation);
+				Courier courier = new Courier(company, name, username, passwordSalt, passwordHash, contactNo);
 				CourierDAO.addCourier(courier);
 				
 				returnJson.put(Key.STATUS, Value.SUCCESS)  ;
@@ -103,12 +103,14 @@ public class CourierCtrl {
 				String name = (String) inputJson.get(Key.NAME);
 				String username = (String) inputJson.get(Key.USERNAME);
 				String contactNo = (String) inputJson.get(Key.CONTACTNO);
-				String realTimeLocation = (String) inputJson.get(Key.REALTIMELOCATION);
+				double curLat =  Double.parseDouble((String)inputJson.get(Key.CURLAT));
+				double curLon =  Double.parseDouble((String)inputJson.get(Key.CURLON));
 				
 				courier.setName(name);
 				courier.setUsername(username);
 				courier.setContactNo(contactNo);
-				courier.setRealTimeLocation(realTimeLocation);
+				courier.setCurLat(curLat);
+				courier.setCurLon(curLon);
 				
 				CourierDAO.modifyCourier(courier);
 				
@@ -160,8 +162,10 @@ public class CourierCtrl {
 			Courier courier = CourierDAO.getCourierById((long) inputJson.get(Key.COURIERID));
 			
 			if(courier != null){
-				String realTimeLocation = (String) inputJson.get(Key.REALTIMELOCATION);
-				courier.setRealTimeLocation(realTimeLocation);
+				double curLat =  Double.parseDouble((String)inputJson.get(Key.CURLAT));
+				double curLon =  Double.parseDouble((String)inputJson.get(Key.CURLON));
+				courier.setCurLat(curLat);
+				courier.setCurLon(curLon);
 				CourierDAO.modifyCourier(courier);
 				
 				returnJson.put(Key.STATUS, Value.SUCCESS)  ;
