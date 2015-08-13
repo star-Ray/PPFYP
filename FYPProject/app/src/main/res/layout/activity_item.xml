@@ -101,84 +101,84 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
 
-        <TextView
-            android:id="@+id/header_packageDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="20sp"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="5dp"
-            android:textSize="17sp"
-            android:text="Activity Log"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+        <!--<TextView-->
+            <!--android:id="@+id/header_packageDetails"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="start"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:layout_marginLeft="20sp"-->
+            <!--android:layout_marginStart="20sp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:textSize="17sp"-->
+            <!--android:text="Activity Log"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textStyle="bold" />-->
 
-        <!--Activity log table-->
-        <TableLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+        <!--&lt;!&ndash;Activity log table&ndash;&gt;-->
+        <!--<TableLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:paddingRight="10dp">-->
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/header1"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/blackborder"
-                    android:padding="2dp"
-                    android:paddingLeft="5dp"
-                    android:text="header1"/>
-                <TextView
-                    android:id="@+id/header2"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/blackborder"
-                    android:padding="2dp"
-                    android:paddingLeft="5dp"
-                    android:text="header2"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/content1"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/blackborder"
-                    android:padding="2dp"
-                    android:paddingLeft="5dp"
-                    android:text="header1"/>
-                <TextView
-                    android:id="@+id/content2"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/blackborder"
-                    android:padding="2dp"
-                    android:paddingLeft="5dp"
-                    android:text="header2"/>
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/content3"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/blackborder"
-                    android:padding="2dp"
-                    android:paddingLeft="5dp"
-                    android:text="header1"/>
-                <TextView
-                    android:id="@+id/content4"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/blackborder"
-                    android:padding="2dp"
-                    android:paddingLeft="5dp"
-                    android:text="header2"/>
-            </TableRow>
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/header1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/blackborder"-->
+                    <!--android:padding="2dp"-->
+                    <!--android:paddingLeft="5dp"-->
+                    <!--android:text="header1"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/header2"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/blackborder"-->
+                    <!--android:padding="2dp"-->
+                    <!--android:paddingLeft="5dp"-->
+                    <!--android:text="header2"/>-->
+            <!--</TableRow>-->
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/content1"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/blackborder"-->
+                    <!--android:padding="2dp"-->
+                    <!--android:paddingLeft="5dp"-->
+                    <!--android:text="header1"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/content2"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/blackborder"-->
+                    <!--android:padding="2dp"-->
+                    <!--android:paddingLeft="5dp"-->
+                    <!--android:text="header2"/>-->
+            <!--</TableRow>-->
+            <!--<TableRow>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/content3"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/blackborder"-->
+                    <!--android:padding="2dp"-->
+                    <!--android:paddingLeft="5dp"-->
+                    <!--android:text="header1"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/content4"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/blackborder"-->
+                    <!--android:padding="2dp"-->
+                    <!--android:paddingLeft="5dp"-->
+                    <!--android:text="header2"/>-->
+            <!--</TableRow>-->
 
 
-        </TableLayout>
+        <!--</TableLayout>-->
 
     </LinearLayout>
 
