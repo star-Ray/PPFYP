@@ -21,6 +21,7 @@ Below are the external libraries that are used in this project.
 
 # Testing Devices
 * Sony Xperia Z3 (Android 5.0.2)
+* Samsung Galaxy Note 2 (Android 4.1.2)
 * Motorola TC55 (Android 4.1.2)
 
 # Developer
