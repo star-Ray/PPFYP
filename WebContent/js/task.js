@@ -17,7 +17,7 @@ function getTasksByCompany(){
 	inputStr = encodeURIComponent(inputStr);
 	//console.log("entered the get task function");
 	$.ajax({
-		url: '/Payroll/admin/GetTasksByCompanyServlet?input='+inputStr,
+		url: '../admin/GetTasksByCompanyServlet?input='+inputStr,
 		method: 'GET',
 		dataType: 'json',
 		error: function(err){

@@ -1,11 +1,13 @@
 package controller;
 
 import model.Officer;
+import model.Officer;
 import model.Company;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import persistence.OfficerDAO;
 import persistence.OfficerDAO;
 import persistence.CompanyDAO;
 import system.Encrypt;
@@ -146,5 +148,27 @@ public class OfficerCtrl {
 	}
 	
 	//features
+	public static JSONObject getOfficersByCompany(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try{
+			Company company = CompanyDAO.getCompanyById((long) inputJson.get(Key.COMPANYID));
+			if(company != null){
+				JSONArray officerJArr = new JSONArray();
+				for(Officer c: OfficerDAO.getOfficersByCompany(company)){
+					officerJArr.add(c.toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, officerJArr);
+			}else{
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.COMPANYNOTEXIST);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
 	
 }

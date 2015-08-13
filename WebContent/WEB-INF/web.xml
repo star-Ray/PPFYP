@@ -195,6 +195,14 @@
     <url-pattern>/admin/GetOfficerByIdServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>GetOfficersByCompanyServlet</servlet-name>
+    <servlet-class>service.admin.GetOfficersByCompanyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetOfficersByCompanyServlet</servlet-name>
+    <url-pattern>/admin/GetOfficersByCompanyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>GetSenderByIdServlet</servlet-name>
     <servlet-class>service.admin.GetSenderByIdServlet</servlet-class>
   </servlet>

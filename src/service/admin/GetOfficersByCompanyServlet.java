@@ -13,18 +13,18 @@ import org.json.simple.JSONObject;
 import system.Config;
 import system.Key;
 import system.Value;
-import controller.CourierCtrl;
+import controller.OfficerCtrl;
 
 /**
  * @author RaySong
  */
-public class GetCouriersByCompanyServlet extends HttpServlet {
+public class GetOfficersByCompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetCouriersByCompanyServlet() {
+    public GetOfficersByCompanyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +58,7 @@ public class GetCouriersByCompanyServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = CourierCtrl.getCouriersByCompany(inputJson);
+			returnJson = OfficerCtrl.getOfficersByCompany(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
