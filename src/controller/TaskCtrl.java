@@ -215,8 +215,7 @@ public class TaskCtrl {
 	public static JSONObject getTasksByCompany(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Company company = CompanyDAO.getCompanyById((long) inputJson
-					.get(Key.COMPANYID));
+			Company company = CompanyDAO.getCompanyById((long) inputJson.get(Key.COMPANYID));
 			if (company != null) {
 				JSONArray taskJArr = new JSONArray();
 				for (Task t : TaskDAO.getTasksByCompany(company)) {
@@ -227,6 +226,29 @@ public class TaskCtrl {
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.COMPANYNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+
+	public static JSONObject getTasksByCourier(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Courier courier = CourierDAO.getCourierById((long) inputJson.get(Key.COURIERID));
+			if (courier != null) {
+				JSONArray taskJArr = new JSONArray();
+				for (Task t : TaskDAO.getTasksByCourier(courier)) {
+					taskJArr.add(t.toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, taskJArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.COURIERNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
